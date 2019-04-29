@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{4EEEB7F6-0
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jurify.Autenticador.Web", "Source\Jurify.Autenticador.Web\Jurify.Autenticador.Web.csproj", "{981BC65E-A93C-4FCE-BB52-109027EF7AAD}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jurify.Autenticador.Domain", "Source\Jurify.Autenticador.Domain\Jurify.Autenticador.Domain.csproj", "{4A0C6040-C851-431B-9017-C85EC52C42B7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,12 +25,17 @@ Global
 		{981BC65E-A93C-4FCE-BB52-109027EF7AAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{981BC65E-A93C-4FCE-BB52-109027EF7AAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{981BC65E-A93C-4FCE-BB52-109027EF7AAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A0C6040-C851-431B-9017-C85EC52C42B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A0C6040-C851-431B-9017-C85EC52C42B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A0C6040-C851-431B-9017-C85EC52C42B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A0C6040-C851-431B-9017-C85EC52C42B7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{981BC65E-A93C-4FCE-BB52-109027EF7AAD} = {A34E50C0-3DE2-4CE7-B292-3BBDE68368BD}
+		{4A0C6040-C851-431B-9017-C85EC52C42B7} = {A34E50C0-3DE2-4CE7-B292-3BBDE68368BD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3FCB5102-A3AB-4844-9931-67E0E50F0BDD}

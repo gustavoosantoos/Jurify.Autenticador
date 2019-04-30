@@ -6,6 +6,11 @@ namespace Jurify.Autenticador.Domain.Base
     {
         public virtual Guid Id { get; }
 
+        public Entity(Guid id)
+        {
+            Id = id;
+        }
+
         public override bool Equals(object obj)
         {
             var other = obj as Entity;

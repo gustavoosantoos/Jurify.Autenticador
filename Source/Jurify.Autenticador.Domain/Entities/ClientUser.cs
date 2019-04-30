@@ -1,8 +1,11 @@
-﻿namespace Jurify.Autenticador.Domain.Entities
+﻿using System;
+
+namespace Jurify.Autenticador.Domain.Entities
 {
     public class ClientUser : User
     {
-        public ClientUser(string username, string senha) : base(username, senha)
+        public ClientUser(Guid id, string username, string senha) 
+            : base(id, username, senha)
         {
         }
     }

@@ -1,5 +1,6 @@
 ﻿using Jurify.Autenticador.Domain.Base;
 using Jurify.Autenticador.Domain.ValueObjects;
+using System;
 
 namespace Jurify.Autenticador.Domain.Entities
 {
@@ -10,7 +11,7 @@ namespace Jurify.Autenticador.Domain.Entities
         public ContactInfo Contact { get; private set; }
         public PersonalInfo PersonalInfo { get; private set; }
 
-        public User(string username, string senha)
+        public User(Guid id, string username, string senha) : base(id)
         {
             Username = username;
             Password = senha;

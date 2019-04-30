@@ -1,6 +1,7 @@
 ﻿using Jurify.Autenticador.Domain.Entities;
 using Jurify.Autenticador.Domain.ValueObjects;
 using System;
+using System.Collections.Generic;
 
 namespace Jurify.Autenticador.Domain.Model
 {
@@ -8,8 +9,8 @@ namespace Jurify.Autenticador.Domain.Model
     {
         public OfficeIdentifier OfficeId { get; }
 
-        public OfficeUser(Guid id, OfficeIdentifier officeId, string username, string password) 
-            : base(id, username, password)
+        public OfficeUser(Guid id, OfficeIdentifier officeId, string username, string password, List<Claim> claims) 
+            : base(id, username, password, claims)
         {
             OfficeId = officeId;
         }

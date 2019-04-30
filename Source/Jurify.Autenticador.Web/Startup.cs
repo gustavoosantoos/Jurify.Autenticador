@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
-using IdentityServer4.Quickstart.UI;
+using Jurify.Autenticador.Application.Services.Concrete;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -25,10 +25,10 @@ namespace Jurify.Autenticador.Web
             services.AddMvc();
 
             var builder = services.AddIdentityServer()
-                .AddTestUsers(TestUsers.Users)
                 .AddInMemoryIdentityResources(Configuration.GetSection("IdentityResources"))
                 .AddInMemoryApiResources(Configuration.GetSection("ApiResources"))
-                .AddInMemoryClients(Configuration.GetSection("clients"));
+                .AddInMemoryClients(Configuration.GetSection("Clients"))
+                .AddProfileService<UserProfileService>();
             
             if (Environment.IsDevelopment())
             {

@@ -26,10 +26,10 @@ namespace Jurify.Autenticador.Web
 
             var builder = services.AddIdentityServer()
                 .AddTestUsers(TestUsers.Users)
-                .AddInMemoryIdentityResources(Config.GetIdentityResources())
-                .AddInMemoryApiResources(Config.GetApis())
-                .AddInMemoryClients(Config.GetClients());
-
+                .AddInMemoryIdentityResources(Configuration.GetSection("IdentityResources"))
+                .AddInMemoryApiResources(Configuration.GetSection("ApiResources"))
+                .AddInMemoryClients(Configuration.GetSection("clients"));
+            
             if (Environment.IsDevelopment())
             {
                 builder.AddDeveloperSigningCredential();

@@ -1,9 +1,10 @@
 ﻿using Jurify.Autenticador.Domain.Base;
 using System;
+using System.Collections.Generic;
 
 namespace Jurify.Autenticador.Domain.ValueObjects
 {
-    public class IdentificadorEscritorio : ValueObject<IdentificadorEscritorio>
+    public class IdentificadorEscritorio : ValueObject
     {
         public Guid Id { get; }
 
@@ -12,14 +13,9 @@ namespace Jurify.Autenticador.Domain.ValueObjects
             Id = identificador;
         }
 
-        protected override bool EqualsCore(IdentificadorEscritorio other)
+        protected override IEnumerable<object> ObterComponentesDeIgualdade()
         {
-            return Id == other.Id;
-        }
-
-        protected override int GetHashCodeCore()
-        {
-            return HashCode.Combine(Id);
+            yield return Id;
         }
     }
 }

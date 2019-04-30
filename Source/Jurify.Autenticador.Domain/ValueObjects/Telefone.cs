@@ -1,14 +1,23 @@
-﻿namespace Jurify.Autenticador.Domain.ValueObjects
+﻿using System.Collections.Generic;
+using Jurify.Autenticador.Domain.Base;
+
+namespace Jurify.Autenticador.Domain.ValueObjects
 {
-    public class TelefoneContato
+    public class TelefoneContato : ValueObject
     {
         public int DDD { get; }
         public int Numero { get; }
 
-        public TelefoneContato(int dDD, int numero)
+        public TelefoneContato(int ddd, int numero)
         {
-            DDD = dDD;
+            DDD = ddd;
             Numero = numero;
+        }
+
+        protected override IEnumerable<object> ObterComponentesDeIgualdade()
+        {
+            yield return DDD;
+            yield return Numero;
         }
     }
 }

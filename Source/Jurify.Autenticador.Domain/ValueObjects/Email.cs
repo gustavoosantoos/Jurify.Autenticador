@@ -1,9 +1,10 @@
 ﻿using Jurify.Autenticador.Domain.Base;
 using System;
+using System.Collections.Generic;
 
 namespace Jurify.Autenticador.Domain.ValueObjects
 {
-    public class EmailContato : ValueObject<EmailContato>
+    public class EmailContato : ValueObject
     {
         public string Email { get; }
 
@@ -12,14 +13,9 @@ namespace Jurify.Autenticador.Domain.ValueObjects
             Email = email;
         }
 
-        protected override bool EqualsCore(EmailContato other)
+        protected override IEnumerable<object> ObterComponentesDeIgualdade()
         {
-            return Email == other.Email;
-        }
-
-        protected override int GetHashCodeCore()
-        {
-            return HashCode.Combine(Email);
+            yield return Email;
         }
     }
 }

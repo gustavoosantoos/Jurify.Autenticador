@@ -1,30 +1,35 @@
-﻿namespace Jurify.Autenticador.Domain.Base
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Jurify.Autenticador.Domain.Base
 {
-    public abstract class ValueObject<T> where T : ValueObject<T>
+    public abstract class ValueObject
     {
+        protected abstract IEnumerable<object> ObterComponentesDeIgualdade();
+
         public override bool Equals(object obj)
         {
-            var valueObject = obj as T;
-
-            if (valueObject == null)
+            if (obj == null)
                 return false;
 
             if (GetType() != obj.GetType())
                 return false;
 
-            return EqualsCore(valueObject);
-        }
+            var valueObject = (ValueObject)obj;
 
-        protected abstract bool EqualsCore(T other);
+            return ObterComponentesDeIgualdade().SequenceEqual(valueObject.ObterComponentesDeIgualdade());
+        }
 
         public override int GetHashCode()
         {
-            return GetHashCodeCore();
+            var hashCode = new HashCode();
+            ObterComponentesDeIgualdade().ToList().ForEach(obj => hashCode.Add(obj));
+
+            return hashCode.ToHashCode();
         }
 
-        protected abstract int GetHashCodeCore();
-
-        public static bool operator ==(ValueObject<T> a, ValueObject<T> b)
+        public static bool operator ==(ValueObject a, ValueObject b)
         {
             if (a is null && b is null)
                 return true;
@@ -35,7 +40,7 @@
             return a.Equals(b);
         }
 
-        public static bool operator !=(ValueObject<T> a, ValueObject<T> b)
+        public static bool operator !=(ValueObject a, ValueObject b)
         {
             return !(a == b);
         }

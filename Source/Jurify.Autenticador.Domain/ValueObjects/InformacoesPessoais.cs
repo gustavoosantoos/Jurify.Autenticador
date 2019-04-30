@@ -1,9 +1,10 @@
 ﻿using Jurify.Autenticador.Domain.Base;
 using System;
+using System.Collections.Generic;
 
 namespace Jurify.Autenticador.Domain.ValueObjects
 {
-    public class InformacoesPessoais : ValueObject<InformacoesPessoais>
+    public class InformacoesPessoais : ValueObject
     {
         public string PrimeiroNome { get; }
         public string UltimoNome { get; }
@@ -14,15 +15,10 @@ namespace Jurify.Autenticador.Domain.ValueObjects
             UltimoNome = ultimoNome;
         }
 
-        protected override bool EqualsCore(InformacoesPessoais other)
+        protected override IEnumerable<object> ObterComponentesDeIgualdade()
         {
-            return PrimeiroNome == other.PrimeiroNome &&
-                UltimoNome == other.UltimoNome;
-        }
-
-        protected override int GetHashCodeCore()
-        {
-            return HashCode.Combine(PrimeiroNome, UltimoNome);
+            yield return PrimeiroNome;
+            yield return UltimoNome;
         }
     }
 }

@@ -3,7 +3,7 @@ using Jurify.Autenticador.Domain.ValueObjects;
 
 namespace Jurify.Autenticador.Domain.Entities
 {
-    public class Escritorio : Entity
+    public class Office : Entity
     {
 
     }

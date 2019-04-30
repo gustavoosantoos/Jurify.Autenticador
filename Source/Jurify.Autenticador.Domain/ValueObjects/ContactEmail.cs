@@ -4,16 +4,16 @@ using System.Collections.Generic;
 
 namespace Jurify.Autenticador.Domain.ValueObjects
 {
-    public class EmailContato : ValueObject
+    public class ContactEmail : ValueObject
     {
         public string Email { get; }
 
-        public EmailContato(string email)
+        public ContactEmail(string email)
         {
             Email = email;
         }
 
-        protected override IEnumerable<object> ObterComponentesDeIgualdade()
+        protected override IEnumerable<object> GetEqualityComponents()
         {
             yield return Email;
         }

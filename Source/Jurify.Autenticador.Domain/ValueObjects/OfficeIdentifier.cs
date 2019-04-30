@@ -4,16 +4,16 @@ using System.Collections.Generic;
 
 namespace Jurify.Autenticador.Domain.ValueObjects
 {
-    public class IdentificadorEscritorio : ValueObject
+    public class OfficeIdentifier : ValueObject
     {
         public Guid Id { get; }
 
-        public IdentificadorEscritorio(Guid identificador)
+        public OfficeIdentifier(Guid id)
         {
-            Id = identificador;
+            Id = id;
         }
 
-        protected override IEnumerable<object> ObterComponentesDeIgualdade()
+        protected override IEnumerable<object> GetEqualityComponents()
         {
             yield return Id;
         }

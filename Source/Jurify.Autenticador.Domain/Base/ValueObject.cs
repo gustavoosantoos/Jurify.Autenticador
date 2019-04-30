@@ -6,7 +6,7 @@ namespace Jurify.Autenticador.Domain.Base
 {
     public abstract class ValueObject
     {
-        protected abstract IEnumerable<object> ObterComponentesDeIgualdade();
+        protected abstract IEnumerable<object> GetEqualityComponents();
 
         public override bool Equals(object obj)
         {
@@ -18,13 +18,13 @@ namespace Jurify.Autenticador.Domain.Base
 
             var valueObject = (ValueObject)obj;
 
-            return ObterComponentesDeIgualdade().SequenceEqual(valueObject.ObterComponentesDeIgualdade());
+            return GetEqualityComponents().SequenceEqual(valueObject.GetEqualityComponents());
         }
 
         public override int GetHashCode()
         {
             var hashCode = new HashCode();
-            ObterComponentesDeIgualdade().ToList().ForEach(obj => hashCode.Add(obj));
+            GetEqualityComponents().ToList().ForEach(obj => hashCode.Add(obj));
 
             return hashCode.ToHashCode();
         }

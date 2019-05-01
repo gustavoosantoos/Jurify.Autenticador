@@ -19,7 +19,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jurify.Autenticador.Applica
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cross-Cutting", "Cross-Cutting", "{3E257E64-D7A6-4E9A-9E2F-CE6091D346D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jurify.Autenticador.Infra.Database", "Source\Jurify.Autenticador.Infra.Database\Jurify.Autenticador.Infra.Database.csproj", "{C6E18C05-C9D4-4B78-9200-93436CCD30CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jurify.Autenticador.Infra.Database", "Source\Jurify.Autenticador.Infra.Database\Jurify.Autenticador.Infra.Database.csproj", "{C6E18C05-C9D4-4B78-9200-93436CCD30CD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{B1EC9C8D-0476-426A-B0FD-944A34860197}"
+	ProjectSection(SolutionItems) = preProject
+		Docs\Database\create_database.sql = Docs\Database\create_database.sql
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +58,7 @@ Global
 		{C87237B0-64AB-4B1D-95AA-4C1B5044CA26} = {A34E50C0-3DE2-4CE7-B292-3BBDE68368BD}
 		{3E257E64-D7A6-4E9A-9E2F-CE6091D346D4} = {A34E50C0-3DE2-4CE7-B292-3BBDE68368BD}
 		{C6E18C05-C9D4-4B78-9200-93436CCD30CD} = {3E257E64-D7A6-4E9A-9E2F-CE6091D346D4}
+		{B1EC9C8D-0476-426A-B0FD-944A34860197} = {4EEEB7F6-08C6-4599-B083-44295CED6DEF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3FCB5102-A3AB-4844-9931-67E0E50F0BDD}

@@ -19,12 +19,18 @@ namespace Jurify.Autenticador.Application.Repositories
 
         public Task<OfficeUser> FindByIdAsync(Guid id)
         {
-            return _context.OfficeUsers.FirstOrDefaultAsync(u => u.Id == id);
+            return _context.OfficeUsers
+                .Include(u => u.PersonalInfo)
+                .Include(u => u.Contact)
+                .FirstOrDefaultAsync(u => u.Id == id);
         }
 
         public Task<OfficeUser> FindByUsernameAsync(string username)
         {
-            return _context.OfficeUsers.FirstOrDefaultAsync(u => u.Username == username);
+            return _context.OfficeUsers
+                .Include(u => u.PersonalInfo)
+                .Include(u => u.Contact)
+                .FirstOrDefaultAsync(u => u.Username == username);
         }
     }
 }

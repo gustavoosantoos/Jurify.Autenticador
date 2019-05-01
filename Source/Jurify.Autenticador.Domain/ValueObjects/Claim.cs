@@ -1,12 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Jurify.Autenticador.Domain.Base;
 
 namespace Jurify.Autenticador.Domain.ValueObjects
 {
     public class Claim : ValueObject
     {
-        public string Name { get; }
-        public string Value { get; }
+        public string Name { get; private set; }
+        public string Value { get; private set; }
+
+        protected Claim() { }
 
         public Claim(string name, string value)
         {

@@ -7,6 +7,8 @@ namespace Jurify.Autenticador.Domain.ValueObjects
     {
         public string Name { get; private set; }
 
+        protected OfficeInfo() { } 
+
         public OfficeInfo(string name)
         {
             Name = name;

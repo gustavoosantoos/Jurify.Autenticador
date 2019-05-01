@@ -4,11 +4,24 @@ namespace Jurify.Autenticador.Domain.Base
 {
     public abstract class Entity
     {
-        public virtual Guid Id { get; }
+        public virtual Guid Id { get; private set; }
+        public bool Deleted { get; protected set; }
+
+        protected Entity() { }
 
         public Entity(Guid id)
         {
             Id = id;
+        }
+
+        public virtual void Activate()
+        {
+            Deleted = false;
+        }
+
+        public virtual void Deativate()
+        {
+            Deleted = true;
         }
 
         public override bool Equals(object obj)

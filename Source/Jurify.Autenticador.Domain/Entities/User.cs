@@ -7,11 +7,15 @@ namespace Jurify.Autenticador.Domain.Entities
 {
     public abstract class User : Entity
     {
-        public string Username { get; }
+        public string Username { get; private set; }
         public string Password { get; private set; }
         public ContactInfo Contact { get; private set; }
         public PersonalInfo PersonalInfo { get; private set; }
         public List<Claim> Claims { get; private set; }
+
+        protected User() : base(Guid.NewGuid())
+        {
+        }
 
         public User(Guid id, string username, string senha, List<Claim> claims) : base(id)
         {

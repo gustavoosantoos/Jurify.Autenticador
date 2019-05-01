@@ -6,8 +6,10 @@ namespace Jurify.Autenticador.Domain.ValueObjects
 {
     public class ContactInfo : ValueObject
     {
-        public ContactEmail Email { get; }
-        public PhoneNumber Phone { get; }
+        public ContactEmail Email { get; private set; }
+        public PhoneNumber Phone { get; private set; }
+
+        protected ContactInfo() { }
 
         public ContactInfo(ContactEmail email, PhoneNumber phone)
         {

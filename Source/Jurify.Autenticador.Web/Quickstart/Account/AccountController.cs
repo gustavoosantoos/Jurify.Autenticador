@@ -29,7 +29,7 @@ namespace IdentityServer4.Quickstart.UI
     [AllowAnonymous]
     public class AccountController : Controller
     {
-        private readonly IUserProfileService _users;
+        private readonly ILaywersUserProfileService _users;
         private readonly IIdentityServerInteractionService _interaction;
         private readonly IClientStore _clientStore;
         private readonly IAuthenticationSchemeProvider _schemeProvider;
@@ -40,7 +40,7 @@ namespace IdentityServer4.Quickstart.UI
             IClientStore clientStore,
             IAuthenticationSchemeProvider schemeProvider,
             IEventService events,
-            IUserProfileService users)
+            ILaywersUserProfileService users)
         {
             _users = users;
             _interaction = interaction;
@@ -107,9 +107,9 @@ namespace IdentityServer4.Quickstart.UI
             if (ModelState.IsValid)
             {
                 // validate username/password against in-memory store
-                if (_users.ValidateCredentials(model.Username, model.Password))
+                if (await _users.ValidateCredentials(model.Username, model.Password))
                 {
-                    var user = _users.FindByUsername(model.Username);
+                    var user = await _users.FindByUsernameAsync(model.Username);
                     await _events.RaiseAsync(new UserLoginSuccessEvent(user.Username, user.Id.ToString(), user.Username));
 
                     // only set explicit expiration here if user chooses "remember me". 

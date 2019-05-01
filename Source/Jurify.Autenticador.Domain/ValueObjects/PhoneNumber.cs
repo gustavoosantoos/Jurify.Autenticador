@@ -5,8 +5,10 @@ namespace Jurify.Autenticador.Domain.ValueObjects
 {
     public class PhoneNumber : ValueObject
     {
-        public int DDD { get; }
-        public int Number { get; }
+        public int DDD { get; private set; }
+        public int Number { get; private set; }
+
+        protected PhoneNumber() { }
 
         public PhoneNumber(int ddd, int number)
         {

@@ -5,8 +5,10 @@ namespace Jurify.Autenticador.Domain.ValueObjects
 {
     public class OfficeLocation : ValueObject
     {
-        public double Latitude { get; }
-        public double Longitude { get; }
+        public double Latitude { get; private set; }
+        public double Longitude { get; private set; }
+
+        protected OfficeLocation() { }
 
         public OfficeLocation(double latitude, double longitude)
         {

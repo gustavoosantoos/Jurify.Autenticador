@@ -23,7 +23,7 @@ namespace Host.Quickstart.Account
     [AllowAnonymous]
     public class ExternalController : Controller
     {
-        private readonly IUserProfileService _users;
+        private readonly ILaywersUserProfileService _users;
         private readonly IIdentityServerInteractionService _interaction;
         private readonly IClientStore _clientStore;
         private readonly IEventService _events;
@@ -32,7 +32,7 @@ namespace Host.Quickstart.Account
             IIdentityServerInteractionService interaction,
             IClientStore clientStore,
             IEventService events,
-            IUserProfileService users)
+            ILaywersUserProfileService users)
         {
             _users = users;
             _interaction = interaction;
@@ -91,13 +91,13 @@ namespace Host.Quickstart.Account
             }
 
             // lookup our user and external provider info
-            var (user, provider, providerUserId, claims) = FindUserFromExternalProvider(result);
+            var (user, provider, providerUserId, claims) = await FindUserFromExternalProvider(result);
             if (user == null)
             {
                 // this might be where you might initiate a custom workflow for user registration
                 // in this sample we don't show how that would be done, as our sample implementation
                 // simply auto-provisions new external user
-                user = AutoProvisionUser(provider, providerUserId, claims);
+                user = await AutoProvisionUser(provider, providerUserId, claims);
             }
 
             // this allows us to collect any additonal claims or properties
@@ -181,7 +181,7 @@ namespace Host.Quickstart.Account
             }
         }
 
-        private (User user, string provider, string providerUserId, IEnumerable<Claim> claims) FindUserFromExternalProvider(AuthenticateResult result)
+        private async Task<(OfficeUser user, string provider, string providerUserId, IEnumerable<Claim> claims)> FindUserFromExternalProvider(AuthenticateResult result)
         {
             var externalUser = result.Principal;
 
@@ -200,14 +200,14 @@ namespace Host.Quickstart.Account
             var providerUserId = userIdClaim.Value;
 
             // find external user
-            var user = _users.FindByExternalProvider(provider, providerUserId);
+            var user = await _users.FindByExternalProvider(provider, providerUserId);
 
             return (user, provider, providerUserId, claims);
         }
 
-        private User AutoProvisionUser(string provider, string providerUserId, IEnumerable<Claim> claims)
+        private async Task<OfficeUser> AutoProvisionUser(string provider, string providerUserId, IEnumerable<Claim> claims)
         {
-            var user = _users.AutoProvisionUser(provider, providerUserId, claims.ToList());
+            var user = await _users.AutoProvisionUser(provider, providerUserId, claims.ToList());
             return user;
         }
 

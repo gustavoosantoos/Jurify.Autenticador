@@ -3,13 +3,17 @@ using Jurify.Autenticador.Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
 
-namespace Jurify.Autenticador.Domain.Model
+namespace Jurify.Autenticador.Domain.Entities
 {
     public class OfficeUser : User
     {
-        public OfficeIdentifier OfficeId { get; }
+        public Guid OfficeId { get; private set; }
 
-        public OfficeUser(Guid id, OfficeIdentifier officeId, string username, string password, List<Claim> claims) 
+        protected OfficeUser()
+        {
+        }
+
+        public OfficeUser(Guid id, Guid officeId, string username, string password, List<Claim> claims)
             : base(id, username, password, claims)
         {
             OfficeId = officeId;

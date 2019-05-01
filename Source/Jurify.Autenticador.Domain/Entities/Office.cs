@@ -6,6 +6,10 @@ namespace Jurify.Autenticador.Domain.Entities
 {
     public class Office : Entity
     {
+        protected Office() : base(Guid.NewGuid())
+        {
+        }
+
         public Office(Guid id, OfficeInfo info, OfficeLocation location) : base(id)
         {
             Info = info;

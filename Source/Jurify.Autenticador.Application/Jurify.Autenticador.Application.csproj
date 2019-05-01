@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Jurify.Autenticador.Domain\Jurify.Autenticador.Domain.csproj" />
+    <ProjectReference Include="..\Jurify.Autenticador.Infra.Database\Jurify.Autenticador.Infra.Database.csproj" />
   </ItemGroup>
 
 </Project>

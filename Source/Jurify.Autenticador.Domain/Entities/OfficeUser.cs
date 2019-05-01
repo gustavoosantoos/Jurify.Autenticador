@@ -13,8 +13,13 @@ namespace Jurify.Autenticador.Domain.Entities
         {
         }
 
-        public OfficeUser(Guid id, Guid officeId, string username, string password, List<Claim> claims)
-            : base(id, username, password, claims)
+        public OfficeUser(Guid id,
+                          Guid officeId,
+                          string username,
+                          string senha,
+                          ContactInfo contactInfo,
+                          PersonalInfo personalInfo,
+                          List<Claim> claims) : base(id, username, senha, contactInfo, personalInfo, claims)
         {
             OfficeId = officeId;
         }

@@ -41,6 +41,7 @@ namespace Jurify.Autenticador.Web
             services.AddScoped<IOfficeUserRepository, OfficeUserRepository>();
             services.AddScoped<ILaywersUserProfileService, LawyersUserProfileService>();
             services.AddSingleton<IHashService, HashService>();
+            services.AddScoped<SeedDatabase>();
 
             if (Environment.IsDevelopment())
             {

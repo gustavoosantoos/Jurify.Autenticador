@@ -6,12 +6,16 @@ namespace Jurify.Autenticador.Domain.Entities
 {
     public class ClientUser : User
     {
-        protected ClientUser()
+        public ClientUser(Guid id,
+                          string username,
+                          string senha,
+                          ContactInfo contactInfo,
+                          PersonalInfo personalInfo,
+                          List<Claim> claims) : base(id, username, senha, contactInfo, personalInfo, claims)
         {
         }
 
-        public ClientUser(Guid id, string username, string senha, List<Claim> claims) 
-            : base(id, username, senha, claims)
+        protected ClientUser()
         {
         }
     }

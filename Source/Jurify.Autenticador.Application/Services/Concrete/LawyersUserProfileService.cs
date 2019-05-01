@@ -41,14 +41,9 @@ namespace Jurify.Autenticador.Application.Services.Concrete
             throw new NotImplementedException();
         }
 
-        public async Task<OfficeUser> FindByUsername(string username)
+        public async Task<OfficeUser> FindByUsernameAsync(string username)
         {
             return await _officeUserRepository.FindByUsernameAsync(username);
-        }
-
-        public Task<OfficeUser> FindByUsernameAsync(string username)
-        {
-            throw new NotImplementedException();
         }
 
         public async Task GetProfileDataAsync(ProfileDataRequestContext context)

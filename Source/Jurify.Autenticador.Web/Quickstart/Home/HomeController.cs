@@ -3,6 +3,7 @@
 
 
 using IdentityServer4.Services;
+using Jurify.Autenticador.Application.Services.Concrete;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -19,11 +20,16 @@ namespace IdentityServer4.Quickstart.UI
         private readonly IHostingEnvironment _environment;
         private readonly ILogger _logger;
 
-        public HomeController(IIdentityServerInteractionService interaction, IHostingEnvironment environment, ILogger<HomeController> logger)
+        public HomeController(
+            IIdentityServerInteractionService interaction, 
+            IHostingEnvironment environment, 
+            ILogger<HomeController> logger,
+            SeedDatabase seeder)
         {
             _interaction = interaction;
             _environment = environment;
             _logger = logger;
+            seeder.Seed();
         }
 
         public IActionResult Index()

@@ -17,10 +17,18 @@ namespace Jurify.Autenticador.Domain.Entities
         {
         }
 
-        public User(Guid id, string username, string senha, List<Claim> claims) : base(id)
+        public User(
+            Guid id,
+            string username, 
+            string senha, 
+            ContactInfo contactInfo, 
+            PersonalInfo personalInfo, 
+            List<Claim> claims) : base(id)
         {
             Username = username;
             Password = senha;
+            PersonalInfo = personalInfo;
+            Contact = contactInfo;
             Claims = claims;
         }
 

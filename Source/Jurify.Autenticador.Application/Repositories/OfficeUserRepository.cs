@@ -17,6 +17,16 @@ namespace Jurify.Autenticador.Application.Repositories
             _context = context;
         }
 
+        public async Task<bool> ExistsAsync(Guid id)
+        {
+            return await _context.OfficeUsers.AnyAsync(u => u.Id == id);
+        }
+
+        public async Task<bool> ExistsAsync(string username, string password)
+        {
+            return await _context.OfficeUsers.AnyAsync(u => u.Username == username && u.Password == password);
+        }
+
         public Task<OfficeUser> FindByIdAsync(Guid id)
         {
             return _context.OfficeUsers

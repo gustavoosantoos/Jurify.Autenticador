@@ -67,7 +67,7 @@ namespace Jurify.Autenticador.Application.Services.Concrete
 
             if (Guid.TryParse(userId.Value, out var guidId))
             {
-                context.IsActive = (await _officeUserRepository.FindByIdAsync(guidId)) != null;
+                context.IsActive = await _officeUserRepository.ExistsAsync(guidId);
             }
         }
 
@@ -80,13 +80,16 @@ namespace Jurify.Autenticador.Application.Services.Concrete
 
             try
             {
-                var user = await _officeUserRepository.FindByUsernameAsync(context.UserName);
+                var exists = await _officeUserRepository
+                    .ExistsAsync(context.UserName, _hashService.Hash(context.Password));
 
-                if (user == null || _hashService.Verify(user.Password, context.Password))
+                if (!exists)
                 {
                     context.Result = loginError;
                     return;
                 }
+
+                var user = await _officeUserRepository.FindByUsernameAsync(context.UserName);
 
                 context.Result = new GrantValidationResult(
                     subject: user.Id.ToString(),

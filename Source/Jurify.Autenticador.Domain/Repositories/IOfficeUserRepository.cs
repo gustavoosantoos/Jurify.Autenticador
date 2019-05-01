@@ -8,5 +8,7 @@ namespace Jurify.Autenticador.Domain.Repositories
     {
         Task<OfficeUser> FindByIdAsync(Guid id);
         Task<OfficeUser> FindByUsernameAsync(string username);
+        Task<bool> ExistsAsync(Guid id);
+        Task<bool> ExistsAsync(string username, string password);
     }
 }

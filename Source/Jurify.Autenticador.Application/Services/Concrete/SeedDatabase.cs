@@ -21,6 +21,7 @@ namespace Jurify.Autenticador.Application.Services.Concrete
 
         public void Seed()
         {
+            //TODO: Remove this class, only for development purposes
             try
             {
                 if (_context.OfficeUsers.Count() != 0)

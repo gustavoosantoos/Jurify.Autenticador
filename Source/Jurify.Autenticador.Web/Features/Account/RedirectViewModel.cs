@@ -1,4 +1,4 @@
-namespace IdentityServer4.Quickstart.UI
+namespace Jurify.Autenticador.Web.Features.Account
 {
     public class RedirectViewModel
     {

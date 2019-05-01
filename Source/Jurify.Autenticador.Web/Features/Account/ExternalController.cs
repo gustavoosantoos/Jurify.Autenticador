@@ -6,18 +6,18 @@ using System.Security.Principal;
 using System.Threading.Tasks;
 using IdentityModel;
 using IdentityServer4.Events;
-using IdentityServer4.Quickstart.UI;
 using IdentityServer4.Services;
 using IdentityServer4.Stores;
 using IdentityServer4.Test;
 using Jurify.Autenticador.Application.Services.Abstractions;
 using Jurify.Autenticador.Domain.Entities;
+using Jurify.Autenticador.Web.Features.Account;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Host.Quickstart.Account
+namespace Jurify.Autenticador.Web.Features.Account
 {
     [SecurityHeaders]
     [AllowAnonymous]

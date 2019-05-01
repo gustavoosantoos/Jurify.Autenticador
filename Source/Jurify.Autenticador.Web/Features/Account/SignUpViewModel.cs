@@ -1,4 +1,4 @@
-﻿namespace Jurify.Autenticador.Web.Quickstart.Account
+﻿namespace Jurify.Autenticador.Web.Features.Account
 {
     public class SignUpViewModel
     {

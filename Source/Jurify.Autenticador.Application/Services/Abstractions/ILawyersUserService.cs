@@ -1,6 +1,4 @@
-﻿using IdentityServer4.Services;
-using IdentityServer4.Validation;
-using Jurify.Autenticador.Domain.Entities;
+﻿using Jurify.Autenticador.Domain.Entities;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;

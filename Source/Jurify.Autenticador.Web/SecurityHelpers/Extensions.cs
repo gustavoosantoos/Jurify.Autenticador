@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using IdentityServer4.Stores;
 
-namespace Jurify.Autenticador.Web.Features
+namespace Jurify.Autenticador.Web.SecurityHelpers
 {
     public static class Extensions
     {

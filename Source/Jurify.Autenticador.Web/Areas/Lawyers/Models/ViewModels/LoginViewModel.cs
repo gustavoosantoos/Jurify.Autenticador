@@ -1,9 +1,8 @@
-using Jurify.Autenticador.Web.Features.Account;
-using System;
+using Jurify.Autenticador.Web.Areas.Lawyers.Models.InputModels;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Jurify.Autenticador.Web.Features.Account
+namespace Jurify.Autenticador.Web.Areas.Lawyers.Models.ViewModels
 {
     public class LoginViewModel : LoginInputModel
     {

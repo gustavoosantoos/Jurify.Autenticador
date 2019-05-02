@@ -1,4 +1,4 @@
-﻿namespace Jurify.Autenticador.Web.Features.Account
+﻿namespace Jurify.Autenticador.Web.Areas.Lawyers.Models.InputModels
 {
     public class LogoutInputModel
     {

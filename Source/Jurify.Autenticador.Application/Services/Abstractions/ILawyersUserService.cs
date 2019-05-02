@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Jurify.Autenticador.Application.Services.Abstractions
 {
-    public interface ILaywersUserService : IProfileService, IResourceOwnerPasswordValidator
+    public interface ILaywersUserService
     {
         Task<bool> ValidateCredentials(string username, string password);
         Task<OfficeUser> FindByUsernameAsync(string username);

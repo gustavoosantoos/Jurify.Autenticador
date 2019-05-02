@@ -13,10 +13,4 @@
     <ProjectReference Include="..\Jurify.Autenticador.Infra.Database\Jurify.Autenticador.Infra.Database.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Services\Strategies\Lawyers\" />
-    <Folder Include="Services\Strategies\Clients\" />
-    <Folder Include="Services\Strategies\" />
-  </ItemGroup>
-
 </Project>

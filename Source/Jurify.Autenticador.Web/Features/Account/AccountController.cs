@@ -29,7 +29,7 @@ namespace Jurify.Autenticador.Web.Features.Account
     [AllowAnonymous]
     public class AccountController : Controller
     {
-        private readonly ILaywersUserProfileService _users;
+        private readonly ILaywersUserService _users;
         private readonly IIdentityServerInteractionService _interaction;
         private readonly IClientStore _clientStore;
         private readonly IAuthenticationSchemeProvider _schemeProvider;
@@ -40,7 +40,7 @@ namespace Jurify.Autenticador.Web.Features.Account
             IClientStore clientStore,
             IAuthenticationSchemeProvider schemeProvider,
             IEventService events,
-            ILaywersUserProfileService users)
+            ILaywersUserService users)
         {
             _users = users;
             _interaction = interaction;

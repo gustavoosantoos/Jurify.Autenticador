@@ -15,16 +15,16 @@ using System.Threading.Tasks;
 
 namespace Jurify.Autenticador.Application.Services.Concrete
 {
-    public class LawyersUserProfileService : ILaywersUserProfileService
+    public class LawyersUserService : ILaywersUserService
     {
         private readonly IOfficeUserRepository _officeUserRepository;
         private readonly IHashService _hashService;
-        private readonly ILogger<LawyersUserProfileService> _logger;
+        private readonly ILogger<LawyersUserService> _logger;
 
-        public LawyersUserProfileService(
+        public LawyersUserService(
             IOfficeUserRepository officeUserRepository,
             IHashService hashService,
-            ILogger<LawyersUserProfileService> logger)
+            ILogger<LawyersUserService> logger)
         {
             _officeUserRepository = officeUserRepository;
             _hashService = hashService;

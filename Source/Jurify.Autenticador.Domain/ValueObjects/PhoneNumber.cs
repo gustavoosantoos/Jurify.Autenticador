@@ -16,6 +16,8 @@ namespace Jurify.Autenticador.Domain.ValueObjects
             Number = number;
         }
 
+        public static PhoneNumber Empty() => new PhoneNumber();
+
         protected override IEnumerable<object> GetEqualityComponents()
         {
             yield return DDD;

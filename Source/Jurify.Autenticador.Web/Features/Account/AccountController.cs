@@ -221,15 +221,14 @@ namespace Jurify.Autenticador.Web.Features.Account
 
 
         [HttpGet]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> SignUp()
+        public IActionResult SignUp()
         {
-            return View();
+            return View(new SignUpViewModel());
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> SignUp(SignUpInputModel model)
+        public IActionResult SignUp(SignUpInputModel model)
         {
             return RedirectToAction(nameof(Login));
         }

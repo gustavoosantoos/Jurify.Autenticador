@@ -11,10 +11,10 @@ namespace Jurify.Autenticador.Domain.ValueObjects
 
         protected ContactInfo() { }
 
-        public ContactInfo(ContactEmail email, PhoneNumber phone)
+        public ContactInfo(ContactEmail email, PhoneNumber phone = null)
         {
             Email = email;
-            Phone = phone;
+            Phone = phone ?? PhoneNumber.Empty();
         }
 
         protected override IEnumerable<object> GetEqualityComponents()

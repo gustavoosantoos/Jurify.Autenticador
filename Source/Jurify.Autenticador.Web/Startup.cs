@@ -37,10 +37,12 @@ namespace Jurify.Autenticador.Web
                 .AddProfileService<LawyersProfileService>()
                 .AddResourceOwnerValidator<LawyersPasswordValidationService>();
 
+            services.AddSingleton<IHashService, HashService>();
+
             services.AddDbContext<AutenticadorContext>();
+
             services.AddScoped<IOfficeUserRepository, OfficeUserRepository>();
             services.AddScoped<ILaywersUserService, LawyersUserService>();
-            services.AddSingleton<IHashService, HashService>();
             services.AddScoped<SeedDatabase>();
 
             if (Environment.IsDevelopment())

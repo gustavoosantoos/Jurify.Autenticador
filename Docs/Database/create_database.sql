@@ -16,8 +16,8 @@ CREATE TABLE office_users(
     first_name VARCHAR(100) NOT NULL,
     last_name  VARCHAR(250) NOT NULL,
     email VARCHAR(150) NOT NULL,
-    phone_ddd NUMERIC(2,0) NOT NULL,
-    phone_number NUMERIC(9,0) NOT NULL,
+    phone_ddd NUMERIC(2,0),
+    phone_number NUMERIC(9,0),
     claims jsonb NOT NULL,
     deleted boolean DEFAULT false
 );

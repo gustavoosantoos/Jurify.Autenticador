@@ -25,7 +25,7 @@ namespace Jurify.Autenticador.Web.Areas.Lawyers.Controllers
     [AllowAnonymous]
     public class AccountController : Controller
     {
-        private readonly ILaywersUserService _users;
+        private readonly IOfficeUserService _users;
         private readonly IIdentityServerInteractionService _interaction;
         private readonly IClientStore _clientStore;
         private readonly IAuthenticationSchemeProvider _schemeProvider;
@@ -36,7 +36,7 @@ namespace Jurify.Autenticador.Web.Areas.Lawyers.Controllers
             IClientStore clientStore,
             IAuthenticationSchemeProvider schemeProvider,
             IEventService events,
-            ILaywersUserService users)
+            IOfficeUserService users)
         {
             _users = users;
             _interaction = interaction;

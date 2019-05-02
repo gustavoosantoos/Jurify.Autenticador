@@ -24,7 +24,7 @@ namespace Jurify.Autenticador.Web.Areas.Lawyers.Controllers
     [AllowAnonymous]
     public class ExternalController : Controller
     {
-        private readonly ILaywersUserService _users;
+        private readonly IOfficeUserService _users;
         private readonly IIdentityServerInteractionService _interaction;
         private readonly IClientStore _clientStore;
         private readonly IEventService _events;
@@ -33,7 +33,7 @@ namespace Jurify.Autenticador.Web.Areas.Lawyers.Controllers
             IIdentityServerInteractionService interaction,
             IClientStore clientStore,
             IEventService events,
-            ILaywersUserService users)
+            IOfficeUserService users)
         {
             _users = users;
             _interaction = interaction;

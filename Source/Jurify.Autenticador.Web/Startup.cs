@@ -34,15 +34,15 @@ namespace Jurify.Autenticador.Web
                 .AddInMemoryIdentityResources(Configuration.GetSection("IdentityResources"))
                 .AddInMemoryApiResources(Configuration.GetSection("ApiResources"))
                 .AddInMemoryClients(Configuration.GetSection("Clients"))
-                .AddProfileService<LawyersProfileService>()
-                .AddResourceOwnerValidator<LawyersPasswordValidationService>();
+                .AddProfileService<UserProfileService>()
+                .AddResourceOwnerValidator<UserPasswordValidationService>();
 
             services.AddSingleton<IHashService, HashService>();
 
             services.AddDbContext<AutenticadorContext>();
 
             services.AddScoped<IOfficeUserRepository, OfficeUserRepository>();
-            services.AddScoped<ILaywersUserService, LawyersUserService>();
+            services.AddScoped<IOfficeUserService, OfficeUserService>();
             services.AddScoped<SeedDatabase>();
 
             if (Environment.IsDevelopment())

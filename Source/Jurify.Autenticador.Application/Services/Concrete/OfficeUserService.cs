@@ -1,30 +1,25 @@
-﻿using IdentityModel;
-using IdentityServer4.Models;
-using IdentityServer4.Validation;
-using Jurify.Autenticador.Application.Extensions;
-using Jurify.Autenticador.Application.Services.Abstractions;
+﻿using Jurify.Autenticador.Application.Services.Abstractions;
 using Jurify.Autenticador.Domain.Entities;
 using Jurify.Autenticador.Domain.Repositories;
 using Jurify.Autenticador.Domain.Services.Abstractions;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Jurify.Autenticador.Application.Services.Concrete
 {
-    public class LawyersUserService : ILaywersUserService
+    public class OfficeUserService : IOfficeUserService
     {
         private readonly IOfficeUserRepository _officeUserRepository;
         private readonly IHashService _hashService;
-        private readonly ILogger<LawyersUserService> _logger;
+        private readonly ILogger<OfficeUserService> _logger;
 
-        public LawyersUserService(
+        public OfficeUserService(
             IOfficeUserRepository officeUserRepository,
             IHashService hashService,
-            ILogger<LawyersUserService> logger)
+            ILogger<OfficeUserService> logger)
         {
             _officeUserRepository = officeUserRepository;
             _hashService = hashService;

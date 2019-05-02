@@ -1,5 +1,6 @@
 ﻿using IdentityServer4.Models;
 using IdentityServer4.Validation;
+using Jurify.Autenticador.Application.Configuration.IdentityServer;
 using Jurify.Autenticador.Application.Extensions;
 using Jurify.Autenticador.Domain.Repositories;
 using Jurify.Autenticador.Domain.Services.Abstractions;
@@ -9,13 +10,16 @@ using System.Threading.Tasks;
 
 namespace Jurify.Autenticador.Application.Services.Concrete
 {
-    public class LawyersPasswordValidationService : IResourceOwnerPasswordValidator
+    public class UserPasswordValidationService : IResourceOwnerPasswordValidator
     {
         private readonly IOfficeUserRepository _officeUserRepository;
         private readonly IHashService _hashService;
-        private ILogger<LawyersPasswordValidationService> _logger;
+        private readonly ILogger<UserPasswordValidationService> _logger;
 
-        public LawyersPasswordValidationService(IOfficeUserRepository officeUserRepository, IHashService hashService, ILogger<LawyersPasswordValidationService> logger)
+        public UserPasswordValidationService(
+            IOfficeUserRepository officeUserRepository,
+            IHashService hashService, 
+            ILogger<UserPasswordValidationService> logger)
         {
             _officeUserRepository = officeUserRepository;
             _hashService = hashService;
@@ -23,6 +27,21 @@ namespace Jurify.Autenticador.Application.Services.Concrete
         }
 
         public async Task ValidateAsync(ResourceOwnerPasswordValidationContext context)
+        {
+            switch (context.Request.Client.ClientName)
+            {
+                case IdentityServerConfiguration.Clients.JurifyWebLawyers:
+                    await ValidateOfficeUserAsync(context);
+                    break;
+                case IdentityServerConfiguration.Clients.JurifyWebClient:
+                    await ValidateClientUserAsync(context);
+                    break;
+                default:
+                    throw new NotImplementedException("Client not identified for querying profile data");
+            }
+        }
+
+        private async Task ValidateOfficeUserAsync(ResourceOwnerPasswordValidationContext context)
         {
             try
             {
@@ -48,6 +67,12 @@ namespace Jurify.Autenticador.Application.Services.Concrete
                 _logger.LogError(ex, ex.Message);
                 context.Result = BuildInvalidGrantValidationResult();
             }
+        }
+
+        private async Task ValidateClientUserAsync(ResourceOwnerPasswordValidationContext context)
+        {
+            await Task.Delay(0);
+            throw new NotImplementedException("Validation of client users not implemented");
         }
 
         private GrantValidationResult BuildInvalidGrantValidationResult()

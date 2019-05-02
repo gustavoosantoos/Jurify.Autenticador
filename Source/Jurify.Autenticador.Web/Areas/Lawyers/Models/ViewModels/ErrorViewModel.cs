@@ -1,6 +1,6 @@
 ﻿using IdentityServer4.Models;
 
-namespace Jurify.Autenticador.Web.Areas.Commom.ViewModels
+namespace Jurify.Autenticador.Web.Areas.Lawyers.Models.ViewModels
 {
     public class ErrorViewModel
     {

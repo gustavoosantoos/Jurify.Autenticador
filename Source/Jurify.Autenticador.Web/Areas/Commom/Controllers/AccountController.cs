@@ -2,12 +2,11 @@
 
 namespace Jurify.Autenticador.Web.Areas.Commom.Controllers
 {
-    [Area("Commom")]
     public class AccountController : Controller
     {
-        public IActionResult Login()
+        public IActionResult Login(string returnUrl, string userType = "lawyers")
         {
-            return View();
+            return RedirectToAction("Login", "Account", new { area = userType, returnUrl });
         }
     }
 }

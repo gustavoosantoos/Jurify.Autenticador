@@ -63,16 +63,12 @@ namespace Jurify.Autenticador.Web
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                  name: "Lawyers",
-                  template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                   name: "users",
+                   template: "{area:exists}/{controller=Account}/{action=Login}/{id?}");
 
                 routes.MapRoute(
-                  name: "Clients",
-                  template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
-
-                routes.MapRoute(
-                   name: "default",
-                   template: "{area=Commom}/{controller=Home}/{action=Index}/{id?}");
+                  name: "default",
+                  template: "{controller=Account}/{action=Login}/{id?}");
             });
         }
     }

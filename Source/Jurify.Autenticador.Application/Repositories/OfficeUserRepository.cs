@@ -27,17 +27,17 @@ namespace Jurify.Autenticador.Application.Repositories
             return await _context.OfficeUsers.AnyAsync(u => u.Username == username && u.Password == password);
         }
 
-        public Task<OfficeUser> FindByIdAsync(Guid id)
+        public async Task<OfficeUser> FindByIdAsync(Guid id)
         {
-            return _context.OfficeUsers
+            return await _context.OfficeUsers
                 .Include(u => u.PersonalInfo)
                 .Include(u => u.Contact)
                 .FirstOrDefaultAsync(u => u.Id == id);
         }
 
-        public Task<OfficeUser> FindByUsernameAsync(string username)
+        public async Task<OfficeUser> FindByUsernameAsync(string username)
         {
-            return _context.OfficeUsers
+            return await _context.OfficeUsers
                 .Include(u => u.PersonalInfo)
                 .Include(u => u.Contact)
                 .FirstOrDefaultAsync(u => u.Username == username);

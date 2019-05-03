@@ -26,24 +26,19 @@ namespace Jurify.Autenticador.Web.UseCases.Services.Concrete
             {
                 if (_context.OfficeUsers.Count() != 0)
                     return;
-
-                var idOffice1 = Guid.NewGuid();
-                var idOffice2 = Guid.NewGuid();
-
+                
                 var office1 = new Office(
-                    idOffice1,
                     new OfficeInfo("Escritório de teste 1"),
                     new OfficeLocation(130.12312322, 84.399999)
                 );
 
                 var office2 = new Office(
-                    idOffice2,
                     new OfficeInfo("Escritório de teste 2"),
                     new OfficeLocation(30.12312322, 162.399999)
                 );
 
                 var user1 = new OfficeUser(
-                    idOffice1,
+                    office1.Id,
                     "gustavo",
                     _hashService.Hash("gustavo"),
                     new ContactInfo(new ContactEmail(""), new PhoneNumber(41, 991689129)),
@@ -52,7 +47,7 @@ namespace Jurify.Autenticador.Web.UseCases.Services.Concrete
                 );
 
                 var user2 = new OfficeUser(
-                    idOffice1,
+                    office1.Id,
                     "rosana",
                     _hashService.Hash("rosana"),
                     new ContactInfo(new ContactEmail(""), new PhoneNumber(41, 991689129)),
@@ -61,7 +56,7 @@ namespace Jurify.Autenticador.Web.UseCases.Services.Concrete
                 );
 
                 var user3 = new OfficeUser(
-                    idOffice2,
+                    office2.Id,
                     "gabriel",
                     _hashService.Hash("gabriel"),
                     new ContactInfo(new ContactEmail(""), new PhoneNumber(41, 991689129)),

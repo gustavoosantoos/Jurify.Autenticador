@@ -10,7 +10,7 @@ namespace Jurify.Autenticador.Web.Domain.Model.Entities
         {
         }
 
-        public Office(Guid id, OfficeInfo info, OfficeLocation location) : base(id)
+        public Office(OfficeInfo info, OfficeLocation location) : base(Guid.NewGuid())
         {
             Info = info;
             Location = location;

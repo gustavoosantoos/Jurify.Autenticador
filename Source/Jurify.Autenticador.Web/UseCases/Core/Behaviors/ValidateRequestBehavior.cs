@@ -34,14 +34,7 @@ namespace Jurify.Autenticador.Web.UseCases.Core.Behaviors
 
         private static Task<TResponse> Errors(IEnumerable<ValidationFailure> failures)
         {
-            var response = new Response();
-
-            foreach (var failure in failures)
-            {
-                response.AddError(failure.ErrorMessage);
-            }
-
-            return Task.FromResult(response as TResponse);
+            return Task.FromResult(Response.WithErrors(failures.Select(f => f.ErrorMessage).ToArray()) as TResponse);
         }
     }
 }

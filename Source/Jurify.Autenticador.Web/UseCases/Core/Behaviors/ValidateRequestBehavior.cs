@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Jurify.Autenticador.Web.UseCases.Core.Behaviors
 {
     public class ValidateRequestBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> 
-        where TRequest : IRequest<TResponse> where TResponse : Response
+        where TRequest : IRequest<TResponse> where TResponse : class
     {
         private readonly IEnumerable<IValidator> _validators;
 
@@ -34,7 +34,7 @@ namespace Jurify.Autenticador.Web.UseCases.Core.Behaviors
 
         private static Task<TResponse> Errors(IEnumerable<ValidationFailure> failures)
         {
-            return Task.FromResult(Response.WithErrors(failures.Select(f => f.ErrorMessage).ToArray()) as TResponse);
+            return Task.FromResult(Response<TResponse>.WithErrors(failures.Select(f => f.ErrorMessage).ToArray()) as TResponse);
         }
     }
 }

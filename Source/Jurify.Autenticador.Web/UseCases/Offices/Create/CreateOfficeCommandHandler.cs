@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Jurify.Autenticador.Web.UseCases.Offices.Create
 {
-    public class CreateOfficeCommandHandler : IRequestHandler<CreateOfficeCommand, Response>
+    public class CreateOfficeCommandHandler : IRequestHandler<CreateOfficeCommand, Response<Guid>>
     {
         private readonly AutenticadorContext _context;
 
@@ -18,13 +18,13 @@ namespace Jurify.Autenticador.Web.UseCases.Offices.Create
             _context = context;
         }
 
-        public async Task<Response> Handle(CreateOfficeCommand request, CancellationToken cancellationToken)
+        public async Task<Response<Guid>> Handle(CreateOfficeCommand request, CancellationToken cancellationToken)
         {
             var existsOfficeWithSameName = await _context.Offices.AnyAsync(o => o.Info.Name == request.OfficeName);
 
-            if (!existsOfficeWithSameName)
+            if (existsOfficeWithSameName)
             {
-                return Response.WithErrors("Já existe um escritório com o mesmo nome");
+                return Response<Guid>.WithErrors("Já existe um escritório com o mesmo nome");
             }
 
             var office = request.AsOffice();
@@ -32,7 +32,7 @@ namespace Jurify.Autenticador.Web.UseCases.Offices.Create
             await _context.Offices.AddAsync(office);
             await _context.SaveChangesAsync();
             
-            return Response.WithResult(office.Id);
+            return Response<Guid>.WithResult(office.Id);
         }
     }
 }

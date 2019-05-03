@@ -2,10 +2,11 @@
 using Jurify.Autenticador.Web.Domain.Model.ValueObjects;
 using Jurify.Autenticador.Web.UseCases.Core;
 using MediatR;
+using System;
 
 namespace Jurify.Autenticador.Web.UseCases.Offices.Create
 {
-    public class CreateOfficeCommand : IRequest<Response>
+    public class CreateOfficeCommand : IRequest<Response<Guid>>
     {
         public string OfficeName { get; set; }
         public double Latitude { get; set; }

@@ -5,11 +5,11 @@ using IdentityServer4.Extensions;
 using IdentityServer4.Models;
 using IdentityServer4.Services;
 using IdentityServer4.Stores;
-using Jurify.Autenticador.Application.Services.Abstractions;
 using Jurify.Autenticador.Web.Areas.Lawyers.Models.InputModels;
 using Jurify.Autenticador.Web.Areas.Lawyers.Models.Options;
 using Jurify.Autenticador.Web.Areas.Lawyers.Models.ViewModels;
-using Jurify.Autenticador.Web.SecurityHelpers;
+using Jurify.Autenticador.Web.Infrastructure.SecurityHelpers;
+using Jurify.Autenticador.Web.UseCases.Services.Abstractions;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -25,7 +25,8 @@ namespace Jurify.Autenticador.Web.Areas.Lawyers.Controllers
     [AllowAnonymous]
     public class AccountController : Controller
     {
-        private readonly IOfficeUserService _users;
+        private readonly IOfficeUserService _userService;
+        private readonly IOfficeService _officeService;
         private readonly IIdentityServerInteractionService _interaction;
         private readonly IClientStore _clientStore;
         private readonly IAuthenticationSchemeProvider _schemeProvider;
@@ -36,13 +37,15 @@ namespace Jurify.Autenticador.Web.Areas.Lawyers.Controllers
             IClientStore clientStore,
             IAuthenticationSchemeProvider schemeProvider,
             IEventService events,
-            IOfficeUserService users)
+            IOfficeUserService userService,
+            IOfficeService officeService)
         {
-            _users = users;
+            _userService = userService;
             _interaction = interaction;
             _clientStore = clientStore;
             _schemeProvider = schemeProvider;
             _events = events;
+            _officeService = officeService;
         }
 
         /// <summary>
@@ -103,9 +106,9 @@ namespace Jurify.Autenticador.Web.Areas.Lawyers.Controllers
             if (ModelState.IsValid)
             {
                 // validate username/password against in-memory store
-                if (await _users.ValidateCredentials(model.Username, model.Password))
+                if (await _userService.ValidateCredentials(model.Username, model.Password))
                 {
-                    var user = await _users.FindByUsernameAsync(model.Username);
+                    var user = await _userService.FindByUsernameAsync(model.Username);
                     await _events.RaiseAsync(new UserLoginSuccessEvent(user.Username, user.Id.ToString(), user.Username));
 
                     // only set explicit expiration here if user chooses "remember me". 
@@ -224,8 +227,21 @@ namespace Jurify.Autenticador.Web.Areas.Lawyers.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult SignUp(SignUpInputModel model)
+        public async Task<IActionResult> SignUp(SignUpInputModel model)
         {
+            if (!ModelState.IsValid) return View(model);
+
+            var office = await _officeService.FindByNameAsync(model.OfficeName);
+            var user = await _userService.FindByUsernameAsync(model.Email);
+
+            if (office != null)
+                ModelState.AddModelError(nameof(model.OfficeName), "Já existe um escritório com o mesmo nome");
+            if (user != null) 
+                ModelState.AddModelError(nameof(model.Email), "Já existe um usuário com o e-mail informado");
+
+            if (!ModelState.IsValid) return View(model);
+
+
             return RedirectToAction(nameof(Login));
         }
 

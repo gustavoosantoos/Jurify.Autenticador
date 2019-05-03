@@ -1,13 +1,13 @@
 ﻿// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
-using Jurify.Autenticador.Application.Repositories;
-using Jurify.Autenticador.Application.Services.Abstractions;
-using Jurify.Autenticador.Application.Services.Concrete;
-using Jurify.Autenticador.Domain.Repositories;
-using Jurify.Autenticador.Domain.Services.Abstractions;
-using Jurify.Autenticador.Domain.Services.Implementations;
-using Jurify.Autenticador.Infra.Database.Context;
+using Jurify.Autenticador.Web.Domain.Model.Repositories;
+using Jurify.Autenticador.Web.Domain.Model.Services.Abstractions;
+using Jurify.Autenticador.Web.Domain.Model.Services.Implementations;
+using Jurify.Autenticador.Web.Infrastructure.Database.Context;
+using Jurify.Autenticador.Web.Infrastructure.Database.Repositories;
+using Jurify.Autenticador.Web.UseCases.Services.Abstractions;
+using Jurify.Autenticador.Web.UseCases.Services.Concrete;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;

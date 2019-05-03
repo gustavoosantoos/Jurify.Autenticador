@@ -1,7 +1,7 @@
 ﻿using IdentityServer4.Services;
-using Jurify.Autenticador.Application.Services.Concrete;
 using Jurify.Autenticador.Web.Areas.Lawyers.Models.ViewModels;
-using Jurify.Autenticador.Web.SecurityHelpers;
+using Jurify.Autenticador.Web.Infrastructure.SecurityHelpers;
+using Jurify.Autenticador.Web.UseCases.Services.Concrete;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;

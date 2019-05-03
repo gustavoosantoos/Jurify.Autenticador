@@ -1,12 +1,7 @@
 ﻿// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
-using Jurify.Autenticador.Web.Domain.Model.Repositories;
-using Jurify.Autenticador.Web.Domain.Model.Services.Abstractions;
-using Jurify.Autenticador.Web.Domain.Model.Services.Implementations;
-using Jurify.Autenticador.Web.Infrastructure.Database.Context;
-using Jurify.Autenticador.Web.Infrastructure.Database.Repositories;
-using Jurify.Autenticador.Web.UseCases.Services.Abstractions;
+using Jurify.Autenticador.Web.Infrastructure.Configuration.DependencyInjection;
 using Jurify.Autenticador.Web.UseCases.Services.Concrete;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -37,16 +32,8 @@ namespace Jurify.Autenticador.Web
                 .AddProfileService<UserProfileService>()
                 .AddResourceOwnerValidator<UserPasswordValidationService>();
 
-            services.AddSingleton<IHashService, HashService>();
-
-            services.AddDbContext<AutenticadorContext>();
-
-            services.AddScoped<IOfficeRepository, OfficeRepository>();
-            services.AddScoped<IOfficeService, OfficeService>();
-            services.AddScoped<IOfficeUserRepository, OfficeUserRepository>();
-            services.AddScoped<IOfficeUserService, OfficeUserService>();
-            services.AddScoped<SeedDatabase>();
-
+            services.AddAutenticadorServices();
+            
             if (Environment.IsDevelopment())
             {
                 builder.AddDeveloperSigningCredential();

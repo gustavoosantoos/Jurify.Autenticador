@@ -41,6 +41,8 @@ namespace Jurify.Autenticador.Web
 
             services.AddDbContext<AutenticadorContext>();
 
+            services.AddScoped<IOfficeRepository, OfficeRepository>();
+            services.AddScoped<IOfficeService, OfficeService>();
             services.AddScoped<IOfficeUserRepository, OfficeUserRepository>();
             services.AddScoped<IOfficeUserService, OfficeUserService>();
             services.AddScoped<SeedDatabase>();

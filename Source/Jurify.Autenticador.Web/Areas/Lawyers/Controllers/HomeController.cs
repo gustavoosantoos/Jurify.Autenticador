@@ -22,13 +22,11 @@ namespace Jurify.Autenticador.Web.Areas.Lawyers.Controllers
         public HomeController(
             IIdentityServerInteractionService interaction,
             IHostingEnvironment environment,
-            ILogger<HomeController> logger,
-            SeedDatabase seeder)
+            ILogger<HomeController> logger)
         {
             _interaction = interaction;
             _environment = environment;
             _logger = logger;
-            seeder.Seed();
         }
 
         public IActionResult Index()

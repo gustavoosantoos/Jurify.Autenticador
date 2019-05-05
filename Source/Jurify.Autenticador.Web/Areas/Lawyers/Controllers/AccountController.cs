@@ -9,7 +9,9 @@ using Jurify.Autenticador.Web.Areas.Lawyers.Models.InputModels;
 using Jurify.Autenticador.Web.Areas.Lawyers.Models.Options;
 using Jurify.Autenticador.Web.Areas.Lawyers.Models.ViewModels;
 using Jurify.Autenticador.Web.Infrastructure.SecurityHelpers;
+using Jurify.Autenticador.Web.UseCases.Lawyers.CreateInitial;
 using Jurify.Autenticador.Web.UseCases.Services.Abstractions;
+using MediatR;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -31,6 +33,7 @@ namespace Jurify.Autenticador.Web.Areas.Lawyers.Controllers
         private readonly IClientStore _clientStore;
         private readonly IAuthenticationSchemeProvider _schemeProvider;
         private readonly IEventService _events;
+        private readonly IMediator _mediator;
 
         public AccountController(
             IIdentityServerInteractionService interaction,
@@ -38,14 +41,14 @@ namespace Jurify.Autenticador.Web.Areas.Lawyers.Controllers
             IAuthenticationSchemeProvider schemeProvider,
             IEventService events,
             IOfficeUserService userService,
-            IOfficeService officeService)
+            IMediator mediator)
         {
             _userService = userService;
             _interaction = interaction;
             _clientStore = clientStore;
             _schemeProvider = schemeProvider;
             _events = events;
-            _officeService = officeService;
+            _mediator = mediator;
         }
 
         /// <summary>
@@ -227,22 +230,29 @@ namespace Jurify.Autenticador.Web.Areas.Lawyers.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SignUp(SignUpInputModel model)
+        public async Task<IActionResult> SignUp(SignUpViewModel model)
         {
-            if (!ModelState.IsValid) return View(model);
+            if (!ModelState.IsValid)
+                return View(model);
 
-            var office = await _officeService.FindByNameAsync(model.OfficeName);
-            var user = await _userService.FindByUsernameAsync(model.Email);
+            var command = new CreateInitialLawyerCommand(
+                model.OfficeName,
+                model.Latitude ?? 0,
+                model.Longitude ?? 0,
+                model.Email,
+                model.Password,
+                model.FirstName,
+                model.LastName
+            );
 
-            if (office != null)
-                ModelState.AddModelError(nameof(model.OfficeName), "Já existe um escritório com o mesmo nome");
-            if (user != null) 
-                ModelState.AddModelError(nameof(model.Email), "Já existe um usuário com o e-mail informado");
+            var response = await _mediator.Send(command);
 
-            if (!ModelState.IsValid) return View(model);
+            if (response.IsSucess)
+                return RedirectToAction(nameof(Login));
 
+            response.Errors.ToList().ForEach(e => ModelState.AddModelError("", e));
 
-            return RedirectToAction(nameof(Login));
+            return View(model);
         }
 
 

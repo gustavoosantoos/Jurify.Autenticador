@@ -4,11 +4,11 @@ namespace Jurify.Autenticador.Web.UseCases.Offices.Create
 {
     public class CreateOfficeCommandValidator : AbstractValidator<CreateOfficeCommand>
     {
-        private const string OfficeNameEmptyErrorMessage = "O nome do escritório deve ser informado";
-        private const string OfficeNameLengthErrorMessage = "O nome do escritório deve ter ao máximo 100 caracteres";
+        public const string OfficeNameEmptyErrorMessage = "O nome do escritório deve ser informado";
+        public const string OfficeNameLengthErrorMessage = "O nome do escritório deve ter ao máximo 100 caracteres";
 
-        private const string LongitudeRangeErrorMessage = "A longitude deve estar entre -180 e 180 graus";
-        private const string LatitudeRangeErrorMessage = "A latitude deve estar entre -90 e 90 graus";
+        public const string LongitudeRangeErrorMessage = "A longitude deve estar entre -180 e 180 graus";
+        public const string LatitudeRangeErrorMessage = "A latitude deve estar entre -90 e 90 graus";
 
         public CreateOfficeCommandValidator()
         {

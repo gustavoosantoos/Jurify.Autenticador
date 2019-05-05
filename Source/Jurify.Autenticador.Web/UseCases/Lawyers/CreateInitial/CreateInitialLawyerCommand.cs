@@ -10,6 +10,28 @@ namespace Jurify.Autenticador.Web.UseCases.Lawyers.CreateInitial
 {
     public class CreateInitialLawyerCommand : IRequest<Response<OfficeUser>>
     {
+        public CreateInitialLawyerCommand()
+        {
+        }
+
+        public CreateInitialLawyerCommand(
+            string officeName,
+            double latitude,
+            double longitude,
+            string username,
+            string plainPassword,
+            string firstName,
+            string lastName)
+        {
+            OfficeName = officeName;
+            Latitude = latitude;
+            Longitude = longitude;
+            Username = username;
+            PlainPassword = plainPassword;
+            FirstName = firstName;
+            LastName = lastName;
+        }
+
         public string OfficeName { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }

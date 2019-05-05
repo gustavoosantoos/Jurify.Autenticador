@@ -26,6 +26,8 @@ namespace Jurify.Autenticador.Web.Infrastructure.Configuration.DependencyInjecti
 
             services.AddScoped<IOfficeService, OfficeService>();
             services.AddScoped<IOfficeUserService, OfficeUserService>();
+
+            AddMediatr(services);
         }
 
         private static void AddMediatr(IServiceCollection services)

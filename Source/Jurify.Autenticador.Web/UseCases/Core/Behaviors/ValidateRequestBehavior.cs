@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using FluentValidation.Results;
+using Jurify.Autenticador.Web.Domain.Model.Exceptions;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -34,7 +35,7 @@ namespace Jurify.Autenticador.Web.UseCases.Core.Behaviors
 
         private static Task<TResponse> Errors(IEnumerable<ValidationFailure> failures)
         {
-            return Task.FromResult(Response<TResponse>.WithErrors(failures.Select(f => f.ErrorMessage).ToArray()) as TResponse);
+            throw new DomainValidationException(failures.Select(f => f.ErrorMessage).ToArray());
         }
     }
 }

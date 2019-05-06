@@ -1,11 +1,10 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using Jurify.Autenticador.Web.Domain.Model.Entities;
-using Jurify.Autenticador.Web.Infrastructure.Database.Context;
+﻿using Jurify.Autenticador.Web.Infrastructure.Database.Context;
 using Jurify.Autenticador.Web.UseCases.Core;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Jurify.Autenticador.Web.UseCases.Offices.Create
 {

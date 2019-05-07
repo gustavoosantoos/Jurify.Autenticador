@@ -17,27 +17,12 @@ namespace Jurify.Autenticador.Web.Infrastructure.Database.Configuration
             builder.Property(e => e.Id).HasColumnName("id");
             builder.Property(e => e.Username).HasColumnName("username");
             builder.Property(e => e.Password).HasColumnName("password");
-            
+
             builder.OwnsOne(e => e.PersonalInfo, b =>
             {
                 b.Property(e => e.FirstName).HasColumnName("first_name");
                 b.Property(e => e.LastName).HasColumnName("last_name");
             });
-
-            builder.OwnsOne(e => e.Contact, b =>
-            {
-                b.OwnsOne(e => e.Email, b1 =>
-                {
-                    b1.Property(e => e.Email).HasColumnName("email");
-                });
-
-                b.OwnsOne(e => e.Phone, b1 =>
-                {
-                    b1.Property(e => e.DDD).HasColumnName("phone_ddd");
-                    b1.Property(e => e.Number).HasColumnName("phone_number");
-                });
-            });
-
             builder.Property(e => e.Claims)
                 .HasColumnName("claims")
                 .HasColumnType("jsonb")

@@ -9,14 +9,11 @@ namespace Jurify.Autenticador.Web.UseCases.Offices.Create
     public class CreateOfficeCommand : IRequest<Response<Guid>>
     {
         public string OfficeName { get; set; }
-        public double Latitude { get; set; }
-        public double Longitude { get; set; }
 
         public Office AsOffice()
         {
             return new Office(
-                new OfficeInfo(OfficeName),
-                new OfficeLocation(Latitude, Longitude)
+                new OfficeInfo(OfficeName)
             );
         }
     }

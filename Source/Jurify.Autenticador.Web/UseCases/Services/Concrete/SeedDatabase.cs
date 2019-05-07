@@ -28,20 +28,17 @@ namespace Jurify.Autenticador.Web.UseCases.Services.Concrete
                     return;
                 
                 var office1 = new Office(
-                    new OfficeInfo("Escritório de teste 1"),
-                    new OfficeLocation(130.12312322, 84.399999)
+                    new OfficeInfo("Escritório de teste 1")
                 );
 
                 var office2 = new Office(
-                    new OfficeInfo("Escritório de teste 2"),
-                    new OfficeLocation(30.12312322, 162.399999)
+                    new OfficeInfo("Escritório de teste 2")
                 );
 
                 var user1 = new OfficeUser(
                     office1.Id,
                     "gustavo",
                     _hashService.Hash("gustavo"),
-                    new ContactInfo(new ContactEmail(""), new PhoneNumber(41, 991689129)),
                     new PersonalInfo("Gustavo", "Santos"),
                     new List<Claim>()
                 );
@@ -50,7 +47,6 @@ namespace Jurify.Autenticador.Web.UseCases.Services.Concrete
                     office1.Id,
                     "rosana",
                     _hashService.Hash("rosana"),
-                    new ContactInfo(new ContactEmail(""), new PhoneNumber(41, 991689129)),
                     new PersonalInfo("Rosana", "Santos"),
                     new List<Claim>()
                 );
@@ -59,7 +55,6 @@ namespace Jurify.Autenticador.Web.UseCases.Services.Concrete
                     office2.Id,
                     "gabriel",
                     _hashService.Hash("gabriel"),
-                    new ContactInfo(new ContactEmail(""), new PhoneNumber(41, 991689129)),
                     new PersonalInfo("Gabriel", "Gorbato"),
                     new List<Claim>()
                 );

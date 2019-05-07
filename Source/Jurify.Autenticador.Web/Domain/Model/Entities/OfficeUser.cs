@@ -15,9 +15,8 @@ namespace Jurify.Autenticador.Web.Domain.Model.Entities
         public OfficeUser(Guid officeId,
                           string username,
                           string senha,
-                          ContactInfo contactInfo,
                           PersonalInfo personalInfo,
-                          List<Claim> claims) : base(Guid.NewGuid(), username, senha, contactInfo, personalInfo, claims)
+                          List<Claim> claims) : base(Guid.NewGuid(), username, senha, personalInfo, claims)
         {
             OfficeId = officeId;
         }

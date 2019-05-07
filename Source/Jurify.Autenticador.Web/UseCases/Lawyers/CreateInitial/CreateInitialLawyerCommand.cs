@@ -16,16 +16,12 @@ namespace Jurify.Autenticador.Web.UseCases.Lawyers.CreateInitial
 
         public CreateInitialLawyerCommand(
             string officeName,
-            double latitude,
-            double longitude,
             string username,
             string plainPassword,
             string firstName,
             string lastName)
         {
             OfficeName = officeName;
-            Latitude = latitude;
-            Longitude = longitude;
             Username = username;
             PlainPassword = plainPassword;
             FirstName = firstName;
@@ -33,8 +29,6 @@ namespace Jurify.Autenticador.Web.UseCases.Lawyers.CreateInitial
         }
 
         public string OfficeName { get; set; }
-        public double Latitude { get; set; }
-        public double Longitude { get; set; }
 
         public string Username { get; set; }
         public string PlainPassword { get; set; }
@@ -44,9 +38,7 @@ namespace Jurify.Autenticador.Web.UseCases.Lawyers.CreateInitial
         public CreateOfficeCommand CreateOfficeCommand =>
             new CreateOfficeCommand()
             {
-                OfficeName = OfficeName,
-                Latitude = Latitude,
-                Longitude = Longitude
+                OfficeName = OfficeName
             };
     }
 }

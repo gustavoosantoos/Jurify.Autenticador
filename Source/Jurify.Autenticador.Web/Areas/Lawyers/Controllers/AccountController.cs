@@ -237,8 +237,6 @@ namespace Jurify.Autenticador.Web.Areas.Lawyers.Controllers
 
             var command = new CreateInitialLawyerCommand(
                 model.OfficeName,
-                model.Latitude ?? 0,
-                model.Longitude ?? 0,
                 model.Email,
                 model.Password,
                 model.FirstName,

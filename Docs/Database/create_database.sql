@@ -15,9 +15,6 @@ CREATE TABLE office_users(
     office_id UUID NOT NULL,
     first_name VARCHAR(100) NOT NULL,
     last_name  VARCHAR(250) NOT NULL,
-    email VARCHAR(150) NOT NULL,
-    phone_ddd NUMERIC(2,0),
-    phone_number NUMERIC(9,0),
     claims jsonb NOT NULL,
     deleted boolean DEFAULT false
 );
@@ -25,8 +22,6 @@ CREATE TABLE office_users(
 CREATE TABLE offices(
     id uuid NOT NULL PRIMARY KEY DEFAULT gen_random_uuid(),
     name VARCHAR(100) NOT NULL,
-    latitude NUMERIC(11,8),
-    longitude NUMERIC(11,8),
     deleted boolean NOT NULL DEFAULT false
 );
 
@@ -36,9 +31,6 @@ CREATE TABLE client_users(
     password TEXT NOT NULL,
     first_name VARCHAR(100) NOT NULL,
     last_name  VARCHAR(250) NOT NULL,
-    email VARCHAR(150) NOT NULL,
-    phone_ddd NUMERIC(2,0),
-    phone_number NUMERIC(9,0),
     claims jsonb NOT NULL,
     deleted boolean DEFAULT false
 );

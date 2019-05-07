@@ -49,7 +49,6 @@ namespace Jurify.Autenticador.Web.UseCases.Lawyers.CreateInitial
                 resultCreateOffice.Result,
                 request.Username,
                 _hashService.Hash(request.PlainPassword),
-                new ContactInfo(new ContactEmail(request.Username)),
                 new PersonalInfo(request.FirstName, request.LastName),
                 new List<Claim>()
             );

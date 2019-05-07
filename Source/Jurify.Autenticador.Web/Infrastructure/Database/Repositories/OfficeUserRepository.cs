@@ -30,16 +30,12 @@ namespace Jurify.Autenticador.Web.Infrastructure.Database.Repositories
         public async Task<OfficeUser> FindByIdAsync(Guid id)
         {
             return await _context.OfficeUsers
-                .Include(u => u.PersonalInfo)
-                .Include(u => u.Contact)
                 .FirstOrDefaultAsync(u => u.Id == id);
         }
 
         public async Task<OfficeUser> FindByUsernameAsync(string username)
         {
             return await _context.OfficeUsers
-                .Include(u => u.PersonalInfo)
-                .Include(u => u.Contact)
                 .FirstOrDefaultAsync(u => u.Username == username);
         }
     }

@@ -18,12 +18,6 @@ namespace Jurify.Autenticador.Web.Infrastructure.Database.Configuration
                 b.Property(e => e.Name).HasColumnName("name");
             });
 
-            builder.OwnsOne(e => e.Location, b =>
-            {
-                b.Property(e => e.Latitude).HasColumnName("latitude");
-                b.Property(e => e.Longitude).HasColumnName("longitude");
-            });
-
             builder.Property(e => e.Deleted).HasColumnName("deleted");
 
             builder.HasQueryFilter(e => !e.Deleted);

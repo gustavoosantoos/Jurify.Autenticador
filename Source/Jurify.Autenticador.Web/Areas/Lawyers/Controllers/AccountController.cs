@@ -253,10 +253,6 @@ namespace Jurify.Autenticador.Web.Areas.Lawyers.Controllers
             return View(model);
         }
 
-
-        /*****************************************/
-        /* helper APIs for the AccountController */
-        /*****************************************/
         private async Task<LoginViewModel> BuildLoginViewModelAsync(string returnUrl)
         {
             var context = await _interaction.GetAuthorizationContextAsync(returnUrl);

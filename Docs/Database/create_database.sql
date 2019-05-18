@@ -6,7 +6,7 @@ CREATE DATABASE jurify_autenticador
     TABLESPACE = pg_default
     CONNECTION LIMIT = -1;
 
-CREATE EXTENSION pgcrypto;
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
 CREATE TABLE office_users(
     id UUID NOT NULL PRIMARY KEY DEFAULT gen_random_uuid(),

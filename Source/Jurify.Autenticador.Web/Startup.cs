@@ -23,6 +23,7 @@ namespace Jurify.Autenticador.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddRouting(options => options.LowercaseUrls = true);
             services.AddMvc();
 
             var builder = services.AddIdentityServer()

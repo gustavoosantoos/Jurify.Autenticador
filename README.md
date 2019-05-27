@@ -10,4 +10,3 @@ para rodar na sua máquina, altere o arquivo appsettings.development.json
 - Para rodar o projeto:
   - No Visual Studio, é só rodar o projeto
   - No VSCode, abrir a linha de comando na raíz do projeto, e rodar o comando: **dotnet run**
-

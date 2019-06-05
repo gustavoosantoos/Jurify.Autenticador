@@ -3,6 +3,7 @@ using Jurify.Autenticador.Web.Areas.Lawyers.Models.ViewModels;
 using Jurify.Autenticador.Web.Infrastructure.SecurityHelpers;
 using Jurify.Autenticador.Web.UseCases.Services.Concrete;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -13,6 +14,7 @@ namespace Jurify.Autenticador.Web.Areas.Lawyers.Controllers
     [Area("Lawyers")]
     [SecurityHeaders]
     [AllowAnonymous]
+    [EnableCors("Default")]
     public class HomeController : Controller
     {
         private readonly IIdentityServerInteractionService _interaction;

@@ -24,6 +24,18 @@ namespace Jurify.Autenticador.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRouting(options => options.LowercaseUrls = true);
+
+            services.AddCors(setup =>
+            {
+                setup.AddPolicy("Default", options =>
+                {
+                    options.AllowAnyHeader();
+                    options.AllowAnyOrigin();
+                    options.AllowAnyMethod();
+                    options.AllowCredentials();
+                });
+            });
+
             services.AddMvc();
 
             var builder = services.AddIdentityServer()
@@ -47,6 +59,8 @@ namespace Jurify.Autenticador.Web
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors("Default");
 
             app.UseIdentityServer();
             app.UseStaticFiles();

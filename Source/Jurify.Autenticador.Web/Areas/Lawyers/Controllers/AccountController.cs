@@ -14,6 +14,7 @@ using Jurify.Autenticador.Web.UseCases.Services.Abstractions;
 using MediatR;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -25,6 +26,7 @@ namespace Jurify.Autenticador.Web.Areas.Lawyers.Controllers
     [Area("Lawyers")]
     [SecurityHeaders]
     [AllowAnonymous]
+    [EnableCors("Default")]
     public class AccountController : Controller
     {
         private readonly IOfficeUserService _userService;

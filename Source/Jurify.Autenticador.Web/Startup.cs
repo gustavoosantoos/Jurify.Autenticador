@@ -2,6 +2,8 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 using Jurify.Autenticador.Web.Infrastructure.Configuration.DependencyInjection;
+using Jurify.Autenticador.Web.Infrastructure.Configuration.IdentityServer;
+using Jurify.Autenticador.Web.Infrastructure.Filters;
 using Jurify.Autenticador.Web.UseCases.Services.Concrete;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -36,12 +38,15 @@ namespace Jurify.Autenticador.Web
                 });
             });
 
-            services.AddMvc();
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(typeof(ExceptionFilter));
+            });
 
             var builder = services.AddIdentityServer()
-                .AddInMemoryIdentityResources(Configuration.GetSection("IdentityResources"))
-                .AddInMemoryApiResources(Configuration.GetSection("ApiResources"))
-                .AddInMemoryClients(Configuration.GetSection("Clients"))
+                .AddInMemoryIdentityResources(IdentityServerConfiguration.Resources.GetIdentityResources())
+                .AddInMemoryApiResources(IdentityServerConfiguration.ApiResources.GetApiResources())
+                .AddInMemoryClients(IdentityServerConfiguration.Clients.GetClients())
                 .AddProfileService<UserProfileService>()
                 .AddResourceOwnerValidator<UserPasswordValidationService>();
 

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Jurify.Autenticador.Web.Domain.Model.Entities;
 using Jurify.Autenticador.Web.Domain.Model.Repositories;
+using Jurify.Autenticador.Web.Domain.Model.Services.Abstractions;
 using Jurify.Autenticador.Web.Infrastructure.Database.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,10 +12,12 @@ namespace Jurify.Autenticador.Web.Infrastructure.Database.Repositories
     public class OfficeUserRepository : IOfficeUserRepository
     {
         private readonly AutenticadorContext _context;
+        private readonly IHashService _hashService;
 
-        public OfficeUserRepository(AutenticadorContext context)
+        public OfficeUserRepository(AutenticadorContext context, IHashService hashService)
         {
             _context = context;
+            _hashService = hashService;
         }
 
         public async Task<bool> ExistsAsync(Guid id)
@@ -24,7 +27,8 @@ namespace Jurify.Autenticador.Web.Infrastructure.Database.Repositories
 
         public async Task<bool> ExistsAsync(string username, string password)
         {
-            return await _context.OfficeUsers.AnyAsync(u => u.Username == username && u.Password == password);
+            var user = await FindByUsernameAsync(username);
+            return user != null && _hashService.Verify(user.Password, password);
         }
 
         public async Task<OfficeUser> FindByIdAsync(Guid id)

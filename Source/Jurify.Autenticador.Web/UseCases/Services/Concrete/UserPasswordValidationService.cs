@@ -13,16 +13,13 @@ namespace Jurify.Autenticador.Web.UseCases.Services.Concrete
     public class UserPasswordValidationService : IResourceOwnerPasswordValidator
     {
         private readonly IOfficeUserRepository _officeUserRepository;
-        private readonly IHashService _hashService;
         private readonly ILogger<UserPasswordValidationService> _logger;
 
         public UserPasswordValidationService(
             IOfficeUserRepository officeUserRepository,
-            IHashService hashService,
             ILogger<UserPasswordValidationService> logger)
         {
             _officeUserRepository = officeUserRepository;
-            _hashService = hashService;
             _logger = logger;
         }
 
@@ -45,8 +42,7 @@ namespace Jurify.Autenticador.Web.UseCases.Services.Concrete
         {
             try
             {
-                var exists = await _officeUserRepository
-                    .ExistsAsync(context.UserName, _hashService.Hash(context.Password));
+                var exists = await _officeUserRepository.ExistsAsync(context.UserName, context.Password);
 
                 if (!exists)
                 {

@@ -51,7 +51,12 @@ namespace Jurify.Autenticador.Web.Infrastructure.Configuration.IdentityServer
                         AccessTokenType = AccessTokenType.Jwt,
                         AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
                         AllowedScopes = new [] { "openid", "profile", ApiResources.JurifyApiLawyers },
-                        RequireConsent = false
+                        RequireConsent = false,
+                        RefreshTokenExpiration = TokenExpiration.Sliding,
+                        AllowedCorsOrigins = new [] 
+                        {
+                            "http://localhost:4200"
+                        }
                     },
                     new Client
                     {
@@ -61,7 +66,8 @@ namespace Jurify.Autenticador.Web.Infrastructure.Configuration.IdentityServer
                         AccessTokenType = AccessTokenType.Jwt,
                         AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
                         AllowedScopes = new [] { "openid", "profile", ApiResources.JurifyApiClients },
-                        RequireConsent = false
+                        RequireConsent = false,
+                        RefreshTokenExpiration = TokenExpiration.Sliding
                     }
                 };
             }

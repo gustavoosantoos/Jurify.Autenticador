@@ -1,10 +1,7 @@
 ﻿using Jurify.Autenticador.Web.Domain.Model.Entities;
-using Jurify.Autenticador.Web.Domain.Model.ValueObjects;
 using Jurify.Autenticador.Web.UseCases.Core;
 using Jurify.Autenticador.Web.UseCases.Offices.Create;
 using MediatR;
-using System;
-using System.Collections.Generic;
 
 namespace Jurify.Autenticador.Web.UseCases.Lawyers.CreateInitial
 {

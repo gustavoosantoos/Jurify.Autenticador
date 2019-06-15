@@ -7,6 +7,7 @@ namespace Jurify.Autenticador.Web.UseCases.Lawyers.CreateInitial
     {
         public const string RequiredUsernameErrorMessage = "É obrigatório informar o e-mail do usuário";
         public const string UsernameLengthErrorMessage = "O e-mail do usuário deve possuir no máximo 150 caracteres";
+        public const string UsernameValidEmailMessage = "O usuário deve ser um e-mail válido";
 
         public const string RequiredPasswordErrorMessage = "É obrigatório informar uma senha para o usuário";
 
@@ -19,8 +20,9 @@ namespace Jurify.Autenticador.Web.UseCases.Lawyers.CreateInitial
         public CreateInitialLawyerCommandValidator()
         {
             RuleFor(e => e.CreateOfficeCommand).SetValidator(new CreateOfficeCommandValidator());
-                
+
             RuleFor(e => e.Username)
+                .EmailAddress().WithMessage(UsernameValidEmailMessage)
                 .NotEmpty().WithMessage(RequiredUsernameErrorMessage)
                 .Length(1, 150).WithMessage(UsernameLengthErrorMessage);
 

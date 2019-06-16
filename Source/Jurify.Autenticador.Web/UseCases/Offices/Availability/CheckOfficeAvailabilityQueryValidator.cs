@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using Jurify.Autenticador.Web.UseCases.Offices.Create;
 
 namespace Jurify.Autenticador.Web.UseCases.Offices.Availability
 {
@@ -6,7 +7,9 @@ namespace Jurify.Autenticador.Web.UseCases.Offices.Availability
     {
         public CheckOfficeAvailabilityQueryValidator()
         {
-            RuleFor(query => query.OfficeName);
+            RuleFor(query => query.OfficeName)
+                .NotEmpty().WithMessage(CreateOfficeCommandValidator.OfficeNameEmptyErrorMessage)
+                .Length(1, 100).WithMessage(CreateOfficeCommandValidator.OfficeNameLengthErrorMessage);
         }
     }
 }

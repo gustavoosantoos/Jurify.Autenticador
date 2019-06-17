@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace Jurify.Autenticador.Web
 {
@@ -50,6 +51,11 @@ namespace Jurify.Autenticador.Web
                 .AddProfileService<UserProfileService>()
                 .AddResourceOwnerValidator<UserPasswordValidationService>();
 
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "Jurify.Autenticador API", Version = "v1" });
+            });
+
             services.AddAutenticadorServices();
             
             if (Environment.IsDevelopment())
@@ -66,19 +72,13 @@ namespace Jurify.Autenticador.Web
             }
 
             app.UseCors("Default");
-
             app.UseIdentityServer();
-            app.UseStaticFiles();
-            app.UseMvc(routes =>
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
             {
-                routes.MapRoute(
-                   name: "users",
-                   template: "{area:exists}/{controller=Account}/{action=Login}/{id?}");
-
-                routes.MapRoute(
-                  name: "default",
-                  template: "{controller=Account}/{action=Login}/{id?}");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Jurify.Autenticador API");
             });
+            app.UseMvc();
         }
     }
 }

@@ -1,15 +1,14 @@
-﻿using Microsoft.AspNetCore.Cors;
+﻿using Jurify.Autenticador.Web.Infrastructure.Shared;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Jurify.Autenticador.Web.Areas.Clients.Controllers
 {
-    [Area("Clients")]
+    [ApiController]
     [EnableCors("Default")]
-    public class AccountController : Controller
+    [Route("api/clients/[controller]")]
+    public class AccountController : BaseController
     {
-        public IActionResult Login()
-        {
-            return View();
-        }
+
     }
 }

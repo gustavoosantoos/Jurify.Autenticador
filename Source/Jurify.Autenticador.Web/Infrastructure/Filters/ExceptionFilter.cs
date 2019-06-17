@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc.Filters;
+﻿using Jurify.Autenticador.Web.Domain.Model.Exceptions;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +12,10 @@ namespace Jurify.Autenticador.Web.Infrastructure.Filters
     {
         public void OnException(ExceptionContext context)
         {
-
+            if (context.Exception is DomainValidationException ex)
+            {
+                context.Result = new BadRequestObjectResult(ex.Errors);
+            }
         }
     }
 }

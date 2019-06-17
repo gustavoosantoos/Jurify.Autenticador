@@ -50,6 +50,7 @@ namespace Jurify.Autenticador.Web
                 .AddInMemoryClients(IdentityServerConfiguration.Clients.GetClients())
                 .AddProfileService<UserProfileService>()
                 .AddResourceOwnerValidator<UserPasswordValidationService>()
+                .AddDeveloperSigningCredential()
                 .AddCorsPolicyService<CorsPolicyService>();
 
             services.AddSwaggerGen(c =>
@@ -58,11 +59,6 @@ namespace Jurify.Autenticador.Web
             });
 
             services.AddAutenticadorServices();
-            
-            if (Environment.IsDevelopment())
-            {
-                builder.AddDeveloperSigningCredential();
-            }
         }
 
         public void Configure(IApplicationBuilder app)

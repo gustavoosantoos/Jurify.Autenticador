@@ -52,11 +52,7 @@ namespace Jurify.Autenticador.Web.Infrastructure.Configuration.IdentityServer
                         AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
                         AllowedScopes = new [] { "openid", "profile", ApiResources.JurifyApiLawyers },
                         RequireConsent = false,
-                        RefreshTokenExpiration = TokenExpiration.Sliding,
-                        AllowedCorsOrigins = new [] 
-                        {
-                            "http://localhost:4200"
-                        }
+                        RefreshTokenExpiration = TokenExpiration.Sliding
                     },
                     new Client
                     {

@@ -72,6 +72,7 @@ namespace Jurify.Autenticador.Web
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseStaticFiles();
             app.UseCors("Default");
             app.UseIdentityServer();
             app.UseSwagger();

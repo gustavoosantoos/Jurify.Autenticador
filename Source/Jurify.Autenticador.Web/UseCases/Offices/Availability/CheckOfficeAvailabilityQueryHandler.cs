@@ -19,7 +19,7 @@ namespace Jurify.Autenticador.Web.UseCases.Offices.Availability
         public async Task<Response<bool>> Handle(CheckOfficeAvailabilityQuery request, CancellationToken cancellationToken)
         {
             var existsOfficeWithSameName = await _context.Offices.AnyAsync(o => o.Info.Name == request.OfficeName);
-            return Response<bool>.WithResult(existsOfficeWithSameName);
+            return Response<bool>.WithResult(!existsOfficeWithSameName);
         }
     }
 }

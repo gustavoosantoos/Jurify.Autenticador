@@ -1,11 +1,14 @@
 ﻿using IdentityModel;
 using IdentityServer4.Models;
 using IdentityServer4.Services;
+using Jurify.Autenticador.Web.Domain.Model.Entities;
 using Jurify.Autenticador.Web.Domain.Model.Repositories;
 using Jurify.Autenticador.Web.Infrastructure.Configuration.IdentityServer;
 using Jurify.Autenticador.Web.Infrastructure.Extensions;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Jurify.Autenticador.Web.UseCases.Services.Concrete
@@ -13,10 +16,12 @@ namespace Jurify.Autenticador.Web.UseCases.Services.Concrete
     public class UserProfileService : IProfileService
     {
         private readonly IOfficeUserRepository _officeUserRepository;
+        private readonly IOfficeRepository _officeRepository;
 
-        public UserProfileService(IOfficeUserRepository officeUserRepository)
+        public UserProfileService(IOfficeRepository officeRepository, IOfficeUserRepository officeUserRepository)
         {
             _officeUserRepository = officeUserRepository;
+            _officeRepository = officeRepository;
         }
 
         public async Task GetProfileDataAsync(ProfileDataRequestContext context)
@@ -56,11 +61,13 @@ namespace Jurify.Autenticador.Web.UseCases.Services.Concrete
             if (Guid.TryParse(userId.Value, out var guidId))
             {
                 var user = await _officeUserRepository.FindByIdAsync(guidId);
-                context.IssuedClaims = user
-                    .Claims
-                    .AsSecurityClaims()
-                    .Where(c => context.RequestedClaimTypes.Contains(c.Type))
-                    .ToList();
+                var office = await _officeRepository.FindByIdAsync(user.OfficeId);
+
+                var userClaims = GetUserInfoClaims(office, user)
+                                .Concat(user.Claims.AsSecurityClaims())
+                                .ToList();
+
+                context.IssuedClaims = userClaims;
             }
         }
 
@@ -82,6 +89,18 @@ namespace Jurify.Autenticador.Web.UseCases.Services.Concrete
         private Task<bool> ClientUserIsActiveAsync(IsActiveContext context)
         {
             throw new NotImplementedException("Client user activity not implemented");
+        }
+
+        private List<Claim> GetUserInfoClaims(Office office, OfficeUser user)
+        {
+            return new List<Claim>
+            {
+                new Claim("user_id", user.Id.ToString()),
+                new Claim("user_first_name", user.PersonalInfo.FirstName),
+                new Claim("user_last_name", user.PersonalInfo.LastName),
+                new Claim("office_id", office.Id.ToString()),
+                new Claim("office_name", office.Info.Name)
+            };
         }
     }
 }

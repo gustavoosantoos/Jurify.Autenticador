@@ -18,6 +18,8 @@ namespace Jurify.Autenticador.Web.Infrastructure.Database.Configuration
                 b.Property(e => e.Name).HasColumnName("name");
             });
 
+            builder.HasMany(e => e.Users).WithOne(u => u.Office).HasForeignKey(u => u.OfficeId);
+
             builder.Property(e => e.Deleted).HasColumnName("deleted");
 
             builder.HasQueryFilter(e => !e.Deleted);

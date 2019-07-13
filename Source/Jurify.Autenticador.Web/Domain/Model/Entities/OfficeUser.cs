@@ -7,6 +7,7 @@ namespace Jurify.Autenticador.Web.Domain.Model.Entities
     public class OfficeUser : User
     {
         public Guid OfficeId { get; private set; }
+        public Office Office { get; private set; }
 
         protected OfficeUser()
         {

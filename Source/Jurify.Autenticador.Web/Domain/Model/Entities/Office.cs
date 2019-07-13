@@ -1,6 +1,7 @@
 ﻿using Jurify.Autenticador.Web.Domain.Model.Base;
 using Jurify.Autenticador.Web.Domain.Model.ValueObjects;
 using System;
+using System.Collections.Generic;
 
 namespace Jurify.Autenticador.Web.Domain.Model.Entities
 {
@@ -16,5 +17,6 @@ namespace Jurify.Autenticador.Web.Domain.Model.Entities
         }
 
         public OfficeInfo Info { get; private set; }
+        public List<OfficeUser> Users { get; private set; }
     }
 }

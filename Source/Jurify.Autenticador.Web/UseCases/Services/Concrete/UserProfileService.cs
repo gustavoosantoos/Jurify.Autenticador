@@ -61,9 +61,8 @@ namespace Jurify.Autenticador.Web.UseCases.Services.Concrete
             if (Guid.TryParse(userId.Value, out var guidId))
             {
                 var user = await _officeUserRepository.FindByIdAsync(guidId);
-                var office = await _officeRepository.FindByIdAsync(user.OfficeId);
 
-                var userClaims = GetUserInfoClaims(office, user)
+                var userClaims = GetUserInfoClaims(user)
                                 .Concat(user.Claims.AsSecurityClaims())
                                 .ToList();
 
@@ -91,15 +90,15 @@ namespace Jurify.Autenticador.Web.UseCases.Services.Concrete
             throw new NotImplementedException("Client user activity not implemented");
         }
 
-        private List<Claim> GetUserInfoClaims(Office office, OfficeUser user)
+        private List<Claim> GetUserInfoClaims(OfficeUser user)
         {
             return new List<Claim>
             {
                 new Claim("user_id", user.Id.ToString()),
                 new Claim("user_first_name", user.PersonalInfo.FirstName),
                 new Claim("user_last_name", user.PersonalInfo.LastName),
-                new Claim("office_id", office.Id.ToString()),
-                new Claim("office_name", office.Info.Name)
+                new Claim("office_id", user.Office.Id.ToString()),
+                new Claim("office_name", user.Office.Info.Name)
             };
         }
     }

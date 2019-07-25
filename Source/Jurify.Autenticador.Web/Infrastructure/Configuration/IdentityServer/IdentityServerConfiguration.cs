@@ -22,6 +22,7 @@ namespace Jurify.Autenticador.Web.Infrastructure.Configuration.IdentityServer
             public const string JurifyApiClients = "jurify.api.clients";
             public const string JurifyApiLawyers = "jurify.api.lawyers";
             public const string JurifyApiChat = "jurify.api.chat";
+            public const string JurifyApiAutenticador = "jurify.api.autenticador";
 
             public static List<ApiResource> GetApiResources()
             {
@@ -29,7 +30,8 @@ namespace Jurify.Autenticador.Web.Infrastructure.Configuration.IdentityServer
                 {
                     new ApiResource(JurifyApiClients),
                     new ApiResource(JurifyApiLawyers),
-                    new ApiResource(JurifyApiChat)
+                    new ApiResource(JurifyApiChat),
+                    new ApiResource(JurifyApiAutenticador)
                 };
             }
         }
@@ -62,6 +64,17 @@ namespace Jurify.Autenticador.Web.Infrastructure.Configuration.IdentityServer
                         AccessTokenType = AccessTokenType.Jwt,
                         AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
                         AllowedScopes = new [] { "openid", "profile", ApiResources.JurifyApiClients },
+                        RequireConsent = false,
+                        RefreshTokenExpiration = TokenExpiration.Sliding
+                    },
+                    new Client
+                    {
+                        ClientId = ApiResources.JurifyApiLawyers,
+                        ClientName = ApiResources.JurifyApiLawyers,
+                        ClientSecrets = new [] { new Secret(ApiResources.JurifyApiLawyers.Sha256()) },
+                        AccessTokenType = AccessTokenType.Jwt,
+                        AllowedGrantTypes = GrantTypes.ClientCredentials,
+                        AllowedScopes = new [] { "openid", "profile", ApiResources.JurifyApiAutenticador },
                         RequireConsent = false,
                         RefreshTokenExpiration = TokenExpiration.Sliding
                     }

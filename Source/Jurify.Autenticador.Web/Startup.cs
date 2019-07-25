@@ -39,10 +39,6 @@ namespace Jurify.Autenticador.Web
                 });
             });
 
-            services.AddMvc(options =>
-            {
-                options.Filters.Add(typeof(ExceptionFilter));
-            });
 
             var builder = services.AddIdentityServer()
                 .AddInMemoryIdentityResources(IdentityServerConfiguration.Resources.GetIdentityResources())
@@ -52,6 +48,22 @@ namespace Jurify.Autenticador.Web
                 .AddResourceOwnerValidator<UserPasswordValidationService>()
                 .AddDeveloperSigningCredential()
                 .AddCorsPolicyService<CorsPolicyService>();
+
+            services.AddAuthentication()
+                .AddJwtBearer(config =>
+                {
+                    config.Authority = Configuration["Authentication:Authority"];
+                    config.RequireHttpsMetadata = false;
+                    config.Audience = Configuration["Authentication:ResourceName"];
+                });
+
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(typeof(ExceptionFilter));
+            }).AddJsonOptions(options => 
+            {
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
 
             services.AddSwaggerGen(c =>
             {
@@ -76,6 +88,8 @@ namespace Jurify.Autenticador.Web
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Jurify.Autenticador API");
             });
+
+            app.UseAuthentication();
             app.UseMvc();
         }
     }

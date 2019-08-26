@@ -5,39 +5,29 @@ using MediatR;
 
 namespace Jurify.Autenticador.Web.UseCases.Lawyers.CreateInitial
 {
-    public class CriarUsuarioInicialCommand : IRequest<Response<UsuarioEscritorio>>
+    public partial class CriarUsuarioInicialCommand : IRequest<Response<UsuarioEscritorio>>
     {
+        public Usuario Usuario { get; set; }
+        public Escritorio Escritorio { get; set; }
+
         public CriarUsuarioInicialCommand()
         {
         }
 
-        // TO-DO: Incluir dados do endereço do escritório e novos dados do escritório
-        // TO-DO: Traduzir para portugues os campos e ações
-        public CriarUsuarioInicialCommand(
-            string officeName,
-            string username,
-            string plainPassword,
-            string firstName,
-            string lastName)
+        public CriarUsuarioInicialCommand(Usuario usuario, Escritorio escritorio)
         {
-            OfficeName = officeName;
-            Username = username;
-            PlainPassword = plainPassword;
-            FirstName = firstName;
-            LastName = lastName;
+            Usuario = usuario;
+            Escritorio = escritorio;
         }
 
-        public string OfficeName { get; set; }
 
-        public string Username { get; set; }
-        public string PlainPassword { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-
-        public CriarEscritorioCommand CreateOfficeCommand =>
+        public CriarEscritorioCommand CriarEscritorioCommand() =>
             new CriarEscritorioCommand()
             {
-                RazaoSocial = OfficeName
+                RazaoSocial = Escritorio.RazaoSocial,
+                NomeFantasia = Escritorio.NomeFantasia,
+                CNPJ = Escritorio.CNPJ,
+                Endereco = Escritorio.Endereco
             };
     }
 }

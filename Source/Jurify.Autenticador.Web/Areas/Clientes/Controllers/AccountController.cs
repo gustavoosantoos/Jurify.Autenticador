@@ -6,7 +6,7 @@ namespace Jurify.Autenticador.Web.Areas.Clients.Controllers
 {
     [ApiController]
     [EnableCors("Default")]
-    [Route("api/clients/[controller]")]
+    [Route("api/clientes/account")]
     public class AccountController : BaseController
     {
 

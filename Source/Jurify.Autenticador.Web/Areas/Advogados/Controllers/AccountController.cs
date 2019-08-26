@@ -1,5 +1,4 @@
-﻿using Jurify.Autenticador.Web.Areas.Lawyers.Models;
-using Jurify.Autenticador.Web.Infrastructure.SecurityHelpers;
+﻿using Jurify.Autenticador.Web.Infrastructure.SecurityHelpers;
 using Jurify.Autenticador.Web.Infrastructure.Shared;
 using Jurify.Autenticador.Web.UseCases.Lawyers.Availability;
 using Jurify.Autenticador.Web.UseCases.Lawyers.CreateInitial;
@@ -18,7 +17,7 @@ namespace Jurify.Autenticador.Web.Areas.Lawyers.Controllers
     [ApiController]
     [AllowAnonymous]
     [SecurityHeaders]
-    [Route("api/lawyers/[controller]")]
+    [Route("api/advogados/account")]
     public class AccountController : BaseController
     {
         private readonly IMediator _mediator;
@@ -28,39 +27,31 @@ namespace Jurify.Autenticador.Web.Areas.Lawyers.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet("OfficeAvailable/{officeName}")]
-        public async Task<ActionResult> OfficeAvailable(string officeName)
+        [HttpGet("disponibilidade-escritorio/{nomeFantasia}")]
+        public async Task<ActionResult> DisponibilidadeEscritorio(string nomeFantasia)
         {
-            var query = new DisponibilidadeEscritorioQuery(officeName);
+            var query = new DisponibilidadeEscritorioQuery(nomeFantasia);
             return AppResponse(await _mediator.Send(query));
         }
 
-        [HttpGet("UserAvailable/{username}")]
-        public async Task<ActionResult> UserAvailable(string username)
+        [HttpGet("disponibilidade-usuario/{username}")]
+        public async Task<ActionResult> DisponibilidadeUsuario(string username)
         {
             var query = new DisponibilidadeAdvogadoQuery(username);
             return AppResponse(await _mediator.Send(query));
         }
 
-        [HttpPost("SignUp")]
-        public async Task<ActionResult> SignUp(SignUpInputModel model)
+        [HttpPost("cadastrar")]
+        public async Task<ActionResult> Cadastrar(CriarUsuarioInicialCommand command)
         {
-            var command = new CriarUsuarioInicialCommand(
-                model.OfficeName,
-                model.Email,
-                model.Password,
-                model.FirstName,
-                model.LastName
-            );
-
             return AppResponse(await _mediator.Send(command));
         }
 
         [Authorize]
-        [HttpGet("UserInfo/{officeId:guid}/{userId:guid}")]
-        public async Task<ActionResult> UserInfo(Guid officeId, Guid userId)
+        [HttpGet("dados-usuario/{codigoEscritorio:guid}/{codigoUsuario:guid}")]
+        public async Task<ActionResult> UserInfo(Guid codigoEscritorio, Guid codigoUsuario)
         {
-            return AppResponse(await _mediator.Send(new DadosUsuarioQuery(officeId, userId)));
+            return AppResponse(await _mediator.Send(new DadosUsuarioQuery(codigoEscritorio, codigoUsuario)));
         }
     }
 }

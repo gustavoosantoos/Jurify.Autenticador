@@ -19,21 +19,21 @@ namespace Jurify.Autenticador.Web.UseCases.Lawyers.CreateInitial
 
         public CriarUsuarioInicialCommandValidator()
         {
-            RuleFor(e => e.CreateOfficeCommand).SetValidator(new CriarEscritorioCommandValidator());
+            RuleFor(e => e.CriarEscritorioCommand()).SetValidator(new CriarEscritorioCommandValidator());
 
-            RuleFor(e => e.Username)
+            RuleFor(e => e.Usuario.Email)
                 .EmailAddress().WithMessage(UsernameValidEmailMessage)
                 .NotEmpty().WithMessage(RequiredUsernameErrorMessage)
                 .Length(1, 150).WithMessage(UsernameLengthErrorMessage);
 
-            RuleFor(e => e.PlainPassword)
+            RuleFor(e => e.Usuario.Senha)
                 .NotEmpty().WithMessage(RequiredPasswordErrorMessage);
 
-            RuleFor(e => e.FirstName)
+            RuleFor(e => e.Usuario.Nome)
                 .NotEmpty().WithMessage(RequiredFirstNameErrorMessage)
                 .Length(1, 100).WithMessage(FirstNameLengthErrorMessage);
 
-            RuleFor(e => e.LastName)
+            RuleFor(e => e.Usuario.Sobrenome)
                 .NotEmpty().WithMessage(RequiredLastNameErrorMessage)
                 .Length(1, 250).WithMessage(LastNameLengthErrorMessage);
         }

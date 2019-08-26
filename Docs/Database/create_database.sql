@@ -8,29 +8,45 @@ CREATE DATABASE jurify_autenticador
 
 CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
-CREATE TABLE office_users(
-    id UUID NOT NULL PRIMARY KEY DEFAULT gen_random_uuid(),
-    username VARCHAR(150) NOT NULL,
-    password TEXT NOT NULL,
-    office_id UUID NOT NULL,
-    first_name VARCHAR(100) NOT NULL,
-    last_name  VARCHAR(250) NOT NULL,
-    claims jsonb NOT NULL,
-    deleted boolean DEFAULT false
+create table escritorios(
+	codigo uuid not null primary key default gen_random_uuid(),
+	razao_social varchar(300) not null,
+	nome_fantasia varchar(300) not null,
+	cnpj varchar(20) not null,
+	apagado boolean default false
 );
 
-CREATE TABLE offices(
-    id uuid NOT NULL PRIMARY KEY DEFAULT gen_random_uuid(),
-    name VARCHAR(100) NOT NULL,
-    deleted boolean NOT NULL DEFAULT false
+create table enderecos(
+	codigo uuid not null primary key default gen_random_uuid(),
+	codigo_escritorio uuid references escritorios(codigo),
+	cep varchar(8) not null,
+	rua varchar(300) not null,
+	numero varchar(20) not null,
+	complemento varchar(255) not null,
+	bairro varchar(200) not null,
+	cidade varchar(200) not null,
+	estado varchar(100) not null,
+	latitude varchar(10) not null,
+	longitude varchar(10) not null
 );
 
-CREATE TABLE client_users(
-	id UUID NOT NULL PRIMARY KEY DEFAULT gen_random_uuid(),
-    username VARCHAR(50) NOT NULL,
-    password TEXT NOT NULL,
-    first_name VARCHAR(100) NOT NULL,
-    last_name  VARCHAR(250) NOT NULL,
-    claims jsonb NOT NULL,
-    deleted boolean DEFAULT false
+create table usuarios_escritorio(
+	codigo uuid not null primary key default gen_random_uuid(),
+	codigo_escritorio uuid not null references escritorios(codigo),
+	username varchar(150) not null,
+	password text not null,
+	nome varchar(100) not null,
+	sobrenome varchar(255) not null,
+	permissoes jsonb not null,
+	apagado boolean default false
+);
+
+create table usuarios_cliente(
+	codigo uuid not null primary key default gen_random_uuid(),
+	username varchar(50) not null,
+	password text not null,
+	nome varchar(100) not null,
+	sobrenome varchar(250) not null,
+	permissoes jsonb not null,
+	apagado boolean default false
 );

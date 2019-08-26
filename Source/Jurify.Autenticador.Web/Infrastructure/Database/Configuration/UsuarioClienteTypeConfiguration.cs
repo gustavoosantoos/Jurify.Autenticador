@@ -11,27 +11,27 @@ namespace Jurify.Autenticador.Web.Infrastructure.Database.Configuration
     {
         public void Configure(EntityTypeBuilder<UsuarioCliente> builder)
         {
-            builder.ToTable("client_users");
+            builder.ToTable("usuarios_cliente");
             builder.HasKey(e => e.Codigo);
 
-            builder.Property(e => e.Codigo).HasColumnName("id");
+            builder.Property(e => e.Codigo).HasColumnName("codigo");
             builder.Property(e => e.Username).HasColumnName("username");
             builder.Property(e => e.Senha).HasColumnName("password");
 
             builder.OwnsOne(e => e.InformacoesPessoais, b =>
             {
-                b.Property(e => e.PrimeiroNome).HasColumnName("first_name");
-                b.Property(e => e.UltimoNome).HasColumnName("last_name");
+                b.Property(e => e.PrimeiroNome).HasColumnName("nome");
+                b.Property(e => e.UltimoNome).HasColumnName("sobrenome");
             });
             builder.Property(e => e.Permissoes)
-                .HasColumnName("claims")
+                .HasColumnName("permissoes")
                 .HasColumnType("jsonb")
                 .HasConversion(
                     v => JsonConvert.SerializeObject(v),
                     v => JsonConvert.DeserializeObject<List<Permissao>>(v)
                 );
 
-            builder.Property(e => e.Apagado).HasColumnName("deleted");
+            builder.Property(e => e.Apagado).HasColumnName("apagado");
             builder.HasQueryFilter(e => !e.Apagado);
         }
     }

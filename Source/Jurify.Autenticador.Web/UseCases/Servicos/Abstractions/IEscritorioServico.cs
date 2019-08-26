@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 
 namespace Jurify.Autenticador.Web.UseCases.Services.Abstractions
 {
-    public interface IOfficeService
+    public interface IEscritorioServico
     {
-        Task<Escritorio> FindByNameAsync(string officeName);
+        Task<Escritorio> BuscarPorNomeAsync(string nomeFantasia);
     }
 }

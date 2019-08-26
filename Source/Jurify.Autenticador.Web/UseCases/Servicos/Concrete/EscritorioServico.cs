@@ -1,25 +1,22 @@
 ﻿using Jurify.Autenticador.Web.Domain.Model.Entities;
 using Jurify.Autenticador.Web.Domain.Model.Repositories;
 using Jurify.Autenticador.Web.UseCases.Services.Abstractions;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Jurify.Autenticador.Web.UseCases.Services.Concrete
 {
-    public class OfficeService : IOfficeService
+    public class EscritorioServico : IEscritorioServico
     {
         private readonly IEscritorioRepositorio _repository;
 
-        public OfficeService(IEscritorioRepositorio repository)
+        public EscritorioServico(IEscritorioRepositorio repository)
         {
             _repository = repository;
         }
 
-        public async Task<Escritorio> FindByNameAsync(string officeName)
+        public async Task<Escritorio> BuscarPorNomeAsync(string nomeFantasia)
         {
-            return await _repository.BuscarPorNomeAsync(officeName);
+            return await _repository.BuscarPorNomeAsync(nomeFantasia);
         }
     }
 }

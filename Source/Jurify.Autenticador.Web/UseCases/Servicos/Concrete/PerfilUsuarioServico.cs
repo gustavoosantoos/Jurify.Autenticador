@@ -13,12 +13,12 @@ using System.Threading.Tasks;
 
 namespace Jurify.Autenticador.Web.UseCases.Services.Concrete
 {
-    public class UserProfileService : IProfileService
+    public class PerfilUsuarioServico : IProfileService
     {
         private readonly IUsuarioEscritorioRepositorio _officeUserRepository;
         private readonly IEscritorioRepositorio _officeRepository;
 
-        public UserProfileService(IEscritorioRepositorio officeRepository, IUsuarioEscritorioRepositorio officeUserRepository)
+        public PerfilUsuarioServico(IEscritorioRepositorio officeRepository, IUsuarioEscritorioRepositorio officeUserRepository)
         {
             _officeUserRepository = officeUserRepository;
             _officeRepository = officeRepository;

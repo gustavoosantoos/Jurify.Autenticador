@@ -6,7 +6,7 @@ using System;
 
 namespace Jurify.Autenticador.Web.UseCases.Offices.Create
 {
-    public class CreateOfficeCommand : IRequest<Response<Guid>>
+    public class CriarEscritorioCommand : IRequest<Response<Guid>>
     {
         public string RazaoSocial { get; set; }
         public string NomeFantasia { get; set; }

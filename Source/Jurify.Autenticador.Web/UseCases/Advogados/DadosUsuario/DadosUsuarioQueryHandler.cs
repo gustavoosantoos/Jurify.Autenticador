@@ -8,21 +8,21 @@ using System.Threading.Tasks;
 
 namespace Jurify.Autenticador.Web.UseCases.Lawyers.UserInfoQuery
 {
-    public class UserInfoQueryHandler : IRequestHandler<UserInfoQuery, Response<UsuarioEscritorio>>
+    public class DadosUsuarioQueryHandler : IRequestHandler<DadosUsuarioQuery, Response<UsuarioEscritorio>>
     {
         private readonly AutenticadorContext _context;
 
-        public UserInfoQueryHandler(AutenticadorContext context)
+        public DadosUsuarioQueryHandler(AutenticadorContext context)
         {
             _context = context;
         }
 
-        public async Task<Response<UsuarioEscritorio>> Handle(UserInfoQuery request, CancellationToken cancellationToken)
+        public async Task<Response<UsuarioEscritorio>> Handle(DadosUsuarioQuery request, CancellationToken cancellationToken)
         {
             var user = await _context
                 .OfficeUsers
                 .Include(u => u.Office)
-                .FirstOrDefaultAsync(u => u.Codigo == request.UserId && u.CodigoEscritorio == request.OfficeId);
+                .FirstOrDefaultAsync(u => u.Codigo == request.CodigoUsuario && u.CodigoEscritorio == request.CodigoEscritorio);
 
             if (user == null)
                 return Response<UsuarioEscritorio>.WithErrors("Usuário não encontrado");

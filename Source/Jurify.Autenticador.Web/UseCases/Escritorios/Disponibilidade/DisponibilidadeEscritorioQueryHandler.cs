@@ -7,18 +7,18 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Jurify.Autenticador.Web.UseCases.Offices.Availability
 {
-    public class CheckOfficeAvailabilityQueryHandler : IRequestHandler<CheckOfficeAvailabilityQuery, Response<bool>>
+    public class DisponibilidadeEscritorioQueryHandler : IRequestHandler<DisponibilidadeEscritorioQuery, Response<bool>>
     {
         private readonly AutenticadorContext _context;
 
-        public CheckOfficeAvailabilityQueryHandler(AutenticadorContext context)
+        public DisponibilidadeEscritorioQueryHandler(AutenticadorContext context)
         {
             _context = context;
         }
 
-        public async Task<Response<bool>> Handle(CheckOfficeAvailabilityQuery request, CancellationToken cancellationToken)
+        public async Task<Response<bool>> Handle(DisponibilidadeEscritorioQuery request, CancellationToken cancellationToken)
         {
-            var existsOfficeWithSameName = await _context.Offices.AnyAsync(o => o.Informacoes.NomeFantasia == request.OfficeName);
+            var existsOfficeWithSameName = await _context.Offices.AnyAsync(o => o.Informacoes.NomeFantasia == request.NomeFantasia);
             return Response<bool>.WithResult(!existsOfficeWithSameName);
         }
     }

@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace Jurify.Autenticador.Web.UseCases.Services.Abstractions
 {
-    public interface IClientUserService
+    public interface IUsuarioClienteServico
     {
-        Task<bool> ValidateCredentials(string username, string password);
-        Task<UsuarioCliente> FindByUsernameAsync(string username);
+        Task<bool> ValidarCredenciais(string username, string password);
+        Task<UsuarioCliente> BuscarPorUsernameAsync(string username);
 
         Task<UsuarioCliente> FindByExternalProvider(string provider, string providerUserId);
         Task<UsuarioCliente> AutoProvisionUser(string provider, string providerUserId, List<Claim> list);

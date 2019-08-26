@@ -7,16 +7,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Jurify.Autenticador.Web.UseCases.Lawyers.Availability
 {
-    public class CheckLawyerAvailabilityQueryHandler : IRequestHandler<CheckLawyerAvailabilityQuery, Response<bool>>
+    public class DisponibilidadeAdvogadoQueryHandler : IRequestHandler<DisponibilidadeAdvogadoQuery, Response<bool>>
     {
         private readonly AutenticadorContext _context;
 
-        public CheckLawyerAvailabilityQueryHandler(AutenticadorContext context)
+        public DisponibilidadeAdvogadoQueryHandler(AutenticadorContext context)
         {
             _context = context;
         }
 
-        public async Task<Response<bool>> Handle(CheckLawyerAvailabilityQuery request, CancellationToken cancellationToken)
+        public async Task<Response<bool>> Handle(DisponibilidadeAdvogadoQuery request, CancellationToken cancellationToken)
         {
             var existsUserWithSameUsername = await _context.OfficeUsers.AnyAsync(u => u.Username == request.Username);
             return Response<bool>.WithResult(!existsUserWithSameUsername);

@@ -5,13 +5,15 @@ using MediatR;
 
 namespace Jurify.Autenticador.Web.UseCases.Lawyers.CreateInitial
 {
-    public class CreateInitialLawyerCommand : IRequest<Response<UsuarioEscritorio>>
+    public class CriarUsuarioInicialCommand : IRequest<Response<UsuarioEscritorio>>
     {
-        public CreateInitialLawyerCommand()
+        public CriarUsuarioInicialCommand()
         {
         }
 
-        public CreateInitialLawyerCommand(
+        // TO-DO: Incluir dados do endereço do escritório e novos dados do escritório
+        // TO-DO: Traduzir para portugues os campos e ações
+        public CriarUsuarioInicialCommand(
             string officeName,
             string username,
             string plainPassword,
@@ -32,8 +34,8 @@ namespace Jurify.Autenticador.Web.UseCases.Lawyers.CreateInitial
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
-        public CreateOfficeCommand CreateOfficeCommand =>
-            new CreateOfficeCommand()
+        public CriarEscritorioCommand CreateOfficeCommand =>
+            new CriarEscritorioCommand()
             {
                 RazaoSocial = OfficeName
             };

@@ -11,13 +11,13 @@ using System.Threading.Tasks;
 
 namespace Jurify.Autenticador.Web.UseCases.Lawyers.CreateInitial
 {
-    public class CreateInitialLawyerCommandHandler : IRequestHandler<CreateInitialLawyerCommand, Response<UsuarioEscritorio>>
+    public class CriarUsuarioInicialCommandHandler : IRequestHandler<CriarUsuarioInicialCommand, Response<UsuarioEscritorio>>
     {
         private readonly AutenticadorContext _context;
         private readonly IMediator _mediator;
         private readonly IHashService _hashService;
 
-        public CreateInitialLawyerCommandHandler(
+        public CriarUsuarioInicialCommandHandler(
             AutenticadorContext context,
             IMediator mediator,
             IHashService hashService)
@@ -27,7 +27,7 @@ namespace Jurify.Autenticador.Web.UseCases.Lawyers.CreateInitial
             _hashService = hashService;
         }
 
-        public async Task<Response<UsuarioEscritorio>> Handle(CreateInitialLawyerCommand request, CancellationToken cancellationToken)
+        public async Task<Response<UsuarioEscritorio>> Handle(CriarUsuarioInicialCommand request, CancellationToken cancellationToken)
         {
             var result = Response<UsuarioEscritorio>.WithResult(null);
             var existsUserWithSameUsername = await _context.OfficeUsers.AnyAsync(u => u.Username == request.Username);

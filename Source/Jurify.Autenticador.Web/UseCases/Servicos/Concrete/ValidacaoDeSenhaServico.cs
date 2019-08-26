@@ -1,7 +1,6 @@
 ﻿using IdentityServer4.Models;
 using IdentityServer4.Validation;
 using Jurify.Autenticador.Web.Domain.Model.Repositories;
-using Jurify.Autenticador.Web.Domain.Model.Services.Abstractions;
 using Jurify.Autenticador.Web.Infrastructure.Configuration.IdentityServer;
 using Jurify.Autenticador.Web.Infrastructure.Extensions;
 using Microsoft.Extensions.Logging;
@@ -10,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace Jurify.Autenticador.Web.UseCases.Services.Concrete
 {
-    public class UserPasswordValidationService : IResourceOwnerPasswordValidator
+    public class ValidacaoDeSenhaServico : IResourceOwnerPasswordValidator
     {
         private readonly IUsuarioEscritorioRepositorio _officeUserRepository;
-        private readonly ILogger<UserPasswordValidationService> _logger;
+        private readonly ILogger<ValidacaoDeSenhaServico> _logger;
 
-        public UserPasswordValidationService(
+        public ValidacaoDeSenhaServico(
             IUsuarioEscritorioRepositorio officeUserRepository,
-            ILogger<UserPasswordValidationService> logger)
+            ILogger<ValidacaoDeSenhaServico> logger)
         {
             _officeUserRepository = officeUserRepository;
             _logger = logger;

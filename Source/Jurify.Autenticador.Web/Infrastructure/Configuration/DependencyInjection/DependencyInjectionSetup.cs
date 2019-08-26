@@ -23,8 +23,8 @@ namespace Jurify.Autenticador.Web.Infrastructure.Configuration.DependencyInjecti
             services.AddScoped<IEscritorioRepositorio, EscritorioRepositorio>();
             services.AddScoped<IUsuarioEscritorioRepositorio, UsuarioEscritorioRepositorio>();
 
-            services.AddScoped<IOfficeService, OfficeService>();
-            services.AddScoped<IOfficeUserService, OfficeUserService>();
+            services.AddScoped<IEscritorioServico, EscritorioServico>();
+            services.AddScoped<IUsuarioEscritorioServico, UsuarioEscritorioServico>();
 
             AddMediatr(services);
         }

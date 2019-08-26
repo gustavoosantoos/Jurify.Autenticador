@@ -10,16 +10,16 @@ using System.Threading.Tasks;
 
 namespace Jurify.Autenticador.Web.UseCases.Services.Concrete
 {
-    public class OfficeUserService : IOfficeUserService
+    public class UsuarioEscritorioServico : IUsuarioEscritorioServico
     {
         private readonly IUsuarioEscritorioRepositorio _officeUserRepository;
         private readonly IHashService _hashService;
-        private readonly ILogger<OfficeUserService> _logger;
+        private readonly ILogger<UsuarioEscritorioServico> _logger;
 
-        public OfficeUserService(
+        public UsuarioEscritorioServico(
             IUsuarioEscritorioRepositorio officeUserRepository,
             IHashService hashService,
-            ILogger<OfficeUserService> logger)
+            ILogger<UsuarioEscritorioServico> logger)
         {
             _officeUserRepository = officeUserRepository;
             _hashService = hashService;
@@ -36,12 +36,12 @@ namespace Jurify.Autenticador.Web.UseCases.Services.Concrete
             throw new NotImplementedException();
         }
 
-        public async Task<UsuarioEscritorio> FindByUsernameAsync(string username)
+        public async Task<UsuarioEscritorio> BuscarPorUsernameAsync(string username)
         {
             return await _officeUserRepository.BuscarPorUsernameAsync(username);
         }
 
-        public async Task<bool> ValidateCredentials(string username, string password)
+        public async Task<bool> ValidarCredenciais(string username, string password)
         {
             _logger.LogInformation("Trying to validate credentials for user: {User}", username);
 

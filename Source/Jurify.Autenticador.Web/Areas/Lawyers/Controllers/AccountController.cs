@@ -31,21 +31,21 @@ namespace Jurify.Autenticador.Web.Areas.Lawyers.Controllers
         [HttpGet("OfficeAvailable/{officeName}")]
         public async Task<ActionResult> OfficeAvailable(string officeName)
         {
-            var query = new CheckOfficeAvailabilityQuery(officeName);
+            var query = new DisponibilidadeEscritorioQuery(officeName);
             return AppResponse(await _mediator.Send(query));
         }
 
         [HttpGet("UserAvailable/{username}")]
         public async Task<ActionResult> UserAvailable(string username)
         {
-            var query = new CheckLawyerAvailabilityQuery(username);
+            var query = new DisponibilidadeAdvogadoQuery(username);
             return AppResponse(await _mediator.Send(query));
         }
 
         [HttpPost("SignUp")]
         public async Task<ActionResult> SignUp(SignUpInputModel model)
         {
-            var command = new CreateInitialLawyerCommand(
+            var command = new CriarUsuarioInicialCommand(
                 model.OfficeName,
                 model.Email,
                 model.Password,
@@ -60,7 +60,7 @@ namespace Jurify.Autenticador.Web.Areas.Lawyers.Controllers
         [HttpGet("UserInfo/{officeId:guid}/{userId:guid}")]
         public async Task<ActionResult> UserInfo(Guid officeId, Guid userId)
         {
-            return AppResponse(await _mediator.Send(new UserInfoQuery(officeId, userId)));
+            return AppResponse(await _mediator.Send(new DadosUsuarioQuery(officeId, userId)));
         }
     }
 }

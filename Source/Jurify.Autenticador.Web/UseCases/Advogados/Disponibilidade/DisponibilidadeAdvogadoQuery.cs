@@ -3,14 +3,14 @@ using MediatR;
 
 namespace Jurify.Autenticador.Web.UseCases.Lawyers.Availability
 {
-    public class CheckLawyerAvailabilityQuery : IRequest<Response<bool>>
+    public class DisponibilidadeAdvogadoQuery : IRequest<Response<bool>>
     {
-        public CheckLawyerAvailabilityQuery(string username)
+        public DisponibilidadeAdvogadoQuery(string username)
         {
             Username = username;
         }
 
-        public CheckLawyerAvailabilityQuery() { }
+        public DisponibilidadeAdvogadoQuery() { }
 
         public string Username { get; set; }
     }

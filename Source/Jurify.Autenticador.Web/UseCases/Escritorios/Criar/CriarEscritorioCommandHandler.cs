@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 
 namespace Jurify.Autenticador.Web.UseCases.Offices.Create
 {
-    public class CreateOfficeCommandHandler : IRequestHandler<CreateOfficeCommand, Response<Guid>>
+    public class CriarEscritorioCommandHandler : IRequestHandler<CriarEscritorioCommand, Response<Guid>>
     {
         private readonly AutenticadorContext _context;
 
-        public CreateOfficeCommandHandler(AutenticadorContext context)
+        public CriarEscritorioCommandHandler(AutenticadorContext context)
         {
             _context = context;
         }
 
-        public async Task<Response<Guid>> Handle(CreateOfficeCommand request, CancellationToken cancellationToken)
+        public async Task<Response<Guid>> Handle(CriarEscritorioCommand request, CancellationToken cancellationToken)
         {
             var existsOfficeWithSameName = await _context.Offices.AnyAsync(o => o.Informacoes.NomeFantasia == request.RazaoSocial);
 

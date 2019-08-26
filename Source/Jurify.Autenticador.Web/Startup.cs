@@ -44,8 +44,8 @@ namespace Jurify.Autenticador.Web
                 .AddInMemoryIdentityResources(IdentityServerConfiguration.Resources.GetIdentityResources())
                 .AddInMemoryApiResources(IdentityServerConfiguration.ApiResources.GetApiResources())
                 .AddInMemoryClients(IdentityServerConfiguration.Clients.GetClients())
-                .AddProfileService<UserProfileService>()
-                .AddResourceOwnerValidator<UserPasswordValidationService>()
+                .AddProfileService<PerfilUsuarioServico>()
+                .AddResourceOwnerValidator<ValidacaoDeSenhaServico>()
                 .AddDeveloperSigningCredential()
                 .AddCorsPolicyService<CorsPolicyService>();
 

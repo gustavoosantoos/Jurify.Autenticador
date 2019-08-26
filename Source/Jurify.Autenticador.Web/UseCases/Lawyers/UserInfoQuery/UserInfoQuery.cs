@@ -5,7 +5,7 @@ using System;
 
 namespace Jurify.Autenticador.Web.UseCases.Lawyers.UserInfoQuery
 {
-    public class UserInfoQuery : IRequest<Response<OfficeUser>>
+    public class UserInfoQuery : IRequest<Response<UsuarioEscritorio>>
     {
         public UserInfoQuery(Guid officeId, Guid userId)
         {

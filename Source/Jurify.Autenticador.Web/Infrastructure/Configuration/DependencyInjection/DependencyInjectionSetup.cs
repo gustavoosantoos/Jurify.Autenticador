@@ -19,10 +19,9 @@ namespace Jurify.Autenticador.Web.Infrastructure.Configuration.DependencyInjecti
             services.AddSingleton<IHashService, HashService>();
 
             services.AddDbContext<AutenticadorContext>();
-            services.AddScoped<SeedDatabase>();
 
-            services.AddScoped<IOfficeRepository, OfficeRepository>();
-            services.AddScoped<IOfficeUserRepository, OfficeUserRepository>();
+            services.AddScoped<IEscritorioRepositorio, EscritorioRepositorio>();
+            services.AddScoped<IUsuarioEscritorioRepositorio, UsuarioEscritorioRepositorio>();
 
             services.AddScoped<IOfficeService, OfficeService>();
             services.AddScoped<IOfficeUserService, OfficeUserService>();

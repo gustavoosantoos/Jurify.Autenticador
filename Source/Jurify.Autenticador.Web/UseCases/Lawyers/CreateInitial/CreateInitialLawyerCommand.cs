@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Jurify.Autenticador.Web.UseCases.Lawyers.CreateInitial
 {
-    public class CreateInitialLawyerCommand : IRequest<Response<OfficeUser>>
+    public class CreateInitialLawyerCommand : IRequest<Response<UsuarioEscritorio>>
     {
         public CreateInitialLawyerCommand()
         {
@@ -35,7 +35,7 @@ namespace Jurify.Autenticador.Web.UseCases.Lawyers.CreateInitial
         public CreateOfficeCommand CreateOfficeCommand =>
             new CreateOfficeCommand()
             {
-                OfficeName = OfficeName
+                RazaoSocial = OfficeName
             };
     }
 }

@@ -8,9 +8,9 @@ namespace Jurify.Autenticador.Web.UseCases.Services.Abstractions
     public interface IClientUserService
     {
         Task<bool> ValidateCredentials(string username, string password);
-        Task<ClientUser> FindByUsernameAsync(string username);
+        Task<UsuarioCliente> FindByUsernameAsync(string username);
 
-        Task<ClientUser> FindByExternalProvider(string provider, string providerUserId);
-        Task<ClientUser> AutoProvisionUser(string provider, string providerUserId, List<Claim> list);
+        Task<UsuarioCliente> FindByExternalProvider(string provider, string providerUserId);
+        Task<UsuarioCliente> AutoProvisionUser(string provider, string providerUserId, List<Claim> list);
     }
 }

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Jurify.Autenticador.Web.UseCases.Lawyers.CreateInitial
 {
-    public class CreateInitialLawyerCommandHandler : IRequestHandler<CreateInitialLawyerCommand, Response<OfficeUser>>
+    public class CreateInitialLawyerCommandHandler : IRequestHandler<CreateInitialLawyerCommand, Response<UsuarioEscritorio>>
     {
         private readonly AutenticadorContext _context;
         private readonly IMediator _mediator;
@@ -27,9 +27,9 @@ namespace Jurify.Autenticador.Web.UseCases.Lawyers.CreateInitial
             _hashService = hashService;
         }
 
-        public async Task<Response<OfficeUser>> Handle(CreateInitialLawyerCommand request, CancellationToken cancellationToken)
+        public async Task<Response<UsuarioEscritorio>> Handle(CreateInitialLawyerCommand request, CancellationToken cancellationToken)
         {
-            var result = Response<OfficeUser>.WithResult(null);
+            var result = Response<UsuarioEscritorio>.WithResult(null);
             var existsUserWithSameUsername = await _context.OfficeUsers.AnyAsync(u => u.Username == request.Username);
 
             if (existsUserWithSameUsername)
@@ -45,18 +45,18 @@ namespace Jurify.Autenticador.Web.UseCases.Lawyers.CreateInitial
             if (result.IsFailure)
                 return result;
 
-            OfficeUser user = new OfficeUser(
+            UsuarioEscritorio user = new UsuarioEscritorio(
                 resultCreateOffice.Result,
                 request.Username,
                 _hashService.Hash(request.PlainPassword),
-                new PersonalInfo(request.FirstName, request.LastName),
-                new List<Claim>()
+                new InformacoesPessoais(request.FirstName, request.LastName),
+                new List<Permissao>()
             );
 
             await _context.OfficeUsers.AddAsync(user);
             await _context.SaveChangesAsync();
 
-            return Response<OfficeUser>.WithResult(user);
+            return Response<UsuarioEscritorio>.WithResult(user);
         }
     }
 }

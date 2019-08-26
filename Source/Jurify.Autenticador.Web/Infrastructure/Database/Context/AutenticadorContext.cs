@@ -14,9 +14,9 @@ namespace Jurify.Autenticador.Web.Infrastructure.Database.Context
             _configuration = configuration;
         }
 
-        public DbSet<Office> Offices { get; private set; }
-        public DbSet<OfficeUser> OfficeUsers { get; private set; }
-        public DbSet<ClientUser> ClientUsers { get; private set; }
+        public DbSet<Escritorio> Offices { get; private set; }
+        public DbSet<UsuarioEscritorio> OfficeUsers { get; private set; }
+        public DbSet<UsuarioCliente> ClientUsers { get; private set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -25,9 +25,9 @@ namespace Jurify.Autenticador.Web.Infrastructure.Database.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new OfficeTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new OfficeUserTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new ClientUserTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new EscritorioTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new UsuarioEscritorioTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new UsuarioClienteTypeConfiguration());
         }
     }
 }

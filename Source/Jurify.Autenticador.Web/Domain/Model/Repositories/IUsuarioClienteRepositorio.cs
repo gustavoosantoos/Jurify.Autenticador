@@ -1,6 +1,6 @@
 ﻿namespace Jurify.Autenticador.Web.Domain.Model.Repositories
 {
-    public interface IClientUserRepository
+    public interface IUsuarioClienteRepositorio
     {
     }
 

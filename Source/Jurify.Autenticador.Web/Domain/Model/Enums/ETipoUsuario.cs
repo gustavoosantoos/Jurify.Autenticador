@@ -1,8 +1,8 @@
 ﻿namespace Jurify.Autenticador.Web.Domain.Model.Enums
 {
-    public enum UserType
+    public enum ETipoUsuario
     {
-        Lawyer,
-        Client
+        Advogado,
+        Cliente
     }
 }

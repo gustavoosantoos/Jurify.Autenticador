@@ -5,6 +5,6 @@ namespace Jurify.Autenticador.Web.UseCases.Services.Abstractions
 {
     public interface IOfficeService
     {
-        Task<Office> FindByNameAsync(string officeName);
+        Task<Escritorio> FindByNameAsync(string officeName);
     }
 }

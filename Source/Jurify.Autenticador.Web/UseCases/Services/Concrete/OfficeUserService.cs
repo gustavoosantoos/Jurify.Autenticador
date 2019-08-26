@@ -12,12 +12,12 @@ namespace Jurify.Autenticador.Web.UseCases.Services.Concrete
 {
     public class OfficeUserService : IOfficeUserService
     {
-        private readonly IOfficeUserRepository _officeUserRepository;
+        private readonly IUsuarioEscritorioRepositorio _officeUserRepository;
         private readonly IHashService _hashService;
         private readonly ILogger<OfficeUserService> _logger;
 
         public OfficeUserService(
-            IOfficeUserRepository officeUserRepository,
+            IUsuarioEscritorioRepositorio officeUserRepository,
             IHashService hashService,
             ILogger<OfficeUserService> logger)
         {
@@ -26,19 +26,19 @@ namespace Jurify.Autenticador.Web.UseCases.Services.Concrete
             _logger = logger;
         }
 
-        public Task<OfficeUser> AutoProvisionUser(string provider, string providerUserId, List<Claim> list)
+        public Task<UsuarioEscritorio> AutoProvisionUser(string provider, string providerUserId, List<Claim> list)
         {
             throw new NotImplementedException();
         }
 
-        public Task<OfficeUser> FindByExternalProvider(string provider, string providerUserId)
+        public Task<UsuarioEscritorio> FindByExternalProvider(string provider, string providerUserId)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<OfficeUser> FindByUsernameAsync(string username)
+        public async Task<UsuarioEscritorio> FindByUsernameAsync(string username)
         {
-            return await _officeUserRepository.FindByUsernameAsync(username);
+            return await _officeUserRepository.BuscarPorUsernameAsync(username);
         }
 
         public async Task<bool> ValidateCredentials(string username, string password)
@@ -48,12 +48,12 @@ namespace Jurify.Autenticador.Web.UseCases.Services.Concrete
             if (string.IsNullOrWhiteSpace(username))
                 return false;
 
-            var user = await _officeUserRepository.FindByUsernameAsync(username);
+            var user = await _officeUserRepository.BuscarPorUsernameAsync(username);
 
             if (user == null)
                 return false;
 
-            return _hashService.Verify(user.Password, password);
+            return _hashService.Verify(user.Senha, password);
         }
     }
 }

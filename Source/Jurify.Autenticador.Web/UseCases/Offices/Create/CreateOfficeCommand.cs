@@ -8,12 +8,14 @@ namespace Jurify.Autenticador.Web.UseCases.Offices.Create
 {
     public class CreateOfficeCommand : IRequest<Response<Guid>>
     {
-        public string OfficeName { get; set; }
+        public string RazaoSocial { get; set; }
+        public string NomeFantasia { get; set; }
+        public string CNPJ { get; set; }
 
-        public Office AsOffice()
+        public Escritorio AsOffice()
         {
-            return new Office(
-                new OfficeInfo(OfficeName)
+            return new Escritorio(
+                new InformacoesDoEscritorio(NomeFantasia, RazaoSocial, CNPJ)
             );
         }
     }

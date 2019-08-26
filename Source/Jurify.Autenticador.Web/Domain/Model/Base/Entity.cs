@@ -4,24 +4,24 @@ namespace Jurify.Autenticador.Web.Domain.Model.Base
 {
     public abstract class Entity
     {
-        public virtual Guid Id { get; private set; }
-        public bool Deleted { get; protected set; }
+        public virtual Guid Codigo { get; private set; }
+        public bool Apagado { get; protected set; }
 
         protected Entity() { }
 
         public Entity(Guid id)
         {
-            Id = id;
+            Codigo = id;
         }
 
-        public virtual void Activate()
+        public virtual void Ativar()
         {
-            Deleted = false;
+            Apagado = false;
         }
 
-        public virtual void Deativate()
+        public virtual void Desativar()
         {
-            Deleted = true;
+            Apagado = true;
         }
 
         public override bool Equals(object obj)
@@ -37,13 +37,13 @@ namespace Jurify.Autenticador.Web.Domain.Model.Base
             if (GetType() != other.GetType())
                 return false;
 
-            if (Id == default || other == default)
+            if (Codigo == default || other == default)
                 return false;
 
-            if (Id == Guid.Empty || other.Id == Guid.Empty)
+            if (Codigo == Guid.Empty || other.Codigo == Guid.Empty)
                 return false;
 
-            return Id == other.Id;
+            return Codigo == other.Codigo;
         }
 
         public static bool operator ==(Entity a, Entity b)
@@ -64,7 +64,7 @@ namespace Jurify.Autenticador.Web.Domain.Model.Base
 
         public override int GetHashCode()
         {
-            return (GetType().ToString() + Id).GetHashCode();
+            return (GetType().ToString() + Codigo).GetHashCode();
         }
     }
 }

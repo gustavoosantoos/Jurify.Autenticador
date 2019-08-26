@@ -10,16 +10,16 @@ namespace Jurify.Autenticador.Web.UseCases.Services.Concrete
 {
     public class OfficeService : IOfficeService
     {
-        private readonly IOfficeRepository _repository;
+        private readonly IEscritorioRepositorio _repository;
 
-        public OfficeService(IOfficeRepository repository)
+        public OfficeService(IEscritorioRepositorio repository)
         {
             _repository = repository;
         }
 
-        public async Task<Office> FindByNameAsync(string officeName)
+        public async Task<Escritorio> FindByNameAsync(string officeName)
         {
-            return await _repository.FindByNameAsync(officeName);
+            return await _repository.BuscarPorNomeAsync(officeName);
         }
     }
 }

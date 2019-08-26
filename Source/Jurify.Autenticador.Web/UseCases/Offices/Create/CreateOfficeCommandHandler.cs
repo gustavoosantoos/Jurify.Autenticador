@@ -19,7 +19,7 @@ namespace Jurify.Autenticador.Web.UseCases.Offices.Create
 
         public async Task<Response<Guid>> Handle(CreateOfficeCommand request, CancellationToken cancellationToken)
         {
-            var existsOfficeWithSameName = await _context.Offices.AnyAsync(o => o.Info.Name == request.OfficeName);
+            var existsOfficeWithSameName = await _context.Offices.AnyAsync(o => o.Informacoes.NomeFantasia == request.RazaoSocial);
 
             if (existsOfficeWithSameName)
             {
@@ -31,7 +31,7 @@ namespace Jurify.Autenticador.Web.UseCases.Offices.Create
             await _context.Offices.AddAsync(office);
             await _context.SaveChangesAsync();
             
-            return Response<Guid>.WithResult(office.Id);
+            return Response<Guid>.WithResult(office.Codigo);
         }
     }
 }

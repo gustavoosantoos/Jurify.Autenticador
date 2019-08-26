@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 
 namespace Jurify.Autenticador.Web.Domain.Model.Repositories
 {
-    public interface IOfficeRepository
+    public interface IEscritorioRepositorio
     {
-        Task<Office> FindByNameAsync(string officeName);
-        Task<Office> FindByIdAsync(Guid officeId);
+        Task<Escritorio> BuscarPorNomeAsync(string officeName);
+        Task<Escritorio> BuscarPorIdAsync(Guid officeId);
     }
 }

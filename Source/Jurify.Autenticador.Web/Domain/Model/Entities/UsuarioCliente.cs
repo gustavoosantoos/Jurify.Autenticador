@@ -4,17 +4,17 @@ using System.Collections.Generic;
 
 namespace Jurify.Autenticador.Web.Domain.Model.Entities
 {
-    public class ClientUser : User
+    public class UsuarioCliente : Usuario
     {
-        public ClientUser(Guid id,
+        public UsuarioCliente(Guid id,
                           string username,
                           string senha,
-                          PersonalInfo personalInfo,
-                          List<Claim> claims) : base(id, username, senha, personalInfo,claims)
+                          InformacoesPessoais informacoesPessoais,
+                          List<Permissao> permissoes) : base(id, username, senha, informacoesPessoais, permissoes)
         {
         }
 
-        protected ClientUser()
+        protected UsuarioCliente()
         {
         }
     }

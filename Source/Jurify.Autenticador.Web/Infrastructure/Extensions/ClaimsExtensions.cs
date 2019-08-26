@@ -6,9 +6,9 @@ namespace Jurify.Autenticador.Web.Infrastructure.Extensions
 {
     public static class ClaimsExtensions
     {
-        public static List<Claim> AsSecurityClaims(this List<Domain.Model.ValueObjects.Claim> claims)
+        public static List<Claim> AsSecurityClaims(this List<Domain.Model.ValueObjects.Permissao> claims)
         {
-            return claims.Select(c => new Claim(c.Name, c.Value)).ToList();
+            return claims.Select(c => new Claim(c.Nome, c.Valor)).ToList();
         }
     }
 }

@@ -12,11 +12,11 @@ namespace Jurify.Autenticador.Web.UseCases.Services.Concrete
 {
     public class UserPasswordValidationService : IResourceOwnerPasswordValidator
     {
-        private readonly IOfficeUserRepository _officeUserRepository;
+        private readonly IUsuarioEscritorioRepositorio _officeUserRepository;
         private readonly ILogger<UserPasswordValidationService> _logger;
 
         public UserPasswordValidationService(
-            IOfficeUserRepository officeUserRepository,
+            IUsuarioEscritorioRepositorio officeUserRepository,
             ILogger<UserPasswordValidationService> logger)
         {
             _officeUserRepository = officeUserRepository;
@@ -42,7 +42,7 @@ namespace Jurify.Autenticador.Web.UseCases.Services.Concrete
         {
             try
             {
-                var exists = await _officeUserRepository.ExistsAsync(context.UserName, context.Password);
+                var exists = await _officeUserRepository.ExisteAsync(context.UserName, context.Password);
 
                 if (!exists)
                 {
@@ -50,12 +50,12 @@ namespace Jurify.Autenticador.Web.UseCases.Services.Concrete
                     return;
                 }
 
-                var user = await _officeUserRepository.FindByUsernameAsync(context.UserName);
+                var user = await _officeUserRepository.BuscarPorUsernameAsync(context.UserName);
 
                 context.Result = new GrantValidationResult(
-                    subject: user.Id.ToString(),
+                    subject: user.Codigo.ToString(),
                     authenticationMethod: "custom",
-                    claims: user.Claims.AsSecurityClaims()
+                    claims: user.Permissoes.AsSecurityClaims()
                 );
             }
             catch (Exception ex)

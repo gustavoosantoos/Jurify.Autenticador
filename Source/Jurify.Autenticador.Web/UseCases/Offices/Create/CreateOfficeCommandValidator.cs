@@ -9,7 +9,7 @@ namespace Jurify.Autenticador.Web.UseCases.Offices.Create
 
         public CreateOfficeCommandValidator()
         {
-            RuleFor(e => e.OfficeName)
+            RuleFor(e => e.RazaoSocial)
                 .NotEmpty().WithMessage(OfficeNameEmptyErrorMessage)
                 .Length(1, 100).WithMessage(OfficeNameLengthErrorMessage);
         }

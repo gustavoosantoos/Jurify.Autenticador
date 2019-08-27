@@ -17,7 +17,16 @@ namespace Jurify.Autenticador.Web.UseCases.Offices.Create
         public Escritorio AsOffice()
         {
             return new Escritorio(
-                new InformacoesDoEscritorio(NomeFantasia, RazaoSocial, CNPJ)
+                new InformacoesDoEscritorio(NomeFantasia, RazaoSocial, CNPJ),
+                new Domain.Model.Entities.Endereco(
+                    Endereco.CEP,
+                    Endereco.Rua,
+                    Endereco.Numero,
+                    Endereco.Complemento,
+                    Endereco.Bairro,
+                    Endereco.Cidade,
+                    Endereco.Estado
+                )
             );
         }
     }

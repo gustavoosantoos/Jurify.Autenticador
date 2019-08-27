@@ -21,7 +21,7 @@ namespace Jurify.Autenticador.Web.Infrastructure.Database.Repositories
 
         public async Task<bool> ExisteAsync(Guid id)
         {
-            return await _context.OfficeUsers.AnyAsync(u => u.Codigo == id);
+            return await _context.UsuariosEscritorio.AnyAsync(u => u.Codigo == id);
         }
 
         public async Task<bool> ExisteAsync(string username, string password)
@@ -32,14 +32,14 @@ namespace Jurify.Autenticador.Web.Infrastructure.Database.Repositories
 
         public async Task<UsuarioEscritorio> BuscarPorIdAsync(Guid id)
         {
-            return await _context.OfficeUsers
+            return await _context.UsuariosEscritorio
                 .Include(u => u.Office)
                 .FirstOrDefaultAsync(u => u.Codigo == id);
         }
 
         public async Task<UsuarioEscritorio> BuscarPorUsernameAsync(string username)
         {
-            return await _context.OfficeUsers
+            return await _context.UsuariosEscritorio
                 .Include(u => u.Office)
                 .FirstOrDefaultAsync(u => u.Username == username);
         }

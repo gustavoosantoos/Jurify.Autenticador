@@ -20,6 +20,7 @@ namespace Jurify.Autenticador.Web.Infrastructure.Database.Configuration
                 b.Property(e => e.CNPJ).HasColumnName("cnpj");
             });
 
+            builder.HasOne(e => e.Endereco).WithOne(u => u.Escritorio).HasForeignKey<Endereco>(e => e.CodigoEscritorio);
             builder.HasMany(e => e.Usuarios).WithOne(u => u.Office).HasForeignKey(u => u.CodigoEscritorio);
 
             builder.Property(e => e.Apagado).HasColumnName("apagado");

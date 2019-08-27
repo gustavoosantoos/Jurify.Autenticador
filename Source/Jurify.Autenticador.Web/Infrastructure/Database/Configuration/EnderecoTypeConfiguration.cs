@@ -31,10 +31,7 @@ namespace Jurify.Autenticador.Web.Infrastructure.Database.Configuration
                 .HasConversion(new NumberToStringConverter<double>());
 
             builder.Property(e => e.CodigoEscritorio).HasColumnName("codigo_escritorio");
-
-            builder.HasOne(e => e.Escritorio)
-                .WithOne(e => e.Endereco)
-                .HasForeignKey<Endereco>(e => e.CodigoEscritorio);
+            builder.Property(e => e.Apagado).HasColumnName("apagado");
         }
     }
 }

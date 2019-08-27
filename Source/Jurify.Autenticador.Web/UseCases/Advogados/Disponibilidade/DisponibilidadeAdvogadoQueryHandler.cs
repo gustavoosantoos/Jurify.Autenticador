@@ -18,7 +18,7 @@ namespace Jurify.Autenticador.Web.UseCases.Lawyers.Availability
 
         public async Task<Response<bool>> Handle(DisponibilidadeAdvogadoQuery request, CancellationToken cancellationToken)
         {
-            var existsUserWithSameUsername = await _context.OfficeUsers.AnyAsync(u => u.Username == request.Username);
+            var existsUserWithSameUsername = await _context.UsuariosEscritorio.AnyAsync(u => u.Username == request.Username);
             return Response<bool>.WithResult(!existsUserWithSameUsername);
         }
     }

@@ -30,11 +30,12 @@ namespace Jurify.Autenticador.Web.UseCases.Lawyers.CreateInitial
         public async Task<Response<UsuarioEscritorio>> Handle(CriarUsuarioInicialCommand request, CancellationToken cancellationToken)
         {
             var result = Response<UsuarioEscritorio>.WithResult(null);
-            var existsUserWithSameUsername = await _context.OfficeUsers.AnyAsync(u => u.Username == request.Usuario.Email);
+            var existsUserWithSameUsername = await _context.UsuariosEscritorio.AnyAsync(u => u.Username == request.Usuario.Email);
 
             if (existsUserWithSameUsername)
             {
                 result.AddError("Já existe um usuário com o mesmo e-mail, logue-se ou utilize outro e-mail");
+                return result;
             }
 
             var resultCreateOffice = await _mediator.Send(request.CriarEscritorioCommand());
@@ -53,7 +54,7 @@ namespace Jurify.Autenticador.Web.UseCases.Lawyers.CreateInitial
                 new List<Permissao>()
             );
 
-            await _context.OfficeUsers.AddAsync(user);
+            await _context.UsuariosEscritorio.AddAsync(user);
             await _context.SaveChangesAsync();
 
             return Response<UsuarioEscritorio>.WithResult(user);

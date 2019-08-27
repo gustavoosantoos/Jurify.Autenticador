@@ -19,16 +19,18 @@ namespace Jurify.Autenticador.Web.UseCases.Offices.Create
 
         public async Task<Response<Guid>> Handle(CriarEscritorioCommand request, CancellationToken cancellationToken)
         {
-            var existsOfficeWithSameName = await _context.Offices.AnyAsync(o => o.Informacoes.NomeFantasia == request.RazaoSocial);
+            var existsOfficeWithSameName = await _context.Escritorios
+                .AnyAsync(o => o.Informacoes.RazaoSocial == request.RazaoSocial || 
+                               o.Informacoes.CNPJ == request.CNPJ);
 
             if (existsOfficeWithSameName)
             {
-                return Response<Guid>.WithErrors("Já existe um escritório com o mesmo nome");
+                return Response<Guid>.WithErrors("Já existe um escritório com a mesma razão social ou CNPJ");
             }
 
             var office = request.AsOffice();
 
-            await _context.Offices.AddAsync(office);
+            await _context.Escritorios.AddAsync(office);
             await _context.SaveChangesAsync();
             
             return Response<Guid>.WithResult(office.Codigo);

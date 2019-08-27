@@ -20,7 +20,7 @@ namespace Jurify.Autenticador.Web.UseCases.Lawyers.UserInfoQuery
         public async Task<Response<UsuarioEscritorio>> Handle(DadosUsuarioQuery request, CancellationToken cancellationToken)
         {
             var user = await _context
-                .OfficeUsers
+                .UsuariosEscritorio
                 .Include(u => u.Office)
                 .FirstOrDefaultAsync(u => u.Codigo == request.CodigoUsuario && u.CodigoEscritorio == request.CodigoEscritorio);
 

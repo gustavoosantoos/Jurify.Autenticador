@@ -18,12 +18,12 @@ namespace Jurify.Autenticador.Web.Infrastructure.Database.Repositories
 
         public async Task<Escritorio> BuscarPorIdAsync(Guid officeId)
         {
-            return await _context.Offices.FirstOrDefaultAsync(o => o.Codigo == officeId);
+            return await _context.Escritorios.FirstOrDefaultAsync(o => o.Codigo == officeId);
         }
 
         public async Task<Escritorio> BuscarPorNomeAsync(string officeName)
         {
-            return await _context.Offices.FirstOrDefaultAsync(o => o.Informacoes.NomeFantasia == officeName);
+            return await _context.Escritorios.FirstOrDefaultAsync(o => o.Informacoes.NomeFantasia == officeName);
         }
     }
 }

@@ -6,5 +6,7 @@
         public string Sobrenome { get; set; }
         public string Email { get; set; }
         public string Senha { get; set; }
+        public int CodigoEstado { get; set; }
+        public string NumeroOAB { get; set; }
     }
 }

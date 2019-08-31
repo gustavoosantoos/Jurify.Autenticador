@@ -1,5 +1,6 @@
 ﻿using Jurify.Autenticador.Web.Infrastructure.SecurityHelpers;
 using Jurify.Autenticador.Web.Infrastructure.Shared;
+using Jurify.Autenticador.Web.UseCases.Advogados.ListarEstadosBrasileiros;
 using Jurify.Autenticador.Web.UseCases.Lawyers.Availability;
 using Jurify.Autenticador.Web.UseCases.Lawyers.CreateInitial;
 using Jurify.Autenticador.Web.UseCases.Lawyers.UserInfoQuery;
@@ -52,6 +53,12 @@ namespace Jurify.Autenticador.Web.Areas.Lawyers.Controllers
         public async Task<ActionResult> UserInfo(Guid codigoEscritorio, Guid codigoUsuario)
         {
             return AppResponse(await _mediator.Send(new DadosUsuarioQuery(codigoEscritorio, codigoUsuario)));
+        }
+
+        [HttpGet("estados-brasileiros")]
+        public async Task<ActionResult> ListarEstados()
+        {
+            return AppResponse(await _mediator.Send(new ListarEstadosBrasileirosQuery()));
         }
     }
 }

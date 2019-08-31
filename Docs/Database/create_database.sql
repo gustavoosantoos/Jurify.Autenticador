@@ -38,6 +38,9 @@ create table usuarios_escritorio(
 	nome varchar(100) not null,
 	sobrenome varchar(255) not null,
 	permissoes jsonb not null,
+	numero_oab text null,
+	codigo_uf numeric(2) null, 
+	caminho_imagem text null,
 	apagado boolean default false
 );
 

@@ -1,4 +1,5 @@
 ﻿using Jurify.Autenticador.Web.Domain.Model.Entities;
+using Jurify.Autenticador.Web.Domain.Model.Enums;
 using Jurify.Autenticador.Web.Domain.Model.Services.Abstractions;
 using Jurify.Autenticador.Web.Domain.Model.ValueObjects;
 using Jurify.Autenticador.Web.Infrastructure.Database.Context;
@@ -46,12 +47,24 @@ namespace Jurify.Autenticador.Web.UseCases.Lawyers.CreateInitial
             if (result.IsFailure)
                 return result;
 
+            CredenciaisAdvogado credenciais = null;
+
+            if (request.Usuario.NumeroOAB != null && request.Usuario.CodigoEstado != 0)
+            {
+                credenciais = new CredenciaisAdvogado(
+                    request.Usuario.NumeroOAB,
+                    EstadoBrasileiro.ObterPorCodigo(request.Usuario.CodigoEstado),
+                    null
+                );
+            }
+
             UsuarioEscritorio user = new UsuarioEscritorio(
                 resultCreateOffice.Result,
                 request.Usuario.Email,
                 _hashService.Hash(request.Usuario.Senha),
                 new InformacoesPessoais(request.Usuario.Nome, request.Usuario.Sobrenome),
-                new List<Permissao>()
+                new List<Permissao>(),
+                credenciais
             );
 
             await _context.UsuariosEscritorio.AddAsync(user);

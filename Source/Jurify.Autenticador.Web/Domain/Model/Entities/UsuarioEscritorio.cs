@@ -8,6 +8,7 @@ namespace Jurify.Autenticador.Web.Domain.Model.Entities
     {
         public Guid CodigoEscritorio { get; private set; }
         public Escritorio Office { get; private set; }
+        public CredenciaisAdvogado Credenciais { get; set; }
 
         protected UsuarioEscritorio()
         {
@@ -17,9 +18,11 @@ namespace Jurify.Autenticador.Web.Domain.Model.Entities
                           string username,
                           string senha,
                           InformacoesPessoais personalInfo,
-                          List<Permissao> claims) : base(Guid.NewGuid(), username, senha, personalInfo, claims)
+                          List<Permissao> claims,
+                          CredenciaisAdvogado credenciais) : base(Guid.NewGuid(), username, senha, personalInfo, claims)
         {
             CodigoEscritorio = officeId;
+            Credenciais = credenciais;
         }
     }
 }

@@ -6,6 +6,13 @@ namespace Jurify.Autenticador.Web.Domain.Model.ValueObjects
 {
     public class CredenciaisAdvogado : ValueObject
     {
+        public CredenciaisAdvogado()
+        {
+            NumeroOab = string.Empty;
+            Estado = EstadoBrasileiro.NAO_INFORMADO;
+            CaminhoFoto = string.Empty;
+        }
+
         public CredenciaisAdvogado(string numeroOab, EstadoBrasileiro estado, string caminhoFoto)
         {
             NumeroOab = numeroOab;

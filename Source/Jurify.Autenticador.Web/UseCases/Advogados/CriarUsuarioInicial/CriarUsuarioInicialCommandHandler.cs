@@ -47,7 +47,7 @@ namespace Jurify.Autenticador.Web.UseCases.Lawyers.CreateInitial
             if (result.IsFailure)
                 return result;
 
-            CredenciaisAdvogado credenciais = null;
+            CredenciaisAdvogado credenciais = new CredenciaisAdvogado();
 
             if (request.Usuario.NumeroOAB != null && request.Usuario.CodigoEstado != 0)
             {

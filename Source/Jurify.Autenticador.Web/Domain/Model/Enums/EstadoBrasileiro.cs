@@ -6,6 +6,7 @@ namespace Jurify.Autenticador.Web.Domain.Model.Enums
 {
     public class EstadoBrasileiro : ValueObject
     {
+        public static readonly EstadoBrasileiro NAO_INFORMADO = new EstadoBrasileiro(0, "Não informado", string.Empty);
         public static readonly EstadoBrasileiro ACRE = new EstadoBrasileiro(1, "Acre", "AC");
         public static readonly EstadoBrasileiro ALAGOAS = new EstadoBrasileiro(2, "Alagoas", "AL");
         public static readonly EstadoBrasileiro AMAPA = new EstadoBrasileiro(3, "Amapá", "AP");
@@ -49,6 +50,7 @@ namespace Jurify.Autenticador.Web.Domain.Model.Enums
         {
             return new List<EstadoBrasileiro>
             {
+                NAO_INFORMADO,
                 ACRE,
                 ALAGOAS,
                 AMAPA,
@@ -81,12 +83,12 @@ namespace Jurify.Autenticador.Web.Domain.Model.Enums
 
         public static EstadoBrasileiro ObterPorUF(string uf)
         {
-            return ObterTodos().FirstOrDefault(e => e.UF == uf);
+            return ObterTodos().FirstOrDefault(e => e.UF == uf) ?? NAO_INFORMADO;
         }
 
         public static EstadoBrasileiro ObterPorCodigo(int codigo)
         {
-            return ObterTodos().FirstOrDefault(e => e.Codigo == codigo);
+            return ObterTodos().FirstOrDefault(e => e.Codigo == codigo) ?? NAO_INFORMADO;
         }
 
         protected override IEnumerable<object> GetEqualityComponents()

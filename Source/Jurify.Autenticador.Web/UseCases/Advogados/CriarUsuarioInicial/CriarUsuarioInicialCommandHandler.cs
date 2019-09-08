@@ -4,8 +4,10 @@ using Jurify.Autenticador.Web.Domain.Model.Services.Abstractions;
 using Jurify.Autenticador.Web.Domain.Model.ValueObjects;
 using Jurify.Autenticador.Web.Infrastructure.Database.Context;
 using Jurify.Autenticador.Web.UseCases.Core;
+using Jurify.Autenticador.Web.UseCases.Offices.Create;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -39,10 +41,10 @@ namespace Jurify.Autenticador.Web.UseCases.Lawyers.CreateInitial
                 return result;
             }
 
-            var resultCreateOffice = await _mediator.Send(request.CriarEscritorioCommand());
+            var resultadoCriacaoEscritorio = await CriarEscritorio(request.CriarEscritorioCommand());
 
-            if (resultCreateOffice.IsFailure)
-                result.AddErrors(resultCreateOffice.Errors);
+            if (resultadoCriacaoEscritorio.IsFailure)
+                result.AddErrors(resultadoCriacaoEscritorio.Errors);
 
             if (result.IsFailure)
                 return result;
@@ -59,7 +61,7 @@ namespace Jurify.Autenticador.Web.UseCases.Lawyers.CreateInitial
             }
 
             UsuarioEscritorio user = new UsuarioEscritorio(
-                resultCreateOffice.Result,
+                resultadoCriacaoEscritorio.Result,
                 request.Usuario.Email,
                 _hashService.Hash(request.Usuario.Senha),
                 new InformacoesPessoais(request.Usuario.Nome, request.Usuario.Sobrenome),
@@ -71,6 +73,24 @@ namespace Jurify.Autenticador.Web.UseCases.Lawyers.CreateInitial
             await _context.SaveChangesAsync();
 
             return Response<UsuarioEscritorio>.WithResult(user);
+        }
+
+        public async Task<Response<Guid>> CriarEscritorio(CriarEscritorioCommand command)
+        {
+            var existsOfficeWithSameName = await _context.Escritorios
+           .AnyAsync(o => o.Informacoes.RazaoSocial == command.RazaoSocial ||
+                          o.Informacoes.CNPJ == command.CNPJ);
+
+            if (existsOfficeWithSameName)
+            {
+                return Response<Guid>.WithErrors("Já existe um escritório com a mesma razão social ou CNPJ");
+            }
+
+            var office = command.AsOffice();
+
+            await _context.Escritorios.AddAsync(office);
+
+            return Response<Guid>.WithResult(office.Codigo);
         }
     }
 }

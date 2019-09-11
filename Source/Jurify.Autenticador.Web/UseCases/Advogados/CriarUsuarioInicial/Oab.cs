@@ -17,5 +17,9 @@ namespace Jurify.Autenticador.Web.UseCases.Advogados.CriarUsuarioInicial
             Uf = uf;
             NomeCompleto = nomeCompleto;
         }
+
+        public Oab()
+        {
+        }
     }
 }

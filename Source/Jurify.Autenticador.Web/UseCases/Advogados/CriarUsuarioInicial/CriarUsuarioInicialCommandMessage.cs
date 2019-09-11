@@ -17,7 +17,7 @@ namespace Jurify.Autenticador.Web.UseCases.Advogados.CriarUsuarioInicial
             using (var channel = connection.CreateModel())
             {
                 channel.QueueDeclare(queue: "validar-oab",
-                                     durable: false,
+                                     durable: true,
                                      exclusive: false,
                                      autoDelete: false,
                                      arguments: null);

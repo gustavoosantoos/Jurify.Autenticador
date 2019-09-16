@@ -70,7 +70,9 @@ namespace Jurify.Autenticador.Web.UseCases.Lawyers.CreateInitial
                 request.Usuario.Email,
                 _hashService.Hash(request.Usuario.Senha),
                 new InformacoesPessoais(request.Usuario.Nome, request.Usuario.Sobrenome),
-                new List<Permissao>(),
+                new List<Permissao>() {
+                    new Permissao("EhAdministrador", "true")
+                },
                 credenciais
             );
 

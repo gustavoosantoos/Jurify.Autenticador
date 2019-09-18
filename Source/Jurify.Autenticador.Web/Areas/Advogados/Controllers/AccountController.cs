@@ -52,6 +52,12 @@ namespace Jurify.Autenticador.Web.Areas.Lawyers.Controllers
             return AppResponse(await _mediator.Send(command));
         }
 
+        [HttpPost("cadastrar-novo")]
+        public async Task<ActionResult> CadastrarNovo(CriarUsuarioNovoCommand command)
+        {
+            return AppResponse(await _mediator.Send(command));
+        }
+
         [Authorize]
         [HttpGet("dados-usuario/{codigoEscritorio:guid}/{codigoUsuario:guid}")]
         public async Task<ActionResult> UserInfo(Guid codigoEscritorio, Guid codigoUsuario)
@@ -71,6 +77,12 @@ namespace Jurify.Autenticador.Web.Areas.Lawyers.Controllers
             return Ok(_context.Escritorios
                 .Include(e => e.Usuarios)
                 .Include(e => e.Endereco));
+        }
+
+        [HttpGet("listar-usuarios-escritorio")]
+        public async Task<ActionResult> ListarUSuariosDoEscritorio(Guid CodigoEscritorio)
+        {
+            return AppResponse(await _mediator.Send(new ListarUsuariosDoEscritorioQuery(CodigoEscritorio)));
         }
     }
 }

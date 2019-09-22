@@ -19,15 +19,18 @@ namespace Jurify.Autenticador.Web.UseCases.Lawyers.CreateInitial
         private readonly AutenticadorContext _context;
         private readonly IMediator _mediator;
         private readonly IHashService _hashService;
+        private readonly IGeocodingService _geocodingService;
 
         public CriarUsuarioInicialCommandHandler(
             AutenticadorContext context,
             IMediator mediator,
-            IHashService hashService)
+            IHashService hashService,
+            IGeocodingService geocodingService)
         {
             _context = context;
             _mediator = mediator;
             _hashService = hashService;
+            _geocodingService = geocodingService;
         }
 
         public async Task<Response<UsuarioEscritorio>> Handle(CriarUsuarioInicialCommand request, CancellationToken cancellationToken)
@@ -86,7 +89,7 @@ namespace Jurify.Autenticador.Web.UseCases.Lawyers.CreateInitial
                 return Response<Guid>.WithErrors("Já existe um escritório com a mesma razão social ou CNPJ");
             }
 
-            var office = command.AsOffice();
+            var office = await command.AsOffice(_geocodingService);
 
             await _context.Escritorios.AddAsync(office);
 

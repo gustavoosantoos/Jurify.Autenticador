@@ -17,6 +17,7 @@ namespace Jurify.Autenticador.Web.Infrastructure.Configuration.DependencyInjecti
         public static void AddAutenticadorServices(this IServiceCollection services)
         {
             services.AddSingleton<IHashService, HashService>();
+            services.AddSingleton<IGeocodingService, GeocodingService>();
 
             services.AddDbContext<AutenticadorContext>();
 

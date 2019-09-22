@@ -22,13 +22,9 @@ namespace Jurify.Autenticador.Web.Infrastructure.Database.Configuration
             builder.Property(e => e.Cidade).HasColumnName("cidade");
             builder.Property(e => e.Estado).HasColumnName("estado");
 
-            builder.Property(e => e.Latitude)
-                .HasColumnName("latitude")
-                .HasConversion(new NumberToStringConverter<double>());
+            builder.Property(e => e.Latitude).HasColumnName("latitude");
 
-            builder.Property(e => e.Longitude)
-                .HasColumnName("longitude")
-                .HasConversion(new NumberToStringConverter<double>());
+            builder.Property(e => e.Longitude).HasColumnName("longitude");
 
             builder.Property(e => e.CodigoEscritorio).HasColumnName("codigo_escritorio");
             builder.Property(e => e.Apagado).HasColumnName("apagado");

@@ -16,7 +16,9 @@ namespace Jurify.Autenticador.Web.Domain.Model.Entities
                         string complemento,
                         string bairro,
                         string cidade,
-                        string estado)
+                        string estado,
+                        double latitude,
+                        double longitude)
         {
             CEP = cep;
             Rua = rua;
@@ -25,8 +27,8 @@ namespace Jurify.Autenticador.Web.Domain.Model.Entities
             Bairro = bairro;
             Cidade = cidade;
             Estado = estado;
-
-            AtualizarCoordenadas();
+            Latitude = latitude;
+            Longitude = longitude;
         }
 
         public Guid CodigoEscritorio { get; set; }
@@ -41,10 +43,5 @@ namespace Jurify.Autenticador.Web.Domain.Model.Entities
         public string Estado { get; private set; }
         public double Latitude { get; private set; }
         public double Longitude { get; private set; }
-
-        public void AtualizarCoordenadas()
-        {
-
-        }
     }
 }

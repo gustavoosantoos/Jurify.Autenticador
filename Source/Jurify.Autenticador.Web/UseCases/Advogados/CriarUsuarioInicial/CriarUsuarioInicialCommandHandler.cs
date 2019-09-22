@@ -3,6 +3,7 @@ using Jurify.Autenticador.Web.Domain.Model.Enums;
 using Jurify.Autenticador.Web.Domain.Model.Services.Abstractions;
 using Jurify.Autenticador.Web.Domain.Model.ValueObjects;
 using Jurify.Autenticador.Web.Infrastructure.Database.Context;
+using Jurify.Autenticador.Web.UseCases.Advogados.CriarUsuarioInicial;
 using Jurify.Autenticador.Web.UseCases.Core;
 using Jurify.Autenticador.Web.UseCases.Offices.Create;
 using MediatR;
@@ -53,9 +54,13 @@ namespace Jurify.Autenticador.Web.UseCases.Lawyers.CreateInitial
                 return result;
 
             CredenciaisAdvogado credenciais = new CredenciaisAdvogado();
+            Oab oabSaida = new Oab();
 
             if (request.Usuario.NumeroOAB != null && request.Usuario.CodigoEstado != 0)
             {
+                oabSaida = new Oab(request.Usuario.NumeroOAB, EstadoBrasileiro.ObterPorCodigo(request.Usuario.CodigoEstado).UF, $"{request.Usuario.Nome} {request.Usuario.Sobrenome}");
+                CriarUsuarioInicialCommandMessage.Publish(oabSaida);
+
                 credenciais = new CredenciaisAdvogado(
                     request.Usuario.NumeroOAB,
                     EstadoBrasileiro.ObterPorCodigo(request.Usuario.CodigoEstado),
@@ -68,7 +73,9 @@ namespace Jurify.Autenticador.Web.UseCases.Lawyers.CreateInitial
                 request.Usuario.Email,
                 _hashService.Hash(request.Usuario.Senha),
                 new InformacoesPessoais(request.Usuario.Nome, request.Usuario.Sobrenome),
-                new List<Permissao>(),
+                new List<Permissao>() {
+                    new Permissao("EhAdministrador", "true")
+                },
                 credenciais
             );
 

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Jurify.Autenticador.Web.Infrastructure.Shared
 {
-    public class BaseController : ControllerBase
+    public abstract class BaseController : ControllerBase
     {
         public ActionResult AppResponse<T>(Response<T> response)
         {

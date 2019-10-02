@@ -41,7 +41,7 @@ namespace Jurify.Autenticador.Web.Domain.Model.Entities
         public string Bairro { get; private set; }
         public string Cidade { get; private set; }
         public string Estado { get; private set; }
-        public double Latitude { get; private set; }
-        public double Longitude { get; private set; }
+        public double? Latitude { get; private set; }
+        public double? Longitude { get; private set; }
     }
 }

@@ -58,6 +58,12 @@ namespace Jurify.Autenticador.Web.Areas.Lawyers.Controllers
             return AppResponse(await _mediator.Send(command));
         }
 
+        [HttpDelete("remover")]
+        public async Task<ActionResult> Remover(Guid codigoUsuario)
+        {
+            return AppResponse(await _mediator.Send(new RemoverUsuarioCommand(codigoUsuario)));
+        }
+
         [Authorize]
         [HttpGet("dados-usuario/{codigoEscritorio:guid}/{codigoUsuario:guid}")]
         public async Task<ActionResult> UserInfo(Guid codigoEscritorio, Guid codigoUsuario)
@@ -80,9 +86,9 @@ namespace Jurify.Autenticador.Web.Areas.Lawyers.Controllers
         }
 
         [HttpGet("listar-usuarios-escritorio")]
-        public async Task<ActionResult> ListarUSuariosDoEscritorio(string cnpj)
+        public async Task<ActionResult> ListarUSuariosDoEscritorio(Guid codigoEscritorio)
         {
-            return AppResponse(await _mediator.Send(new ListarUsuariosDoEscritorioQuery(cnpj)));
+            return AppResponse(await _mediator.Send(new ListarUsuariosDoEscritorioQuery(codigoEscritorio)));
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Jurify.Autenticador.Web.Domain.Model.Entities;
+﻿using Jurify.Autenticador.Web.UseCases.Advogados.ListarUsuariosDoEscritorio;
 using Jurify.Autenticador.Web.Infrastructure.Database.Context;
 using Jurify.Autenticador.Web.UseCases.Core;
 using MediatR;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Jurify.Autenticador.Web.UseCases.Lawyers.UserInfoQuery
 {
-    public class ListarUsuariosDoEscritorioQueryHandler : IRequestHandler<ListarUsuariosDoEscritorioQuery, Response<List<UsuarioEscritorio>>>
+    public class ListarUsuariosDoEscritorioQueryHandler : IRequestHandler<ListarUsuariosDoEscritorioQuery, Response<List<Usuario>>>
     {
         private readonly AutenticadorContext _context;
 
@@ -19,16 +19,22 @@ namespace Jurify.Autenticador.Web.UseCases.Lawyers.UserInfoQuery
             _context = context;
         }
 
-        public async Task<Response<List<UsuarioEscritorio>>> Handle(ListarUsuariosDoEscritorioQuery request, CancellationToken cancellationToken)
+        public async Task<Response<List<Usuario>>> Handle(ListarUsuariosDoEscritorioQuery request, CancellationToken cancellationToken)
         {
-            var user = await _context
+            var users = await _context
                 .UsuariosEscritorio
                 .Where(u => u.CodigoEscritorio == request.CodigoEscritorio).ToListAsync();
 
-            if (user == null)
-                return Response<List<UsuarioEscritorio>>.WithErrors("Usuário não encontrado");
+            if (users == null)
+                return Response<List<Usuario>>.WithErrors("Usuário não encontrado");
 
-            return Response<List<UsuarioEscritorio>>.WithResult(user);
+            List<Usuario> usuarios = new List<Usuario>();
+
+            foreach (var user in users)
+            {
+                usuarios.Add(new Usuario(user));
+            }
+            return Response<List<Usuario>>.WithResult(usuarios);
         }
     }
 }

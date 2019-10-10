@@ -9,12 +9,12 @@ namespace Jurify.Autenticador.Web.UseCases.Lawyers.UserInfoQuery
 {
     public class ListarUsuariosDoEscritorioQuery : IRequest<Response<List<Usuario>>>
     {
-        public ListarUsuariosDoEscritorioQuery(string cnpj)
+        public ListarUsuariosDoEscritorioQuery(Guid codigoEscritorio)
         {
-            Cnpj = cnpj;
+            CodigoEscritorio = codigoEscritorio;
         }
 
-        public string Cnpj { get; set; }
+        public Guid CodigoEscritorio { get; set; }
 
     }
 }

@@ -16,7 +16,7 @@ namespace Jurify.Autenticador.Web.UseCases.Advogados.ListarUsuariosDoEscritorio
         public string UltimoNome { get; private set; }
         public string NumeroOab { get; set; }
         public EstadoBrasileiro Estado { get; set; }
-        public string ehAdministrador { get; set; }
+        public bool ehAdministrador { get; set; }
 
         public Usuario(UsuarioEscritorio user)
         {
@@ -27,7 +27,10 @@ namespace Jurify.Autenticador.Web.UseCases.Advogados.ListarUsuariosDoEscritorio
             UltimoNome = user.InformacoesPessoais.UltimoNome;
             NumeroOab = user.Credenciais.NumeroOab;
             Estado = user.Credenciais.Estado;
-            ehAdministrador = user.Permissoes.Find(x => x.Nome.Contains("EhAdministrador")).Valor;
+            if (user.Permissoes != null && user.Permissoes.Count() > 0)
+                ehAdministrador =  bool.Parse(user.Permissoes.Find(x => x.Nome.Contains("EhAdministrador")).Valor);
+            else
+                ehAdministrador = false;
 
         }
     }

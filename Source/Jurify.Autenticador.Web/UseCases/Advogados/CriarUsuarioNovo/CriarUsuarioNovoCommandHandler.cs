@@ -46,14 +46,14 @@ namespace Jurify.Autenticador.Web.UseCases.Lawyers.CreateInitial
             CredenciaisAdvogado credenciais = new CredenciaisAdvogado();
             Oab oabSaida = new Oab();
 
-            if (request.Usuario.NumeroOAB != null && request.Usuario.CodigoEstado != 0)
+            if (request.Usuario.NumeroOAB != null && request.Usuario.Estado != 0)
             {
-                oabSaida = new Oab(request.Usuario.NumeroOAB, EstadoBrasileiro.ObterPorCodigo(request.Usuario.CodigoEstado).UF, $"{request.Usuario.Nome} {request.Usuario.Sobrenome}");
+                oabSaida = new Oab(request.Usuario.NumeroOAB, EstadoBrasileiro.ObterPorCodigo(request.Usuario.Estado).UF, $"{request.Usuario.Nome} {request.Usuario.Sobrenome}");
                 CriarUsuarioInicialCommandMessage.Publish(oabSaida);
 
                 credenciais = new CredenciaisAdvogado(
                     request.Usuario.NumeroOAB,
-                    EstadoBrasileiro.ObterPorCodigo(request.Usuario.CodigoEstado),
+                    EstadoBrasileiro.ObterPorCodigo(request.Usuario.Estado),
                     null
                 );
             }

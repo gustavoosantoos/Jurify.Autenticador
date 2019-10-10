@@ -80,9 +80,9 @@ namespace Jurify.Autenticador.Web.Areas.Lawyers.Controllers
         }
 
         [HttpGet("listar-usuarios-escritorio")]
-        public async Task<ActionResult> ListarUSuariosDoEscritorio(Guid CodigoEscritorio)
+        public async Task<ActionResult> ListarUSuariosDoEscritorio(string cnpj)
         {
-            return AppResponse(await _mediator.Send(new ListarUsuariosDoEscritorioQuery(CodigoEscritorio)));
+            return AppResponse(await _mediator.Send(new ListarUsuariosDoEscritorioQuery(cnpj)));
         }
     }
 }

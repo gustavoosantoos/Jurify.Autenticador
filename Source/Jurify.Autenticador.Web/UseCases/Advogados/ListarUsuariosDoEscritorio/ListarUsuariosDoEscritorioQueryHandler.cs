@@ -23,7 +23,7 @@ namespace Jurify.Autenticador.Web.UseCases.Lawyers.UserInfoQuery
         {
             var users = await _context
                 .UsuariosEscritorio
-                .Where(u => u.CodigoEscritorio == request.CodigoEscritorio).ToListAsync();
+                .Where(u => u.Office.Informacoes.CNPJ == request.Cnpj).ToListAsync();
 
             if (users == null)
                 return Response<List<Usuario>>.WithErrors("Usuário não encontrado");

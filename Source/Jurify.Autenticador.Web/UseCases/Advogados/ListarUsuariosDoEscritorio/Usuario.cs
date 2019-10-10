@@ -11,6 +11,7 @@ namespace Jurify.Autenticador.Web.UseCases.Advogados.ListarUsuariosDoEscritorio
     {
         public Guid CodigoEscritorio { get; private set; }
         public Guid CodigoUsuario { get; private set; }
+        public string Email { get; private set; }
         public string PrimeiroNome { get; private set; }
         public string UltimoNome { get; private set; }
         public string NumeroOab { get; set; }
@@ -21,6 +22,7 @@ namespace Jurify.Autenticador.Web.UseCases.Advogados.ListarUsuariosDoEscritorio
         {
             CodigoEscritorio = user.CodigoEscritorio;
             CodigoUsuario = user.Codigo;
+            Email = user.Username;
             PrimeiroNome = user.InformacoesPessoais.PrimeiroNome;
             UltimoNome = user.InformacoesPessoais.UltimoNome;
             NumeroOab = user.Credenciais.NumeroOab;

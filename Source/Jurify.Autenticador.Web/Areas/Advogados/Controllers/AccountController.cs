@@ -4,6 +4,7 @@ using Jurify.Autenticador.Web.Infrastructure.Shared;
 using Jurify.Autenticador.Web.UseCases.Advogados.ListarEstadosBrasileiros;
 using Jurify.Autenticador.Web.UseCases.Lawyers.Availability;
 using Jurify.Autenticador.Web.UseCases.Lawyers.CreateInitial;
+using Jurify.Autenticador.Web.UseCases.Lawyers.Modify;
 using Jurify.Autenticador.Web.UseCases.Lawyers.UserInfoQuery;
 using Jurify.Autenticador.Web.UseCases.Offices.Availability;
 using MediatR;
@@ -58,6 +59,12 @@ namespace Jurify.Autenticador.Web.Areas.Lawyers.Controllers
             return AppResponse(await _mediator.Send(command));
         }
 
+        [HttpPut("modificar-usuario")]
+        public async Task<ActionResult> ModificarUsuario(ModificarUsuarioCommand command)
+        {
+            return AppResponse(await _mediator.Send(command));
+        }
+
         [HttpDelete("remover")]
         public async Task<ActionResult> Remover(Guid codigoUsuario)
         {
@@ -90,5 +97,6 @@ namespace Jurify.Autenticador.Web.Areas.Lawyers.Controllers
         {
             return AppResponse(await _mediator.Send(new ListarUsuariosDoEscritorioQuery(codigoEscritorio)));
         }
+
     }
 }

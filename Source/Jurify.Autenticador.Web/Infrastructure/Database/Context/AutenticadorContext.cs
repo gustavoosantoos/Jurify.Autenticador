@@ -17,6 +17,8 @@ namespace Jurify.Autenticador.Web.Infrastructure.Database.Context
         public DbSet<Escritorio> Escritorios { get; private set; }
         public DbSet<UsuarioEscritorio> UsuariosEscritorio { get; private set; }
         public DbSet<UsuarioCliente> UsuariosCliente { get; private set; }
+        public DbSet<Especialidade> Especialidades { get; private set; }
+        public DbSet<EspecialidadesEscritorio> EspecialidadesEscritorio { get; private set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -29,6 +31,8 @@ namespace Jurify.Autenticador.Web.Infrastructure.Database.Context
             modelBuilder.ApplyConfiguration(new UsuarioEscritorioTypeConfiguration());
             modelBuilder.ApplyConfiguration(new UsuarioClienteTypeConfiguration());
             modelBuilder.ApplyConfiguration(new EnderecoTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new EspecialidadeTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new EspecialidadesEscritorioTypeConfiguration());
         }
     }
 }

@@ -16,6 +16,20 @@ create table escritorios(
 	apagado boolean default false
 );
 
+create table especialidades(
+	codigo uuid not null primary key default gen_random_uuid(),
+	nome varchar(100) not null,
+	descricao varchar(255) not null,
+	apagado boolean default false
+);
+
+create table especialidades_escritorio(
+	codigo uuid not null primary key default gen_random_uuid(),
+	codigo_escritorio uuid references escritorios(codigo),
+	codigo_especialidade uuid references especialidades(codigo),
+	apagado boolean default false
+);
+
 create table enderecos(
 	codigo uuid not null primary key default gen_random_uuid(),
 	codigo_escritorio uuid references escritorios(codigo),

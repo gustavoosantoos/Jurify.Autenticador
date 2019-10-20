@@ -35,7 +35,7 @@ namespace Jurify.Autenticador.Web.UseCases.Lawyers.CreateInitial
         {
             var result = Response<UsuarioEscritorio>.WithResult(null);
             var existsUserWithSameUsername = await _context.UsuariosEscritorio.AnyAsync(u => u.Username == request.Usuario.Email);
-            var escritorioAtual = await _context.Escritorios.FirstOrDefaultAsync(o => o.Informacoes.NomeFantasia == request.Escritorio.NomeFantasia);
+            var escritorioAtual = await _context.Escritorios.FirstOrDefaultAsync(o => o.Informacoes.CNPJ == request.Escritorio.CNPJ);
 
             if (existsUserWithSameUsername)
             {

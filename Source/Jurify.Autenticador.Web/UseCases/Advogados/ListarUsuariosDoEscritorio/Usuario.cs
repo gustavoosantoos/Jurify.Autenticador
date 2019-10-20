@@ -27,11 +27,10 @@ namespace Jurify.Autenticador.Web.UseCases.Advogados.ListarUsuariosDoEscritorio
             UltimoNome = user.InformacoesPessoais.UltimoNome;
             NumeroOab = user.Credenciais.NumeroOab;
             Estado = user.Credenciais.Estado;
-            if (user.Permissoes != null && user.Permissoes.Count() > 0)
-                ehAdministrador =  bool.Parse(user.Permissoes.Find(x => x.Nome.Contains("EhAdministrador")).Valor);
+            if (user.Permissoes != null && user.Permissoes.Exists(x => x.Nome.Equals("EhAdministrador")))
+                ehAdministrador = bool.Parse(user.Permissoes.Find(x => x.Nome.Contains("EhAdministrador")).Valor);
             else
                 ehAdministrador = false;
-
         }
     }
 }

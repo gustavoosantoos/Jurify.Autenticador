@@ -17,7 +17,6 @@ namespace Jurify.Autenticador.Web.UseCases.Offices.Modify
         public string NomeFantasia { get; set; }
         public string CNPJ { get; set; }
         public Endereco Endereco { get; set; }
-        public List<EspecialidadesEscritorio> EspecialidadesEscritorio { get; set; }
 
         public async Task<Escritorio> AsOffice(IGeocodingService geocodingService)
         {

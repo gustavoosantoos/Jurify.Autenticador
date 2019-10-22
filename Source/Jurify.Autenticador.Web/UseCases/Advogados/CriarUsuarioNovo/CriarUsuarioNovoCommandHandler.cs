@@ -36,6 +36,9 @@ namespace Jurify.Autenticador.Web.UseCases.Lawyers.CreateInitial
             var result = Response<UsuarioEscritorio>.WithResult(null);
             var existsUserWithSameUsername = await _context.UsuariosEscritorio.AnyAsync(u => u.Username == request.Usuario.Email);
             var escritorioAtual = await _context.Escritorios.FirstOrDefaultAsync(o => o.Informacoes.NomeFantasia == request.Escritorio.NomeFantasia);
+            string ehAdministrador = "false";
+            if (request.Usuario.ehAdministrador != null && !request.Usuario.ehAdministrador.Equals(""))
+                 ehAdministrador = request.Usuario.ehAdministrador;
 
             if (escritorioAtual == null)
             {
@@ -70,7 +73,7 @@ namespace Jurify.Autenticador.Web.UseCases.Lawyers.CreateInitial
                 _hashService.Hash(request.Usuario.Senha),
                 new InformacoesPessoais(request.Usuario.Nome, request.Usuario.Sobrenome),
                 new List<Permissao>() {
-                    new Permissao("EhAdministrador", "true")
+                    new Permissao("EhAdministrador", ehAdministrador)
                 },
                 credenciais
             );

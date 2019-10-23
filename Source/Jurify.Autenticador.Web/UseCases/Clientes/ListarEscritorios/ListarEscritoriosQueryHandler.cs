@@ -26,6 +26,8 @@ namespace Jurify.Autenticador.Web.UseCases.Clientes.ListarEscritorios
                 var escritorios = await _context
                     .Escritorios
                     .Include(e => e.Endereco)
+                    .Include(e => e.Especialidades)
+                        .ThenInclude(es => es.Especialidade)
                     .Where(e => e.Endereco != null &&
                                 e.Endereco.Latitude.HasValue &&
                                 e.Endereco.Longitude.HasValue &&
@@ -36,7 +38,13 @@ namespace Jurify.Autenticador.Web.UseCases.Clientes.ListarEscritorios
                         RazaoSocial = e.Informacoes.RazaoSocial,
                         Latitude = e.Endereco.Latitude,
                         Longitude = e.Endereco.Longitude,
-                        Endereco = $"{e.Endereco.Rua}, {e.Endereco.Numero} - {e.Endereco.Cidade}/{e.Endereco.Estado}"
+                        Endereco = $"{e.Endereco.Rua}, {e.Endereco.Numero} - {e.Endereco.Cidade}/{e.Endereco.Estado}",
+                        Especialidades = e.Especialidades.Select(es => new Especialidade
+                        {
+                            Codigo = es.Especialidade.Codigo,
+                            Nome = es.Especialidade.Nome,
+                            Descricao = es.Especialidade.Descricao
+                        })
                     })
                     .ToListAsync();
 

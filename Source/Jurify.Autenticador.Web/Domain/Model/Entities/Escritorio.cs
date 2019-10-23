@@ -30,5 +30,6 @@ namespace Jurify.Autenticador.Web.Domain.Model.Entities
         public InformacoesDoEscritorio Informacoes { get; private set; }
         public Endereco Endereco { get; private set; }
         public List<UsuarioEscritorio> Usuarios { get; private set; }
+        public List<EspecialidadesEscritorio> Especialidades { get; private set; }
     }
 }

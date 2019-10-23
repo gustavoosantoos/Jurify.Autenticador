@@ -13,9 +13,16 @@ namespace Jurify.Autenticador.Web.Infrastructure.Database.Configuration
             builder.ToTable("especialidades_escritorio");
             builder.HasKey(e => e.Codigo);
             builder.Property(e => e.Codigo).HasColumnName("codigo");
-            //builder.Property(e => e.).HasColumnName("codigo_escritorio");
             builder.Property(e => e.CodigoEspecialidade).HasColumnName("codigo_especialidade");
             builder.Property(e => e.CodigoEscritorio).HasColumnName("codigo_escritorio");
+
+            builder.HasOne(e => e.Escritorio)
+                   .WithMany(e => e.Especialidades)
+                   .HasForeignKey(e => e.CodigoEscritorio);
+
+            builder.HasOne(e => e.Especialidade)
+                   .WithMany()
+                   .HasForeignKey(e => e.CodigoEspecialidade);
 
             builder.Ignore(e => e.Nome);
             builder.Ignore(e => e.Descricao);

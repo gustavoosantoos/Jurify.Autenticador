@@ -49,13 +49,19 @@ namespace Jurify.Autenticador.Web
                 .AddDeveloperSigningCredential()
                 .AddCorsPolicyService<CorsPolicyService>();
 
-            services.AddAuthentication()
+            services.AddAuthentication( )
                 .AddJwtBearer(config =>
                 {
                     config.Authority = Configuration["Authentication:Authority"];
                     config.RequireHttpsMetadata = false;
                     config.Audience = Configuration["Authentication:ResourceName"];
+                    
                 });
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("admin", policy => policy.RequireClaim("EhAdministrador", "true"));
+            });
 
             services.AddMvc(options =>
             {

@@ -19,6 +19,7 @@ namespace Jurify.Autenticador.Web.Areas.Lawyers.Controllers
 {
     [EnableCors("Default")]
     [ApiController]
+    [Authorize]
     [AllowAnonymous]
     [SecurityHeaders]
     [Route("api/advogados/account")]
@@ -33,6 +34,7 @@ namespace Jurify.Autenticador.Web.Areas.Lawyers.Controllers
             _context = context;
         }
 
+        
         [HttpGet("disponibilidade-escritorio/{nomeFantasia}")]
         public async Task<ActionResult> DisponibilidadeEscritorio(string nomeFantasia)
         {
@@ -78,12 +80,14 @@ namespace Jurify.Autenticador.Web.Areas.Lawyers.Controllers
             return AppResponse(await _mediator.Send(new DadosUsuarioQuery(codigoEscritorio, codigoUsuario)));
         }
 
+
         [HttpGet("estados-brasileiros")]
         public async Task<ActionResult> ListarEstados()
         {
             return AppResponse(await _mediator.Send(new ListarEstadosBrasileirosQuery()));
         }
 
+        [Authorize("admin")]
         [HttpGet("listar-escritorios-usuarios")]
         public async Task<ActionResult> ListarTudo()
         {
@@ -92,6 +96,7 @@ namespace Jurify.Autenticador.Web.Areas.Lawyers.Controllers
                 .Include(e => e.Endereco));
         }
 
+        [Authorize("admin")]
         [HttpGet("listar-usuarios-escritorio")]
         public async Task<ActionResult> ListarUSuariosDoEscritorio(Guid codigoEscritorio)
         {

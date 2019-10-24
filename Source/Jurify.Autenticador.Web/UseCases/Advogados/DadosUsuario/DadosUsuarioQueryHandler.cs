@@ -21,7 +21,6 @@ namespace Jurify.Autenticador.Web.UseCases.Lawyers.UserInfoQuery
         {
             var user = await _context
                 .UsuariosEscritorio
-                .Include(u => u.Office)
                 .FirstOrDefaultAsync(u => u.Codigo == request.CodigoUsuario && u.CodigoEscritorio == request.CodigoEscritorio);
 
             if (user == null)

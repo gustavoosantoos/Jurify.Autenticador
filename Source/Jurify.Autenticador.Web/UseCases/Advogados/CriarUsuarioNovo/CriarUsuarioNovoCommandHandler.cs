@@ -57,9 +57,6 @@ namespace Jurify.Autenticador.Web.UseCases.Lawyers.CreateInitial
 
             if (request.Usuario.NumeroOAB != null && request.Usuario.Estado != 0)
             {
-                oabSaida = new Oab(request.Usuario.NumeroOAB, EstadoBrasileiro.ObterPorCodigo(request.Usuario.Estado).UF, $"{request.Usuario.Nome} {request.Usuario.Sobrenome}");
-                CriarUsuarioInicialCommandMessage.Publish(oabSaida);
-
                 credenciais = new CredenciaisAdvogado(
                     request.Usuario.NumeroOAB,
                     EstadoBrasileiro.ObterPorCodigo(request.Usuario.Estado),
@@ -77,8 +74,13 @@ namespace Jurify.Autenticador.Web.UseCases.Lawyers.CreateInitial
                 },
                 credenciais
             );
+            if (request.Usuario.NumeroOAB != null && request.Usuario.Estado != 0)
+            {
+                oabSaida = new Oab(user.Codigo, request.Usuario.NumeroOAB, EstadoBrasileiro.ObterPorCodigo(request.Usuario.Estado).UF, $"{request.Usuario.Nome} {request.Usuario.Sobrenome}");
+                CriarUsuarioInicialCommandMessage.Publish(oabSaida);
+            };
 
-            await _context.UsuariosEscritorio.AddAsync(user);
+                await _context.UsuariosEscritorio.AddAsync(user);
             await _context.SaveChangesAsync();
 
             return Response<UsuarioEscritorio>.WithResult(user);

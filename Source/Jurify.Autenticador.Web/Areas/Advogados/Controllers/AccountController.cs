@@ -5,7 +5,9 @@ using Jurify.Autenticador.Web.UseCases.Advogados.ListarEstadosBrasileiros;
 using Jurify.Autenticador.Web.UseCases.Lawyers.Availability;
 using Jurify.Autenticador.Web.UseCases.Lawyers.CreateInitial;
 using Jurify.Autenticador.Web.UseCases.Lawyers.Modify;
+using Jurify.Autenticador.Web.UseCases.Lawyers.ResendValidateOab;
 using Jurify.Autenticador.Web.UseCases.Lawyers.UserInfoQuery;
+using Jurify.Autenticador.Web.UseCases.Lawyers.ValidateOab;
 using Jurify.Autenticador.Web.UseCases.Offices.Availability;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -63,6 +65,18 @@ namespace Jurify.Autenticador.Web.Areas.Lawyers.Controllers
 
         [HttpPut("modificar-usuario")]
         public async Task<ActionResult> ModificarUsuario(ModificarUsuarioCommand command)
+        {
+            return AppResponse(await _mediator.Send(command));
+        }
+
+        [HttpPost("validar-oab")]
+        public async Task<ActionResult> ValidarOab(ValidarOabCommand command)
+        {
+            return AppResponse(await _mediator.Send(command));
+        }
+
+        [HttpPost("reenviar-oab-validacao")]
+        public async Task<ActionResult> ReenviarOabsValidacao(ReenviarOabsValidacaoCommand command)
         {
             return AppResponse(await _mediator.Send(command));
         }

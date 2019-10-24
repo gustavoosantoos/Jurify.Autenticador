@@ -17,6 +17,13 @@ namespace Jurify.Autenticador.Web.Domain.Model.Entities
             Endereco = endereco;
             Endereco.CodigoEscritorio = Codigo;
         }
+        public Escritorio(InformacoesDoEscritorio info, Endereco endereco, List<EspecialidadesEscritorio> especialidades) : base(Guid.NewGuid())
+        {
+            Informacoes = info;
+            Endereco = endereco;
+            Endereco.CodigoEscritorio = Codigo;
+            Especialidades = especialidades;
+        }
         public void AtualizarInformacoesEscritorio(InformacoesDoEscritorio novasInformacoes)
         {
             Informacoes = novasInformacoes;

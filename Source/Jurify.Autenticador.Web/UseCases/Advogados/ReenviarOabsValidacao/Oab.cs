@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Jurify.Autenticador.Web.UseCases.Advogados.CriarUsuarioInicial
+namespace Jurify.Autenticador.Web.UseCases.Lawyers.ResendValidateOab
 {
     public class Oab
     {

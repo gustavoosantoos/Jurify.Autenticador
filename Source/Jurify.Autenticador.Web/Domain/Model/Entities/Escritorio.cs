@@ -29,10 +29,6 @@ namespace Jurify.Autenticador.Web.Domain.Model.Entities
             Informacoes = novasInformacoes;
         }
 
-        public void AtualizarEndereco(Endereco endereco)
-        {
-            Endereco = endereco;
-        }
 
         public InformacoesDoEscritorio Informacoes { get; private set; }
         public Endereco Endereco { get; private set; }

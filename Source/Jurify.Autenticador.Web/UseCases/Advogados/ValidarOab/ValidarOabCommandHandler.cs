@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace Jurify.Autenticador.Web.UseCases.Lawyers.ValidateOab
 {
@@ -34,33 +35,22 @@ namespace Jurify.Autenticador.Web.UseCases.Lawyers.ValidateOab
 
         public async Task<Response<OabValidada>> Handle(ValidarOabCommand request, CancellationToken cancellationToken)
         {
-            await _context.SaveChangesAsync(); OabValidada oab = new OabValidada(request.CodigoAdvogado, request.Uf, request.NumeroOab, request.CaminhoImagem, request.Ativo, request.Existe);
+            OabValidada oab = new OabValidada(request.CodigoAdvogado, request.Uf, request.NumeroOab, request.CaminhoImagem, request.Ativo, request.Existe);
             var result = Response<OabValidada>.WithResult(null);
             CredenciaisAdvogado novasCredenciais = new CredenciaisAdvogado();
             var user = await _context.UsuariosEscritorio
                 .FirstOrDefaultAsync(u => u.Credenciais.NumeroOab == request.NumeroOab) ;
-
             if (user == null)
             {
                 result.AddError("Usuario não encontrado para modificar");
                 return result;
             }
-
             novasCredenciais = new CredenciaisAdvogado(request.NumeroOab, EstadoBrasileiro.ObterPorUF(request.Uf), request.CaminhoImagem);
-
             user.Credenciais = novasCredenciais;
-
             Permissao permissao = new Permissao("OabValida","true");
-
-            bool existePermissao = false;
-            foreach(var p in user.Permissoes)
-            {
-                if (p.Nome == "OabValida")
-                    existePermissao = true;
-            }
-            if(!existePermissao)
+            bool existePermissao = user.Permissoes.Any(p => p.Nome == "OabValida");
+            if (!existePermissao)
                 user.Permissoes.Add(permissao);
-            
 
             _context.UsuariosEscritorio.Update(user);
             await _context.SaveChangesAsync();

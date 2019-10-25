@@ -34,7 +34,7 @@ namespace Jurify.Autenticador.Web.UseCases.Offices.Modify
         public async Task<Response<Escritorio>> Handle(ModificarEscritorioCommand request, CancellationToken cancellationToken)
         {
             var result = Response<Escritorio>.WithResult(null);
-            var escritorio = await _context.Escritorios
+            var escritorio = await _context.Escritorios.Include(b => b.Endereco)
                 .FirstOrDefaultAsync(u => u.Informacoes.CNPJ == request.CNPJ) ;
             var enderecoCompleto = $"{request.Endereco.Rua}, {request.Endereco.Numero} - {request.Endereco.Cidade} - {request.Endereco.Estado}";
             var (lat, lon) = await _geocodingService.ObterCoordenadas(enderecoCompleto);
@@ -46,7 +46,7 @@ namespace Jurify.Autenticador.Web.UseCases.Offices.Modify
             }
 
             escritorio.AtualizarInformacoesEscritorio(new InformacoesDoEscritorio(request.NomeFantasia, request.RazaoSocial, request.CNPJ));
-            escritorio.AtualizarEndereco(new Domain.Model.Entities.Endereco(
+            escritorio.Endereco.AtualizarDadosEndereco(
                     request.Endereco.CEP,
                     request.Endereco.Rua,
                     request.Endereco.Numero,
@@ -56,7 +56,7 @@ namespace Jurify.Autenticador.Web.UseCases.Offices.Modify
                     request.Endereco.Estado,
                     lat,
                     lon
-                ));
+                );
 
             _context.Escritorios.Update(escritorio);
             await _context.SaveChangesAsync();

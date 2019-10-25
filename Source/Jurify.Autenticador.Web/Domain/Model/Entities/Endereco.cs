@@ -31,6 +31,27 @@ namespace Jurify.Autenticador.Web.Domain.Model.Entities
             Longitude = longitude;
         }
 
+        public void AtualizarDadosEndereco(string cep,
+                        string rua,
+                        string numero,
+                        string complemento,
+                        string bairro,
+                        string cidade,
+                        string estado,
+                        double latitude,
+                        double longitude)
+        {
+            CEP = cep;
+            Rua = rua;
+            Numero = numero;
+            Complemento = complemento;
+            Bairro = bairro;
+            Cidade = cidade;
+            Estado = estado;
+            Latitude = latitude;
+            Longitude = longitude;
+        }
+
         public Guid CodigoEscritorio { get; set; }
         public Escritorio Escritorio { get; set; }
 

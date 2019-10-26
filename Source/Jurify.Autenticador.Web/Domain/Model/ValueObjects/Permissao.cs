@@ -17,6 +17,15 @@ namespace Jurify.Autenticador.Web.Domain.Model.ValueObjects
             Valor = valor;
         }
 
+        public void ConcedePermissao()
+        {
+            Valor = "true";
+        }
+        public void RetiraPermissao()
+        {
+            Valor = "false";
+        }
+
         protected override IEnumerable<object> GetEqualityComponents()
         {
             yield return Nome.ToUpper();

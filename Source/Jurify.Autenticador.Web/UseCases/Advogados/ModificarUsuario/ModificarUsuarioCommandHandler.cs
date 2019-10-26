@@ -51,7 +51,7 @@ namespace Jurify.Autenticador.Web.UseCases.Lawyers.Modify
                 novasCredenciais = new CredenciaisAdvogado(request.Usuario.NumeroOAB, EstadoBrasileiro.ObterPorCodigo(request.Usuario.Estado), "");
 
             user.Credenciais = novasCredenciais;
-            user.AtualizarSenha(_hashService.Hash(request.Usuario.Senha));
+
             user.AtualizarInformacoesPessoais(new InformacoesPessoais(request.Usuario.Nome, request.Usuario.Sobrenome));
 
             _context.UsuariosEscritorio.Update(user);

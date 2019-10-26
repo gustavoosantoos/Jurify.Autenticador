@@ -54,6 +54,13 @@ namespace Jurify.Autenticador.Web.UseCases.Lawyers.Modify
 
             user.AtualizarInformacoesPessoais(new InformacoesPessoais(request.Usuario.Nome, request.Usuario.Sobrenome));
 
+            if(request.Usuario.ehAdministrador == "true" && user.Permissoes.Exists(p => p.Nome == "EhAdministrador"))
+                user.Permissoes.Find(p => p.Nome == "EhAdministrador").ConcedePermissao();
+            else
+                if(user.Permissoes.Exists(p => p.Nome == "EhAdministrador"))
+                    user.Permissoes.Find(p => p.Nome == "EhAdministrador").RetiraPermissao();
+
+
             _context.UsuariosEscritorio.Update(user);
             await _context.SaveChangesAsync();
 

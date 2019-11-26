@@ -18,14 +18,17 @@ namespace Jurify.Autenticador.Web.UseCases.Lawyers.CreateInitial
     public class CriarUsuarioNovoCommandHandler : IRequestHandler<CriarUsuarioNovoCommand, Response<UsuarioEscritorio>>
     {
         private readonly AutenticadorContext _context;
+        private readonly PerfilOabContext _oabContext;
         private readonly IMediator _mediator;
         private readonly IHashService _hashService;
 
         public CriarUsuarioNovoCommandHandler(
             AutenticadorContext context,
+            PerfilOabContext oabContext,
             IMediator mediator,
             IHashService hashService)
         {
+            _oabContext = oabContext;
             _context = context;
             _mediator = mediator;
             _hashService = hashService;
@@ -77,7 +80,9 @@ namespace Jurify.Autenticador.Web.UseCases.Lawyers.CreateInitial
             if (request.Usuario.NumeroOAB != null && request.Usuario.Estado != 0)
             {
                 oabSaida = new Oab(user.Codigo, request.Usuario.NumeroOAB, EstadoBrasileiro.ObterPorCodigo(request.Usuario.Estado).UF, $"{request.Usuario.Nome} {request.Usuario.Sobrenome}");
-                CriarUsuarioInicialCommandMessage.Publish(oabSaida);
+                //CriarUsuarioInicialCommandMessage.Publish(oabSaida);
+                await _oabContext.Oab.AddAsync(oabSaida);
+                await _oabContext.SaveChangesAsync();
             };
 
                 await _context.UsuariosEscritorio.AddAsync(user);

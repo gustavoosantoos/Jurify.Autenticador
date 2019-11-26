@@ -49,6 +49,7 @@ namespace Jurify.Autenticador.Web
                 .AddDeveloperSigningCredential()
                 .AddCorsPolicyService<CorsPolicyService>();
 
+
             services.AddAuthentication( )
                 .AddJwtBearer(config =>
                 {

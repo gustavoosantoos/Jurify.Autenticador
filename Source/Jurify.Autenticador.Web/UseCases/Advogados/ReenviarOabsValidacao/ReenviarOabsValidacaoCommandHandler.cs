@@ -18,16 +18,19 @@ namespace Jurify.Autenticador.Web.UseCases.Lawyers.ResendValidateOab
     public class ReenviarOabsValidacaoCommandHandler : IRequestHandler<ReenviarOabsValidacaoCommand, Response<List<Oab>>>
     {
         private readonly AutenticadorContext _context;
+        private readonly PerfilOabContext _oabContext;
         private readonly IMediator _mediator;
         private readonly IHashService _hashService;
 
 
         public ReenviarOabsValidacaoCommandHandler(
             AutenticadorContext context,
+            PerfilOabContext oabContext,
             IMediator mediator,
             IHashService hashService)
         {
             _context = context;
+            _oabContext = oabContext;
             _mediator = mediator;
             _hashService = hashService;
         }

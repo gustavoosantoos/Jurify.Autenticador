@@ -8,6 +8,7 @@ using Jurify.Autenticador.Web.UseCases.Core.Behaviors;
 using Jurify.Autenticador.Web.UseCases.Services.Abstractions;
 using Jurify.Autenticador.Web.UseCases.Services.Concrete;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Jurify.Autenticador.Web.Infrastructure.Configuration.DependencyInjection
@@ -20,6 +21,10 @@ namespace Jurify.Autenticador.Web.Infrastructure.Configuration.DependencyInjecti
             services.AddSingleton<IGeocodingService, GeocodingService>();
 
             services.AddDbContext<AutenticadorContext>();
+            services.AddDbContext<PerfilOabContext>();
+            services.AddEntityFrameworkNpgsql()
+               .AddDbContext<PerfilOabContext>()
+               .BuildServiceProvider();
 
             services.AddScoped<IEscritorioRepositorio, EscritorioRepositorio>();
             services.AddScoped<IUsuarioEscritorioRepositorio, UsuarioEscritorioRepositorio>();

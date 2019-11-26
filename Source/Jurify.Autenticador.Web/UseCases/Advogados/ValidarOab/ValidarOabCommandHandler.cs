@@ -38,22 +38,26 @@ namespace Jurify.Autenticador.Web.UseCases.Lawyers.ValidateOab
             OabValidada oab = new OabValidada(request.CodigoAdvogado, request.Uf, request.NumeroOab, request.CaminhoImagem, request.Ativo, request.Existe);
             var result = Response<OabValidada>.WithResult(null);
             CredenciaisAdvogado novasCredenciais = new CredenciaisAdvogado();
-            var user = await _context.UsuariosEscritorio
-                .FirstOrDefaultAsync(u => u.Credenciais.NumeroOab == request.NumeroOab) ;
-            if (user == null)
+            var users = _context.UsuariosEscritorio
+                .Where(u => u.Credenciais.NumeroOab == request.NumeroOab).ToList();
+            if (users == null)
             {
                 result.AddError("Usuario não encontrado para modificar");
                 return result;
             }
-            novasCredenciais = new CredenciaisAdvogado(request.NumeroOab, EstadoBrasileiro.ObterPorUF(request.Uf), request.CaminhoImagem);
-            user.Credenciais = novasCredenciais;
-            Permissao permissao = new Permissao("OabValida","true");
-            bool existePermissao = user.Permissoes.Any(p => p.Nome == "OabValida");
-            if (!existePermissao)
-                user.Permissoes.Add(permissao);
 
-            _context.UsuariosEscritorio.Update(user);
-            await _context.SaveChangesAsync();
+            foreach(var user in users)
+            {
+                novasCredenciais = new CredenciaisAdvogado(request.NumeroOab, EstadoBrasileiro.ObterPorUF(request.Uf), request.CaminhoImagem);
+                user.Credenciais = novasCredenciais;
+                Permissao permissao = new Permissao("OabValida", "true");
+                bool existePermissao = user.Permissoes.Any(p => p.Nome == "OabValida");
+                if (!existePermissao)
+                    user.Permissoes.Add(permissao);
+
+                _context.UsuariosEscritorio.Update(user);
+                await _context.SaveChangesAsync();
+            }
             
             return Response<OabValidada>.WithResult(oab);
         }
